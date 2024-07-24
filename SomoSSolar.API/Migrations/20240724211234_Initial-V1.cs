@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SomoSSolar.API.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialv1 : Migration
+    public partial class InitialV1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace SomoSSolar.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     Sobrenome = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: false),
-                    Documento = table.Column<string>(type: "NVARCHAR(14)", maxLength: 14, nullable: false),
+                    Documento = table.Column<string>(type: "NVARCHAR(18)", maxLength: 18, nullable: false),
                     Celular = table.Column<string>(type: "NVARCHAR(12)", maxLength: 12, nullable: false),
                     Email = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false)

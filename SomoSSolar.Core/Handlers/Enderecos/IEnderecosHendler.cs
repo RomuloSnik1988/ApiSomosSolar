@@ -12,5 +12,5 @@ public interface IEnderecosHendler
     Task<Response<Endereco?>> UpdateAsync(UpdateEnderecoRequest request);
     Task<Response<Endereco?>> DeleteAsync(DeleteEnderecoRequest request);
     Task<Response<Endereco?>> GetByIdAsync(GetEnderecoByIdRequest request);
-    Task<Response<Endereco?>> GetAllAsync(GetAllEnderecosRequest request);
+    Task<PagedResponse<List<Endereco?>>> GetAllAsync(GetAllEnderecosRequest request);
 }

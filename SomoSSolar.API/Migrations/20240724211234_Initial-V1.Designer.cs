@@ -12,8 +12,8 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240724182531_Initial-v1")]
-    partial class Initialv1
+    [Migration("20240724211234_Initial-V1")]
+    partial class InitialV1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.Property<string>("Documento")
                         .IsRequired()
-                        .HasMaxLength(14)
+                        .HasMaxLength(18)
                         .HasColumnType("NVARCHAR");
 
                     b.Property<string>("Email")

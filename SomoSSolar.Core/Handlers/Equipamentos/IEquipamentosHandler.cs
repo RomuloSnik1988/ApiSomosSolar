@@ -11,5 +11,5 @@ public interface IEquipamentosHandler
     Task<Response<Equipamento?>> UpdateAsync(UpdateEquipamentoRequest request);
     Task<Response<Equipamento?>> DeleteAsync(DeleteEquipamentoRequest request);
     Task<Response<Equipamento?>> GetByIdAsync(GetEquipamentoByIdRequest request);
-    Task<Response<Equipamento?>> GetAllAsync(GetAllEquipamentosRequest request);
+    Task<PagedResponse<List<Equipamento?>>> GetAllAsync(GetAllEquipamentosRequest request);
 }

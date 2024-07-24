@@ -11,5 +11,5 @@ public interface IClienteHandler
     Task<Response<Cliente?>> UpdateAsync(UpdateClienteRequest request);
     Task<Response<Cliente?>> DeleteAsync(DeleteClienteRequest request);
     Task<Response<Cliente?>> GetByIdAsync(GetClienteByIdRequest request);
-    Task<Response<Cliente?>> GetAllAsync(GetAllClientesRequest request);
+    Task<PagedResponse<List<Cliente?>>> GetAllAsync(GetAllClientesRequest request);
 }

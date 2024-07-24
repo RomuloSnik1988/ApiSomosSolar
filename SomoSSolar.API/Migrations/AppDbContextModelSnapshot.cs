@@ -40,7 +40,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.Property<string>("Documento")
                         .IsRequired()
-                        .HasMaxLength(14)
+                        .HasMaxLength(18)
                         .HasColumnType("NVARCHAR");
 
                     b.Property<string>("Email")

@@ -16,7 +16,7 @@ public class UpdateClienteRequest
     [Required(ErrorMessage = "CPF ou CNPJ inválido")]
     [DisplayName("CPF ou CNPJ")]
     [MaxLength(14, ErrorMessage = "O CPF ou CNPJ deve conter até 14 caracteres")]
-    public int Documento { get; set; }
+    public string Documento { get; set; } = string.Empty;
     [Required(ErrorMessage = "Celular inválido")]
     [MaxLength(12, ErrorMessage = "O celular deve conter até 50 caracteres")]
     public string Celular { get; set; } = string.Empty;

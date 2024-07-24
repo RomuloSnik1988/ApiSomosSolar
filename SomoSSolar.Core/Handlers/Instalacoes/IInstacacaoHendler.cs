@@ -10,5 +10,5 @@ public interface IInstacacaoHendler
     Task<Response<Instalacao?>> UpdateAsync(UpdateInstalacaoRequest request);
     Task<Response<Instalacao?>> DeleteAsync(DeleteInstalacaoRequest request);
     Task<Response<Instalacao?>> GetByAsync(GetInstalacaoByIdRequest request);
-    Task<Response<Instalacao?>> GetAllAsync(GetAllInstacoesRequest request);
+    Task<PagedResponse<List<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request);
 }

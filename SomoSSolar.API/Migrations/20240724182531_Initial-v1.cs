@@ -84,7 +84,8 @@ namespace SomoSSolar.API.Migrations
                     Valor = table.Column<decimal>(type: "MONEY", maxLength: 20, nullable: false),
                     Status = table.Column<string>(type: "VARCHAR(10)", maxLength: 10, nullable: false),
                     Despesas = table.Column<decimal>(type: "MONEY", maxLength: 20, nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    EnderecoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,6 +96,11 @@ namespace SomoSSolar.API.Migrations
                         principalTable: "Cliente",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Instalacao_Endereco_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Endereco",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -134,6 +140,11 @@ namespace SomoSSolar.API.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Instalacao_EnderecoId",
+                table: "Instalacao",
+                column: "EnderecoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Venda_EquipamentoId",
                 table: "Venda",
                 column: "EquipamentoId");
@@ -148,9 +159,6 @@ namespace SomoSSolar.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Endereco");
-
-            migrationBuilder.DropTable(
                 name: "Venda");
 
             migrationBuilder.DropTable(
@@ -158,6 +166,9 @@ namespace SomoSSolar.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Instalacao");
+
+            migrationBuilder.DropTable(
+                name: "Endereco");
 
             migrationBuilder.DropTable(
                 name: "Cliente");

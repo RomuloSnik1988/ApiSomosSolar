@@ -12,7 +12,7 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240723211839_Initial-v1")]
+    [Migration("20240724182531_Initial-v1")]
     partial class Initialv1
     {
         /// <inheritdoc />
@@ -186,6 +186,9 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("MONEY");
 
+                    b.Property<int?>("EnderecoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -198,6 +201,8 @@ namespace SomoSSolar.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Instalacao", (string)null);
                 });
@@ -232,11 +237,9 @@ namespace SomoSSolar.API.Migrations
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Endereco", b =>
                 {
-                    b.HasOne("SomoSSolar.Core.Models.Cliente", "Cliente")
+                    b.HasOne("SomoSSolar.Core.Models.Cliente", null)
                         .WithMany("Enderecos")
                         .HasForeignKey("ClienteId");
-
-                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Instalacao", b =>
@@ -247,7 +250,13 @@ namespace SomoSSolar.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SomoSSolar.Core.Models.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+
                     b.Navigation("Cliente");
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Venda", b =>

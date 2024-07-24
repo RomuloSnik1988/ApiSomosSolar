@@ -13,4 +13,6 @@ public class Instalacao
     public int ClienteId { get; set; }
     public Cliente? Cliente { get; set; }
     public ICollection<Venda> Venda { get; set; } = null!;
+
+    public Endereco? Endereco { get; set; }
 }

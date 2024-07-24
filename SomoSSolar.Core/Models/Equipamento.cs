@@ -15,4 +15,5 @@ public class Equipamento
     public string Tamanho { get; set; } = string.Empty;
     public string ImagemUrl { get; set; } = string.Empty;
     public EIsAtivo Ativo { get; set; } = EIsAtivo.Ativo;
+
 }

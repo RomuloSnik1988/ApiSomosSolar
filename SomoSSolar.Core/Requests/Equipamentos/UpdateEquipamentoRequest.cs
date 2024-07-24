@@ -34,4 +34,4 @@ public class UpdateEquipamentoRequest
     [DisplayName("Imagem")]
     public string ImagemUrl { get; set; } = string.Empty;
 }
-}
+

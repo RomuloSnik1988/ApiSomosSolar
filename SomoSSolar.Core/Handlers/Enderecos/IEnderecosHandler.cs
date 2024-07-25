@@ -6,7 +6,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.Core.Handlers.Enderecos;
 
-public interface IEnderecosHendler
+public interface IEnderecosHandler
 {
     Task<Response<Endereco?>> CreateAsync(CreateEnderecoRequest request);
     Task<Response<Endereco?>> UpdateAsync(UpdateEnderecoRequest request);

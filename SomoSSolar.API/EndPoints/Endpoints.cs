@@ -1,5 +1,6 @@
 ﻿using SomoSSolar.API.Common.Api;
 using SomoSSolar.API.EndPoints.Clientes;
+using SomoSSolar.API.EndPoints.Enderecos;
 
 namespace SomoSSolar.API.EndPoints;
 
@@ -16,6 +17,14 @@ public static class Endpoints
             .MapEndpoint<DeleteClienteEndpoint>()
             .MapEndpoint<GetClienteByIDEndpoint>()
             .MapEndpoint<GetAllClienteEndpoint>();
+
+        endpoints.MapGroup("v1/enderecos")
+            .WithTags("Endereços")
+            .MapEndpoint<CreateEnredecoEndpoint>()
+            .MapEndpoint<UpdateEnderecoEndpoint>()
+            .MapEndpoint<DeleteEnderecoEndpoint>()
+            .MapEndpoint<GetEnderecoByIdEndpoint>()
+            .MapEndpoint<GetAllEnderecoEndpoint>();
     }
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
         where TEndpoint : IEndpoint

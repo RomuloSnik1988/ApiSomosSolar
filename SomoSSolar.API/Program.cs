@@ -3,6 +3,7 @@ using SomoSSolar.API.Data;
 using SomoSSolar.API.EndPoints;
 using SomoSSolar.API.Handlers;
 using SomoSSolar.Core.Handlers.Clientes;
+using SomoSSolar.Core.Handlers.Enderecos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen(x =>
 });
 
 builder.Services.AddTransient<IClienteHandler, ClienteHandler>();
+builder.Services.AddTransient<IEnderecosHandler, EnderecoHandler>();
 
 var app = builder.Build();
 

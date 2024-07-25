@@ -90,7 +90,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
                 ? new Response<Cliente?>(null, 404, "Cliente não encontrado")
                 : new Response<Cliente?>(cliente);
         }
-        catch (Exception)
+        catch 
         {
             return new Response<Cliente?>(null, 500, "Não foi possível localizar o cliente");
         }

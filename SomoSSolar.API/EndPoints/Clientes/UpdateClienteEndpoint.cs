@@ -11,7 +11,7 @@ public class UpdateClienteEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
     => app.MapPut("/{id}", HandlerAsync)
         .WithName("Clientes: Update")
-        .WithSummary("Atualiaza um cliente")
+        .WithSummary("Atualiza um cliente")
         .WithDescription("Atualiza um cliente")
         .WithOrder(2)
         .Produces<Response<Cliente?>>();

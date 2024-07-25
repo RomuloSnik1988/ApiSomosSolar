@@ -5,7 +5,7 @@ namespace SomoSSolar.Core.Models;
 public class Equipamento
 {
     public int Id { get; set; }
-    public int Tipo { get; set; }
+    public string Tipo { get; set; } = string.Empty;
     public string Fornecedor { get; set; } = string.Empty;
     public string Marca { get; set; } = string.Empty;
     public string Modelo { get; set; } = string.Empty;

@@ -7,7 +7,7 @@ public class CreateEquipamentoRequest
 {
     [Required(ErrorMessage = "Tipo Inválido")]
     [MaxLength(120, ErrorMessage = "O tipo deve ter no máximo 120 catacteres")]
-    public int Tipo { get; set; }
+    public string Tipo { get; set; } = string.Empty;
     [Required(ErrorMessage = "Fornecedor Inválido")]
     [MaxLength(120, ErrorMessage = "O fornecedor deve ter no máximo 120 catacteres")]
     public string Fornecedor { get; set; } = string.Empty;

@@ -7,7 +7,7 @@ public class CreateClienteRequest
 {
     [Required(ErrorMessage = "Nome inválido")]
     [MaxLength(50, ErrorMessage = "O nome deve conter até 50 caracteres")]
-    public string Name { get; set; } = string.Empty;
+    public string Nome { get; set; } = string.Empty;
     [Required(ErrorMessage = "Sobrenome inválido")]
     [MaxLength(80, ErrorMessage = "O sobrenome deve conter até 50 caracteres")]
     public string Sobrenome { get; set; } = string.Empty;

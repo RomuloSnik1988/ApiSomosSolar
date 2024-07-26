@@ -12,7 +12,7 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240724211234_Initial-V1")]
+    [Migration("20240726195843_InitialV1")]
     partial class InitialV1
     {
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("NVARCHAR");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("NVARCHAR");
@@ -84,11 +84,11 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("NVARCHAR");
 
-                    b.Property<int?>("ClienteId")
+                    b.Property<int>("ClienteId")
+                        .HasMaxLength(15)
                         .HasColumnType("int");
 
                     b.Property<string>("Complemento")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("NVARCHAR");
 
@@ -176,17 +176,19 @@ namespace SomoSSolar.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClienteId")
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataInstalacao")
+                    b.Property<DateTime?>("DataInstalacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Despesas")
+                    b.Property<decimal?>("Despesas")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("MONEY");
 
-                    b.Property<int?>("EnderecoId")
+                    b.Property<int>("EnderecoId")
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -215,10 +217,14 @@ namespace SomoSSolar.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Datadavenda")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EquipamentoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InstalacaoId")
+                    b.Property<int>("InstalacaoId")
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<string>("Quantidade")
@@ -239,20 +245,22 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", null)
                         .WithMany("Enderecos")
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Instalacao", b =>
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", "Cliente")
                         .WithMany("Instalacoes")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("SomoSSolar.Core.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoId");
+                        .HasForeignKey("EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cliente");
 
@@ -267,11 +275,15 @@ namespace SomoSSolar.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SomoSSolar.Core.Models.Instalacao", null)
+                    b.HasOne("SomoSSolar.Core.Models.Instalacao", "Instalacao")
                         .WithMany("Venda")
-                        .HasForeignKey("InstalacaoId");
+                        .HasForeignKey("InstalacaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Equipamento");
+
+                    b.Navigation("Instalacao");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Cliente", b =>

@@ -4,7 +4,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.Core.Handlers.Instalacoes;
 
-public interface IInstacacaoHendler
+public interface IInstacacaoHandler
 {
     Task<Response<Instalacao?>> CreateAsync(CreateInstalacaoRequest request);
     Task<Response<Instalacao?>> UpdateAsync(UpdateInstalacaoRequest request);

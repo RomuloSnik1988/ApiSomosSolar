@@ -18,4 +18,7 @@ public class CreateEnderecoRequest
     [Required(ErrorMessage = "CEP inválido")]
     [MaxLength(10, ErrorMessage = "O lagradouro deve conter no maxímo 10 caracteres")]
     public string Cep { get; set; } = string.Empty;
+    [Required(ErrorMessage ="Cliente Id inválido")]
+    [MaxLength(20, ErrorMessage = "O Cliente deve conter no maxímo 20 caracteres")]
+    public int ClienteId { get; set; }
 }

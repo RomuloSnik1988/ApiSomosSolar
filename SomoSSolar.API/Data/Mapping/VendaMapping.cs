@@ -15,5 +15,12 @@ public class VendaMapping : IEntityTypeConfiguration<Venda>
            .IsRequired(true)
            .HasColumnType("VARCHAR")
            .HasMaxLength(20);
+
+        builder.Property(x => x.Datadavenda)
+            .IsRequired(true);
+
+        builder.Property(x => x.InstalacaoId)
+            .IsRequired(true)
+            .HasMaxLength(20);
     }
 }

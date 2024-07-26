@@ -11,7 +11,7 @@ public class ClienteMapping : IEntityTypeConfiguration<Cliente>
         builder.ToTable("Cliente");
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Name)
+        builder.Property(x => x.Nome)
             .IsRequired(true)
             .HasColumnType("NVARCHAR")
             .HasMaxLength(50);

@@ -22,10 +22,12 @@ public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
           .HasMaxLength(50);
 
         builder.Property(x => x.Numero)
+            .IsRequired(true)
           .HasColumnType("NVARCHAR")
           .HasMaxLength(10);
 
         builder.Property(x => x.Complemento)
+         .IsRequired(false)
         .HasColumnType("NVARCHAR")
         .HasMaxLength(50);
 
@@ -33,5 +35,9 @@ public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
           .IsRequired(true)
           .HasColumnType("NVARCHAR")
           .HasMaxLength(10);
+
+        builder.Property(x => x.ClienteId)
+            .IsRequired(true)
+            .HasMaxLength(15);
     }
 }

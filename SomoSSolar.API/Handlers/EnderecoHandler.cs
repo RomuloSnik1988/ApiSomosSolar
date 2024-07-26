@@ -21,6 +21,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
                 Numero = request.Numero,
                 Complemento = request.Complemento,
                 Cep = request.Cep,
+                ClienteId = request.ClienteId,
             };
 
             await context.Enderecos.AddAsync(endereco);
@@ -47,6 +48,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
             endereco.Numero = request.Numero;
             endereco.Complemento = request.Complemento;
             endereco.Cep = request.Cep;
+            endereco.ClienteId = request.ClienteId;
 
             context.Enderecos.Update(endereco);
             await context.SaveChangesAsync();

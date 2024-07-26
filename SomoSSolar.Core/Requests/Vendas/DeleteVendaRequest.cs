@@ -1,6 +1,6 @@
 ﻿namespace SomoSSolar.Core.Requests.Vendas;
 
-public class DeleteVendaReques
+public class DeleteVendaRequest
 {
     public int Id { get; set; }
 }

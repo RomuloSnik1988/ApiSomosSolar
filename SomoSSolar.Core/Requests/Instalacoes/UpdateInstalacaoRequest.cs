@@ -7,7 +7,6 @@ public class UpdateInstalacaoRequest
 {
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "Data da instalação invalida")]
     public DateTime DataInstalacao { get; set; }
     [Required(ErrorMessage = "Valor inválido")]
     [MaxLength(20, ErrorMessage = "O valor deve ter no máximo 20 caracteres")]
@@ -16,4 +15,6 @@ public class UpdateInstalacaoRequest
     public EStatus Status { get; set; } = EStatus.Pedido;
     [MaxLength(20, ErrorMessage = "O valor deve ter no máximo 20 caracteres")]
     public decimal Despesas { get; set; }
+    [Required(ErrorMessage = "O Cliente deve ser informado")]
+    public int EnderecoId { get; set; }
 }

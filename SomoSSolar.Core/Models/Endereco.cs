@@ -9,4 +9,6 @@ public class Endereco
     public string Complemento { get; set; } = string.Empty;
     public string Cep { get; set; } = string.Empty;
 
+    public int ClienteId { get; set; }
+
 }

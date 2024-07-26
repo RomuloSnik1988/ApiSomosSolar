@@ -16,7 +16,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
         {
             var cliente = new Cliente
             {
-                Name = request.Name,
+                Nome = request.Nome,
                 Sobrenome = request.Sobrenome,
                 Documento = request.Documento,
                 Celular = request.Celular,
@@ -44,7 +44,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
             if (cliente is null)
                 return new Response<Cliente?>(null, 404, "Cliente não encontrado");
 
-            cliente.Name = request.Name;
+            cliente.Nome = request.Name;
             cliente.Sobrenome = request.Sobrenome;
             cliente.Documento = request.Documento;
             cliente.Celular = request.Celular;
@@ -77,7 +77,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
         }
         catch 
         {
-            return new Response<Cliente?>(null, 500, "Não foi possivel exluir o cadastro do cliente");
+            return new Response<Cliente?>(null, 500, "Não foi possivel excluir o cadastro do cliente");
         }
     }
     public async Task<Response<Cliente?>> GetByIdAsync(GetClienteByIdRequest request)
@@ -99,7 +99,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
     {
         try
         {
-            var query = context.Clientes.AsNoTracking().OrderBy(x => x.Name);
+            var query = context.Clientes.AsNoTracking().OrderBy(x => x.Nome);
 
             var clientes = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -111,7 +111,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
 
             return new PagedResponse<List<Cliente?>>(clientes, count, request.PageNumber, request.PageSize);
         }
-        catch (Exception)
+        catch
         {
             return new PagedResponse<List<Cliente?>>(null, 500, "Não foi possivel pesquisar os clientes");
         }

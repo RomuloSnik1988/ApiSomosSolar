@@ -1,0 +1,17 @@
+﻿using Microsoft.AspNetCore.Identity;
+using SomoSSolar.API.Common.Api;
+using SomoSSolar.API.Models;
+
+namespace SomoSSolar.API.EndPoints.Identity;
+
+public class LogoutEndpoint : IEndpoint
+{
+    public static void Map(IEndpointRouteBuilder app)
+   => app.MapPost("/logout", HandlerAsync)
+        .RequireAuthorization();
+    private static async Task<IResult>HandlerAsync(SignInManager<User> signInManager)
+    {
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+}

@@ -1,0 +1,34 @@
+﻿@page "/clientes/adicionar"
+@inherits CreateClientePage
+
+<MudText Typo="Typo.h5">Novo Cliente</MudText>
+<MudCard>
+<MudCardContent Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+        
+
+        <MudTextField T="string" Label="Nome" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Nome" For="@(() =>InputModel.Nome)" />
+
+        <MudTextField T="string" Label="Sobrenome" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Sobrenome" For="@(() =>InputModel.Sobrenome)" />
+
+        <MudTextField T="string" Label="CPF/CNPJ" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Documento" For="@(() =>InputModel.Documento)" />
+
+        <MudTextField T="string" Label="Celular" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Celular" For="@(() =>InputModel.Celular)" />
+
+        <MudTextField T="string" Label="E-mail" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Email" For="@(() =>InputModel.Email)" />
+
+        <MudTextField T="DateTime" Label="Data de Cadastro" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.DataCadastro" For="@(() =>InputModel.DataCadastro)" />
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
+            Salvar
+        </MudButton>
+    </EditForm>
+</MudCardContent>
+</MudCard>

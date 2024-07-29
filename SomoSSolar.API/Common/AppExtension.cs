@@ -1,6 +1,4 @@
-﻿using SomoSSolar.API.EndPoints;
-
-namespace SomoSSolar.API.Common;
+﻿namespace SomoSSolar.API.Common;
 
 public static class AppExtension
 {

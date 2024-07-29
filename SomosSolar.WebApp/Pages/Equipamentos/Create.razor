@@ -1,0 +1,44 @@
+﻿@page "/equipamentos/adicionar"
+@inherits CreateEquipamentoPage
+
+<MudText Typo="Typo.h5">Novo Equipamento</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+
+        <MudTextField T="string" Label="Produto" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Tipo" For="@(() => InputModel.Tipo)" />
+
+        <MudTextField T="string" Label="Fornecedor" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Fornecedor" For="@(() => InputModel.Fornecedor)" />
+
+        <MudTextField T="string" Label="Marca" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Marca" For="@(() => InputModel.Marca)" />
+
+        <MudTextField T="string" Label="Modelo" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Modelo" For="@(() => InputModel.Modelo)" />
+
+        <MudTextField T="string" Label="Potência em W" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Potencia" For="@(() => InputModel.Tipo)" />
+
+        <MudTextField T="string" Label="Potencia Máxima em W" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.PotenciaMaxima" For="@(() => InputModel.PotenciaMaxima)" />
+
+        <MudTextField T="string" Label="Peso" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Peso" For="@(() => InputModel.Peso)" />
+
+        <MudTextField T="string" Label="Tamanho" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />
+
+        <MudTextField T="string" Label="Imagem URL" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.ImagemUrl" For="@(() => InputModel.ImagemUrl)" />
+
+        <MudSelect T="EIsAtivo" Label="Equipamento Ativo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Ativo">
+            <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Ativo">Ativo</MudSelectItem>
+            <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Inativo">Inativo</MudSelectItem>
+        </MudSelect>
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+        <MudButton Href="/equipamentos" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
+    </EditForm>
+</MudPaper>

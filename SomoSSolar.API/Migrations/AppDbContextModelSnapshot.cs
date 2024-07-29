@@ -34,7 +34,7 @@ namespace SomoSSolar.API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -152,14 +152,14 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("UserId", "LoginProvider", "Nome");
 
                     b.ToTable("IdentityUserToken", (string)null);
                 });

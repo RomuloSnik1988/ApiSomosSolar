@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SomoSSolar.Core.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SomoSSolar.Core.Requests.Equipamentos;
@@ -31,4 +32,6 @@ public class CreateEquipamentoRequest
     [MaxLength(120, ErrorMessage = "A imagem deve ter no máximo 120 catacteres")]
     [DisplayName("Imagem")]
     public string ImagemUrl { get; set; } = string.Empty;
+    [Required(ErrorMessage ="Informar se o equipamento esta atívo")]
+    public EIsAtivo Ativo { get; set; } = EIsAtivo.Ativo;
 }

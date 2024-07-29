@@ -15,6 +15,10 @@ public static class Endpoints
     {
         var endpoints = app.MapGroup("");
 
+        endpoints.MapGroup("/")
+            .WithTags("Helth Check")
+            .MapGet("/", () => new { message = "OK" });
+
         endpoints.MapGroup("v1/clientes")
             .WithTags("Clientes")
             .RequireAuthorization()

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace SomoSSolar.API.Models;
 
 public class User : IdentityUser<long>
 {
-    public List<IdentityRole<long>>? Role { get; set; }
+    [Required]
+    public List<IdentityRole<long>>? Roles { get; set; }
 }

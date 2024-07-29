@@ -41,7 +41,7 @@ public static class BuilderExtension
             x.UseSqlServer(Configuration.ConnectionString);
         });
         builder.Services.AddIdentityCore<User>().AddRoles<IdentityRole<long>>()
-            .AddEntityFrameworkStores<AppDbContext>();
+            .AddEntityFrameworkStores<AppDbContext>().AddApiEndpoints(); 
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {
@@ -55,7 +55,10 @@ public static class BuilderExtension
     {
         builder.Services.AddCors(
             options => options.AddPolicy(ApiConfiguration.CorsPolicyName,
-                policy => policy.WithOrigins([Configuration.BackendUrl, Configuration.FrontendUrl])
+                policy => policy.WithOrigins([
+                    Configuration.BackendUrl,
+                    Configuration.FrontendUrl
+                    ])
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()));

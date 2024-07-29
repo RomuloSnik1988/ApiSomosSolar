@@ -3,5 +3,5 @@
 public enum EIsAtivo
 {
     Ativo = 1,
-    Inativo = 2,
+    Inativo = 2
 }

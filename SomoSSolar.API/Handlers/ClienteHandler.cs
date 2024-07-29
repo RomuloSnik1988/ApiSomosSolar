@@ -44,7 +44,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
             if (cliente is null)
                 return new Response<Cliente?>(null, 404, "Cliente não encontrado");
 
-            cliente.Nome = request.Name;
+            cliente.Nome = request.Nome;
             cliente.Sobrenome = request.Sobrenome;
             cliente.Documento = request.Documento;
             cliente.Celular = request.Celular;

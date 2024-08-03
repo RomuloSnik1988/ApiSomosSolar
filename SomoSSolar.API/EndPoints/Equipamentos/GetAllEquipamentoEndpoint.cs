@@ -17,7 +17,7 @@ public class GetAllEquipamentoEndpoint : IEndpoint
         .WithDescription("Recupera todos os equipamentos")
         .WithOrder(5)
         .Produces<PagedResponse<List<Equipamento>?>>();
-    private static async Task<IResult> HandleAsync(IEquipamentosHandler handler,
+    private static async Task<IResult> HandleAsync(IEquipamentoHandler handler,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = Configuration.DefaultPageSize)
     {

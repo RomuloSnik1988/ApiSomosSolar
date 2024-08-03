@@ -17,7 +17,7 @@ public class GetAllVendaEndpoint : IEndpoint
         .WithDescription("Recuperar todas as vendas")
         .WithOrder(5)
         .Produces<Response<Venda?>>();
-    private static async Task<IResult> HandlerAsync(IVendasHendler handler,
+    private static async Task<IResult> HandlerAsync(IVendasHandler handler,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = Configuration.DefaultPageSize)
     {

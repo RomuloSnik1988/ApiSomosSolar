@@ -31,11 +31,14 @@ public static class Endpoints
         endpoints.MapGroup("v1/enderecos")
             .WithTags("Endereços")
             .RequireAuthorization()
-            .MapEndpoint<CreateEnredecoEndpoint>()
+            .MapEndpoint<CreateEnderecoEndpoint>()
             .MapEndpoint<UpdateEnderecoEndpoint>()
             .MapEndpoint<DeleteEnderecoEndpoint>()
             .MapEndpoint<GetEnderecoByIdEndpoint>()
-            .MapEndpoint<GetAllEnderecoEndpoint>();
+            .MapEndpoint<GetAllEnderecoEndpoint>()
+            .MapEndpoint<GetEnderecosByClienteEndpoint>()
+            .MapEndpoint<GetByClienteIdEndpoint>();
+
 
         endpoints.MapGroup("v1/equipamentos")
             .WithTags("Equipamentos")

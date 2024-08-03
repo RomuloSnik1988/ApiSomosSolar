@@ -1,0 +1,37 @@
+﻿@page "/instalacoes"
+@inherits ListInstalacoesPage
+
+<MudText Typo="Typo.h6">Instalções</MudText>
+<div class="d-flex justify-end"
+<MudButton Variant="Variant.Filled" Color="Color.Primary"
+StartIcon="@Icons.Material.TwoTone.Add" Href="instalacoes/adicionar">
+Nova Instalação
+</MudButton>
+</div>
+
+<MudDataGrid Items="@Instalacoes" Filterable="true" Hideable="true" QuickFilter="Filter" Class="mt-4">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Instalações</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value=SearchTerm Placeholder="Filtar" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" IconSize="Size.Medium" Class="mt-0">
+        </MudTextField>
+    </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Cliente" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="x => x.DataInstalacao" Title="Data de Instalação"></PropertyColumn>
+        <PropertyColumn Property="x => x.Valor" Title="Valor de Venda"></PropertyColumn>
+        <PropertyColumn Property="x => x.Despesas" Title="Despesas"></PropertyColumn>
+        <TemplateColumn Class="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Href="@($"/instalacoes/editar/{context.Item.Id}")" Color="Color.Primary"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                   arial-label="Excluir" OnClick="()=>OnDeleteButtonClickedAsync(context.Item.Id)"></MudIconButton>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+
+</MudDataGrid>

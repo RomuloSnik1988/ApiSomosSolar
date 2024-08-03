@@ -135,12 +135,12 @@ namespace SomoSSolar.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Endereco_ClienteId",
                 table: "Endereco",
-                column: "ClienteId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Instalacao_ClienteId",
                 table: "Instalacao",
-                column: "ClienteId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Instalacao_EnderecoId",

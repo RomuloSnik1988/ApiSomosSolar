@@ -14,7 +14,7 @@ public partial class CreateEquipamentoPage : ComponentBase
 
     #region Services
     [Inject]
-    public IEquipamentosHandler Handler { get; set; } = null!;
+    public IEquipamentoHandler Handler { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
     [Inject]

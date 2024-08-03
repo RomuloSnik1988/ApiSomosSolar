@@ -1,0 +1,49 @@
+﻿@page "/enderecos/editar/{id}"
+@inherits EditEnderecoPage
+
+<MudText Typo="Typo.h3">Editar Endereço 0</MudText>
+@if (IsBusy)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110" />
+        <MudSkeleton Height="55px" />
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
+
+            <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Lagradouro" For="@(() => InputModel.Lagradouro)" />
+
+            <MudTextField T="string" Label="Bairro" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Bairro" For="@(() => InputModel.Bairro)" />
+
+            <MudTextField T="string" Label="Numero" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Numero" For="@(() => InputModel.Numero)" />
+
+            <MudTextField T="string" Label="Complemento" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Complemento" For="@(() => InputModel.Complemento)" />
+
+            <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Cep" For="@(() => InputModel.Cep)" />
+
+        <MudSelect T="int" Label="Cliente" @bind-Value="InputModel.ClienteId" AnchorOrigin="Origin.BottomCenter">
+            @foreach (var cliente in Clientes)
+            {
+                <MudSelectItem T="int" Value="@cliente.Id">@cliente.Nome</MudSelectItem>
+            }
+        </MudSelect>
+
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+            <MudButton Href="/enderecos" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
+
+        </EditForm>
+    </MudPaper>
+
+}

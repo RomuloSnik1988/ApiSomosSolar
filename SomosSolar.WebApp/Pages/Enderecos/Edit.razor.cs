@@ -4,40 +4,38 @@ using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Clientes;
+using SomoSSolar.Core.Requests.Enderecos;
 
-namespace SomosSolar.WebApp.Pages.Clientes;
+namespace SomosSolar.WebApp.Pages.Enderecos;
 
-public class EditClientePage : ComponentBase
+public class EditEnderecoPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public UpdateClienteRequest InputModel { get; set; } = new();
-    public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
+    public UpdateEnderecoRequest InputModel { get; set; } = new();
+    public List<Cliente> Clientes { get; set; } = [];
     #endregion
-
     #region Parameters
     [Parameter]
     public string Id { get; set; } = string.Empty;
     #endregion
-
     #region Services
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
     [Inject]
-    public IClienteHandler Handler { get; set; } = null!;
-    //[Inject]
-    //public IEnderecoHandler HEndereco { get; set; } = null!;
+    public IEnderecoHandler Handler { get; set; } = null!;
+    [Inject]
+    public IClienteHandler ClienteHandler { get; set; } = null!;
     #endregion
-
     #region Overrides
     protected override async Task OnInitializedAsync()
     {
-        GetClienteByIdRequest? request = null;
+        GetEnderecoByIdRequest? request = null;
         try
         {
-            request = new GetClienteByIdRequest
+            request = new GetEnderecoByIdRequest
             {
                 Id = int.Parse(Id)
             };
@@ -52,24 +50,21 @@ public class EditClientePage : ComponentBase
         IsBusy = true;
         try
         {
+            await GetClientesAsync();
+
             var response = await Handler.GetByIdAsync(request);
             if (response.IsSuccess && response.Data is not null)
-                InputModel = new UpdateClienteRequest
+                InputModel = new UpdateEnderecoRequest
                 {
                     Id = response.Data.Id,
-                    Nome = response.Data.Nome,
-                    Sobrenome = response.Data.Sobrenome,
-                    Documento = response.Data.Documento,
-                    Celular = response.Data.Celular,
-                    Email = response.Data.Email,
-                    DataCadastro = response.Data.DataCadastro
+                    Lagradouro = response.Data.Lagradouro,
+                    Bairro = response.Data.Bairro,
+                    Numero = response.Data.Numero,
+                    Complemento = response.Data.Complemento,
+                    Cep = response.Data.Cep,
+                    ClienteId = response.Data.ClienteId
                 };
 
-            //var enderecosReponse = await HEndereco.GetEnderecoByClienteAsync(new GetEnderecosClienteRequest { Id = request.Id });
-            //if (enderecosReponse.IsSuccess && enderecosReponse.Data is not null)
-            //{
-            //    Enderecos = enderecosReponse.Data;
-            //}
         }
         catch (Exception ex)
         {
@@ -78,7 +73,6 @@ public class EditClientePage : ComponentBase
         finally { IsBusy = false; }
     }
     #endregion
-
     #region Methods
     public async Task OnValidSubmitAsync()
     {
@@ -88,15 +82,38 @@ public class EditClientePage : ComponentBase
             var result = await Handler.UpdateAsync(InputModel);
             if (result.IsSuccess)
             {
-                Snackbar.Add("Dados do cliente atualizado com sucesso", Severity.Success);
-                NavigationManager.NavigateTo("/clientes");
+                Snackbar.Add("Endereço atualizado", Severity.Success);
+                NavigationManager.NavigateTo("/enderecos");
             }
         }
         catch (Exception ex)
         {
-            Snackbar.Add(ex.Message, Severity.Success);
+            Snackbar.Add(ex.Message, Severity.Error);
         }
         finally { IsBusy = false; }
+        
+    }
+    #endregion
+
+    #region Private Methods
+
+    private async Task GetClientesAsync()
+    {
+        IsBusy = true;
+        try
+        {
+            var request = new GetAllClientesRequest();
+            var result = await ClienteHandler.GetAllAsync(request);
+            if (result.IsSuccess)
+            {
+                Clientes = result.Data ?? [];
+                InputModel.ClienteId = Clientes.FirstOrDefault()?.Id ?? 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
     }
     #endregion
 }

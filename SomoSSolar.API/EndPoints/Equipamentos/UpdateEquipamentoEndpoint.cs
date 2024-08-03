@@ -15,7 +15,7 @@ public class UpdateEquipamentoEndpoint : IEndpoint
         .WithDescription("Atualiza um equipamento")
         .WithOrder(2)
         .Produces<Response<Equipamento?>>();
-    private static async Task<IResult>HandlerAsync(IEquipamentosHandler handler,UpdateEquipamentoRequest request, int id)
+    private static async Task<IResult>HandlerAsync(IEquipamentoHandler handler,UpdateEquipamentoRequest request, int id)
     {
         request.Id = id;
         

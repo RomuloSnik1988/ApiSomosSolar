@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SomoSSolar.API.Data;
 using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Models;
@@ -116,5 +118,28 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
             return new PagedResponse<List<Cliente?>>(null, 500, "Não foi possivel pesquisar os clientes");
         }
     }
+
+    
+
+    //public async Task<IActionResult> enderecosAsync(int usuarioid)
+    //{
+    //    var buscaEnderecos = await (from enderecos in context.Enderecos
+    //                                where enderecos.Id == usuarioid
+    //                                orderby enderecos.Id descending
+    //                                select new
+    //                                {
+    //                                    Lagradouro = enderecos.Lagradouro,
+    //                                    Bairro = enderecos.Bairro,
+    //                                    Numero = enderecos.Numero,
+    //                                    Complemento = enderecos.Complemento,
+    //                                    Cep = enderecos.Cep
+    //                                }).ToListAsync();
+    //    if (buscaEnderecos is null)
+    //        return new NotFoundResult();
+
+    //    return (buscaEnderecos);
+
+    //}
+
 }
 

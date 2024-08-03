@@ -12,4 +12,6 @@ public interface IClienteHandler
     Task<Response<Cliente?>> DeleteAsync(DeleteClienteRequest request);
     Task<Response<Cliente?>> GetByIdAsync(GetClienteByIdRequest request);
     Task<PagedResponse<List<Cliente?>>> GetAllAsync(GetAllClientesRequest request);
+
+   
 }

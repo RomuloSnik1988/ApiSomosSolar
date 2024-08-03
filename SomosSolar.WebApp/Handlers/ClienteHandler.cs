@@ -32,7 +32,7 @@ namespace SomosSolar.WebApp.Handlers
         public async Task<Response<Cliente?>> GetByIdAsync(GetClienteByIdRequest request)
         =>
             await _client.GetFromJsonAsync<Response<Cliente?>>($"v1/clientes/{request.Id}")
-                ?? new Response<Cliente?>(null, 400, "Não foi possível obter a transação");
+                ?? new Response<Cliente?>(null, 400, "Não foi possível obter o cliente");
        
         public async Task<PagedResponse<List<Cliente?>>> GetAllAsync(GetAllClientesRequest request)
         =>

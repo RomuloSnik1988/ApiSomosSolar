@@ -15,7 +15,7 @@ public class CreateVendaEndpoint : IEndpoint
         .WithDescription("Incluir uma nova venda")
         .WithOrder(1)
         .Produces<Response<Venda?>>();
-    private static async Task<IResult>HandlerAsync(IVendasHendler hendler, CreateVendaRequest request)
+    private static async Task<IResult>HandlerAsync(IVendasHandler hendler, CreateVendaRequest request)
     {
         var result = await hendler.CreateAsync(request);
         return result.IsSuccess

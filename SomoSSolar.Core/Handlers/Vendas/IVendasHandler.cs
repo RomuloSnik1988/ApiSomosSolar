@@ -4,7 +4,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.Core.Handlers.Vendas;
 
-public interface IVendasHendler
+public interface IVendasHandler
 {
     Task<Response<Venda?>> CreateAsync(CreateVendaRequest request);
     Task<Response<Venda?>> UpdateAsync(UpdateVendaRequest request);

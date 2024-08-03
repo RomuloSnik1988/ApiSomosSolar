@@ -17,7 +17,7 @@ public class GetAllEnderecoEndpoint : IEndpoint
         .WithDescription("Buscar todos os endereços")
         .WithOrder(5)
         .Produces<PagedResponse<List<Endereco>?>>();
-    private static async Task<IResult>HandlerAsync(IEnderecosHandler handler,
+    private static async Task<IResult>HandlerAsync(IEnderecoHandler handler,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = Configuration.DefaultPageSize)
     {

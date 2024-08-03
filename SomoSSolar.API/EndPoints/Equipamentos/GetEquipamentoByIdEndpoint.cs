@@ -15,7 +15,7 @@ public class GetEquipamentoByIdEndpoint : IEndpoint
         .WithDescription("Buscar Esquipamento por Id")
         .WithOrder(4)
         .Produces<Response<Equipamento?>>();
-    private static async Task<IResult> HandlerAsync(IEquipamentosHandler handler, int id)
+    private static async Task<IResult> HandlerAsync(IEquipamentoHandler handler, int id)
     {
         var request = new GetEquipamentoByIdRequest { Id = id };
 

@@ -7,7 +7,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.Handlers;
 
-public class VendaHandler(AppDbContext context) : IVendasHendler
+public class VendaHandler(AppDbContext context) : IVendasHandler
 {
     public async Task<Response<Venda?>> CreateAsync(CreateVendaRequest request)
     {

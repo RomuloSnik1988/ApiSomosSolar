@@ -15,7 +15,7 @@ public class GetEnderecoByIdEndpoint : IEndpoint
         .WithDescription("Buscar um endereço por Id")
         .WithOrder(4)
         .Produces<Response<Endereco?>>();
-    private static async Task<IResult>HandlerAsync(IEnderecosHandler handler, int id)
+    private static async Task<IResult>HandlerAsync(IEnderecoHandler handler, int id)
     {
         var request = new GetEnderecoByIdRequest { Id = id };
 

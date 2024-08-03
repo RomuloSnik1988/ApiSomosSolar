@@ -8,7 +8,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.Handlers;
 
-public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
+public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
 {
     public async Task<Response<Endereco?>> CreateAsync(CreateEnderecoRequest request)
     {
@@ -29,7 +29,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
 
             return new Response<Endereco?>(endereco, 201, "Endereço adicionado com sucesso!");
         }
-        catch 
+        catch
         {
             return new Response<Endereco?>(null, 500, "Não foi possivel adicionar o endereço");
         }
@@ -55,7 +55,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
 
             return new Response<Endereco?>(endereco, message: "Endereço atualizado com sucesso");
         }
-        catch 
+        catch
         {
             return new Response<Endereco?>(null, 500, "Não foi possível atualizar o endereço");
         }
@@ -65,7 +65,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
     {
         try
         {
-            var endereco = await context.Enderecos.FirstOrDefaultAsync(x =>x.Id == request.Id);
+            var endereco = await context.Enderecos.FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (endereco is null)
                 return new Response<Endereco?>(null, 404, "Endereço não encontrado");
@@ -90,7 +90,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
                 ? new Response<Endereco?>(null, 404, "Endereço nao encontrado")
                 : new Response<Endereco?>(endereco);
         }
-        catch 
+        catch
         {
             return new Response<Endereco?>(null, 500, "Não foi possível localizar o endereço");
         }
@@ -111,13 +111,47 @@ public class EnderecoHandler(AppDbContext context) : IEnderecosHandler
 
             return new PagedResponse<List<Endereco?>>(enderecos, count, request.PageNumber, request.PageSize);
         }
-        catch 
+        catch
         {
             return new PagedResponse<List<Endereco?>>(null, 500, "Não foi possível pesquisar os endereços");
         }
     }
 
-   
+    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request)
+    {
+       
 
-    
+        var enderecos = await (from endereco in context.Enderecos
+                               where endereco.ClienteId == request.Id
+                               select new Endereco
+                               {
+                                   Lagradouro = endereco.Lagradouro,
+                                   Bairro = endereco.Bairro,
+                                   Numero = endereco.Numero,
+                                   Complemento = endereco.Complemento,
+                                   Cep = endereco.Cep
+
+                               }).ToListAsync();
+
+        return enderecos.Count == 0 
+            ? new Response<List<Endereco?>>(null, 404, "Não encontrado")
+            : new Response<List<Endereco?>>(enderecos);
+    }
+
+    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteId(GetEnderecoByClienteIdRequest request)
+    {
+        try
+        {
+            var query = context.Enderecos.AsNoTracking().Where(x=> x.ClienteId == request.Id);
+
+            var enderecos = await query.ToListAsync();
+
+            return new Response<List<Endereco?>>(enderecos);
+        }
+        catch (Exception)
+        {
+            return new Response<List<Endereco?>>(null, 500, "Não foi possível pesquisar os endereços");
+        }
+    }
 }
+

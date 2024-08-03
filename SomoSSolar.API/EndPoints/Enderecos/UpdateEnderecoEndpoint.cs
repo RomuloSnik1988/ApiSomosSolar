@@ -15,7 +15,7 @@ public class UpdateEnderecoEndpoint : IEndpoint
         .WithDescription("Atualizar um endereço")
         .WithOrder(2)
         .Produces<Response<Endereco?>>();
-    private static async Task<IResult>HandlerAsync(IEnderecosHandler handler, UpdateEnderecoRequest request, int id)
+    private static async Task<IResult>HandlerAsync(IEnderecoHandler handler, UpdateEnderecoRequest request, int id)
     {
         request.Id = id;
 

@@ -13,10 +13,10 @@ public class DeleteEnderecoEndpoint : IEndpoint
         .WithName("Endereços: Delete")
         .WithSummary("Exluir um endereço")
         .WithDescription("Excluir um endereço")
-        .WithOrder(2)
+        .WithOrder(3)
         .Produces<Response<Endereco?>>();
 
-    private static async Task<IResult>HandlerAsync(IEnderecosHandler handler, int id)
+    private static async Task<IResult>HandlerAsync(IEnderecoHandler handler, int id)
     {
         var request = new DeleteEnderecoRequest
         {

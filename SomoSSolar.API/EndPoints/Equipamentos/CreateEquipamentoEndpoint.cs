@@ -16,7 +16,7 @@ public class CreateEquipamentoEndpoint : IEndpoint
         .WithOrder(1)
         .Produces<Response<Equipamento?>>();
 
-    private static async Task<IResult>HandleAsync(IEquipamentosHandler handler, CreateEquipamentoRequest request)
+    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler, CreateEquipamentoRequest request)
     {
         var result = await handler.CreateAsync(request);
         return result.IsSuccess

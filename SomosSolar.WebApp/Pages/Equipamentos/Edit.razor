@@ -1,0 +1,59 @@
+﻿@page "/equipamentos/editar/{id}"
+@inherits EditEquipamentoPage
+
+<MudText Typo="Typo.h6">Editar Equipamentos</MudText>
+@if (IsBusy)
+{
+    <MudPaper Class="pa-8 mt-4">
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110" />
+        <MudSkeleton Height="55px" />
+        <MudSkeleton Height="110" />
+        <MudSkeleton Height="55px" />
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-8 mt-4">
+        <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator/>
+
+            <MudTextField T="string" Label="Tipo" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Tipo" For="@(() => InputModel.Tipo)" />
+
+            <MudTextField T="string" Label="Fornecedor" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Fornecedor" For="@(() => InputModel.Fornecedor)" />
+
+            <MudTextField T="string" Label="Marca" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Marca" For="@(() => InputModel.Marca)" />
+
+            <MudTextField T="string" Label="Modelo" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Modelo" For="@(() => InputModel.Tipo)" />
+
+            <MudTextField T="string" Label="Potência" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Potencia" For="@(() => InputModel.Potencia)" />
+
+            <MudTextField T="string" Label="Potencia Máxima" 
+                          @bind-Value="InputModel.PotenciaMaxima" For="@(() => InputModel.PotenciaMaxima)" />
+
+            <MudTextField T="string" Label="Peso" 
+                          @bind-Value="InputModel.Peso" For="@(() => InputModel.Peso)" />
+
+            <MudTextField T="string" Label="Modelo" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Modelo" For="@(() => InputModel.Tipo)" />
+
+            <MudTextField T="string" Label="Tamanho" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />
+
+            <MudTextField T="string" Label="ImagemUrl"
+                          @bind-Value="InputModel.ImagemUrl" For="@(() => InputModel.ImagemUrl)" />
+
+            <MudSelect T="EIsAtivo" Label="Status" @bind-Value="InputModel.Ativo" AnchorOrigin="Origin.BottomCenter">
+                <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Ativo">Ativo</MudSelectItem>
+                <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Inativo">Inativo</MudSelectItem>
+            </MudSelect>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">Salvar</MudButton>
+            <MudButton Href="/equipamentos" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
+        </EditForm>
+    </MudPaper>
+}

@@ -7,6 +7,9 @@ using SomosSolar.WebApp.Handlers;
 using SomosSolar.WebApp.Security;
 using SomoSSolar.Core.Handlers;
 using SomoSSolar.Core.Handlers.Clientes;
+using SomoSSolar.Core.Handlers.Enderecos;
+using SomoSSolar.Core.Handlers.Equipamentos;
+using SomoSSolar.Core.Handlers.Instalacoes;
 using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -33,6 +36,9 @@ builder.Services.AddHttpClient(Configuration.HttpClientName, opt =>
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();
 builder.Services.AddTransient<IClienteHandler, ClienteHandler>();
+builder.Services.AddTransient<IEnderecoHandler, EnderecoHandler>();
+builder.Services.AddTransient<IEquipamentoHandler, EquipamentoHandler>();
+builder.Services.AddTransient<IInstacacaoHandler, InstacacaoHandler>();
 
 builder.Services.AddLocalization();
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");

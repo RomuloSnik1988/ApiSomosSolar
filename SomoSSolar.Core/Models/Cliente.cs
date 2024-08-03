@@ -9,7 +9,7 @@ public class Cliente
     public string Celular { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
-    public ICollection<Endereco> Enderecos { get; set; } = null!;
-    public ICollection<Instalacao> Instalacoes { get; set; } = null!;
+    public ICollection<Endereco> Enderecos { get; set; } = new List<Endereco>();
+    public ICollection<Instalacao> Instalacoes { get; set; } = new List<Instalacao>();
 
 }

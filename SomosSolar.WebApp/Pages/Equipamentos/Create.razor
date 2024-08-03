@@ -6,7 +6,7 @@
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
 
-        <MudTextField T="string" Label="Produto" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Tipo" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Tipo" For="@(() => InputModel.Tipo)" />
 
         <MudTextField T="string" Label="Fornecedor" HelperText="Campo Obrigatório"
@@ -21,16 +21,16 @@
         <MudTextField T="string" Label="Potência em W" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Potencia" For="@(() => InputModel.Tipo)" />
 
-        <MudTextField T="string" Label="Potencia Máxima em W" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Potencia Máxima em W"
                       @bind-Value="InputModel.PotenciaMaxima" For="@(() => InputModel.PotenciaMaxima)" />
 
-        <MudTextField T="string" Label="Peso" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Peso" 
                       @bind-Value="InputModel.Peso" For="@(() => InputModel.Peso)" />
 
-        <MudTextField T="string" Label="Tamanho" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Tamanho" 
                       @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />
 
-        <MudTextField T="string" Label="Imagem URL" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Imagem URL" 
                       @bind-Value="InputModel.ImagemUrl" For="@(() => InputModel.ImagemUrl)" />
 
         <MudSelect T="EIsAtivo" Label="Equipamento Ativo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Ativo">

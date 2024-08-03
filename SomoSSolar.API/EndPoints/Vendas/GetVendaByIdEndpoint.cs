@@ -15,7 +15,7 @@ public class GetVendaByIdEndpoint : IEndpoint
         .WithDescription("Buscar venda por id")
         .WithOrder(4)
         .Produces<Response<Venda?>>();
-    private static async Task<IResult>HandlerAsync(IVendasHendler handler, int id)
+    private static async Task<IResult>HandlerAsync(IVendasHandler handler, int id)
     {
         var request = new GetVendaByIdRequest { Id = id };
 

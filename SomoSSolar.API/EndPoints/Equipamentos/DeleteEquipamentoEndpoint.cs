@@ -15,7 +15,7 @@ public class DeleteEquipamentoEndpoint : IEndpoint
         .WithDescription("Excluir um equipamento")
         .WithOrder(3)
         .Produces<Response<Equipamento?>>();
-    private static async Task<IResult> HandleAsync(IEquipamentosHandler handler, int id)
+    private static async Task<IResult> HandleAsync(IEquipamentoHandler handler, int id)
     {
         var request = new DeleteEquipamentoRequest { Id = id };
 

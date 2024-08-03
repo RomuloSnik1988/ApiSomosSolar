@@ -46,10 +46,10 @@ public static class BuilderExtension
     public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddTransient<IClienteHandler, ClienteHandler>();
-        builder.Services.AddTransient<IEnderecosHandler, EnderecoHandler>();
-        builder.Services.AddTransient<IEquipamentosHandler, EquipamentoHandler>();
+        builder.Services.AddTransient<IEnderecoHandler, EnderecoHandler>();
+        builder.Services.AddTransient<IEquipamentoHandler, EquipamentoHandler>();
         builder.Services.AddTransient<IInstacacaoHandler, InstalacaoHandler>();
-        builder.Services.AddTransient<IVendasHendler, VendaHandler>();
+        builder.Services.AddTransient<IVendasHandler, VendaHandler>();
     }
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {

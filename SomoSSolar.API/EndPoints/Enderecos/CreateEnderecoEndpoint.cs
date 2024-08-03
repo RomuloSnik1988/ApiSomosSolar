@@ -6,7 +6,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.EndPoints.Enderecos;
 
-public class CreateEnredecoEndpoint : IEndpoint
+public class CreateEnderecoEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
     => app.MapPost("/", HandlerAsync)
@@ -16,7 +16,7 @@ public class CreateEnredecoEndpoint : IEndpoint
         .WithOrder(1)
         .Produces<Response<Endereco?>>();
 
-    private static async Task<IResult>HandlerAsync(IEnderecosHandler handler, CreateEnderecoRequest request)
+    private static async Task<IResult>HandlerAsync(IEnderecoHandler handler, CreateEnderecoRequest request)
     {
         var result = await handler.CreateAsync(request);
         return result.IsSuccess

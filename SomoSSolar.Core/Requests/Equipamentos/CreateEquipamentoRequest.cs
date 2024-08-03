@@ -23,10 +23,8 @@ public class CreateEquipamentoRequest
     public string Potencia { get; set; } = string.Empty;
     [MaxLength(20, ErrorMessage = "A potência maxíma deve ter no máximo 20 catacteres")]
     public string PotenciaMaxima { get; set; } = string.Empty;
-    [Required(ErrorMessage = "Peso Inválido")]
     [MaxLength(20, ErrorMessage = "O peso deve ter no máximo 20 catacteres")]
     public string Peso { get; set; } = string.Empty;
-    [Required(ErrorMessage = "Tamanho Inválido")]
     [MaxLength(20, ErrorMessage = "O tamanho deve ter no máximo 20 catacteres")]
     public string Tamanho { get; set; } = string.Empty;
     [MaxLength(120, ErrorMessage = "A imagem deve ter no máximo 120 catacteres")]

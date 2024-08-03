@@ -5,7 +5,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.Core.Handlers.Equipamentos;
 
-public interface IEquipamentosHandler
+public interface IEquipamentoHandler
 {
     Task<Response<Equipamento?>> CreateAsync(CreateEquipamentoRequest request);
     Task<Response<Equipamento?>> UpdateAsync(UpdateEquipamentoRequest request);

@@ -7,7 +7,7 @@ using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.Handlers;
 
-public class EquipamentoHandler(AppDbContext context) : IEquipamentosHandler
+public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
 {
     public async Task<Response<Equipamento?>> CreateAsync(CreateEquipamentoRequest request)
     {

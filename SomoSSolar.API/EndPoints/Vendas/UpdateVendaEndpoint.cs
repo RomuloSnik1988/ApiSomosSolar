@@ -15,7 +15,7 @@ public class UpdateVendaEndpoint : IEndpoint
         .WithDescription("Atualizar uma venda")
         .WithOrder(2)
         .Produces<Response<Venda?>>();
-    private static async Task<IResult>HandlerAsync(IVendasHendler handler, UpdateVendaRequest request, int id)
+    private static async Task<IResult>HandlerAsync(IVendasHandler handler, UpdateVendaRequest request, int id)
     {
         request.Id = id;
 

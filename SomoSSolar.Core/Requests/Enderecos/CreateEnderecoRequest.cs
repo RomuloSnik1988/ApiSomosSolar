@@ -12,13 +12,10 @@ public class CreateEnderecoRequest
     public string Bairro { get; set; } = string.Empty;
     [MaxLength(10, ErrorMessage = "O numero deve conter no maxímo 10 caracteres")]
     public string Numero { get; set; } = string.Empty;
-    [Required(ErrorMessage = "Lagradouro inválido")]
     [MaxLength(50, ErrorMessage = "O complemento deve conter no maxímo 50 caracteres")]
     public string Complemento { get; set; } = string.Empty;
     [Required(ErrorMessage = "CEP inválido")]
-    [MaxLength(10, ErrorMessage = "O lagradouro deve conter no maxímo 10 caracteres")]
+    [MaxLength(10, ErrorMessage = "O Cep deve conter no maxímo 10 caracteres")]
     public string Cep { get; set; } = string.Empty;
-    [Required(ErrorMessage ="Cliente Id inválido")]
-    [MaxLength(20, ErrorMessage = "O Cliente deve conter no maxímo 20 caracteres")]
     public int ClienteId { get; set; }
 }

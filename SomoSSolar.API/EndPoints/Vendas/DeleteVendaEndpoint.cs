@@ -15,7 +15,7 @@ public class DeleteVendaEndpoint : IEndpoint
         .WithDescription("Excluir uma venda")
         .WithOrder(3)
         .Produces<Response<Venda?>>();
-    private static async Task<IResult> HandlerAsync(IVendasHendler handler, int id)
+    private static async Task<IResult> HandlerAsync(IVendasHandler handler, int id)
     {
         var request = new DeleteVendaRequest
         {

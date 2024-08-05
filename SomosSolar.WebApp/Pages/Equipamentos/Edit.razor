@@ -18,8 +18,10 @@ else
         <EditForm Model="InputModel" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator/>
 
-            <MudTextField T="string" Label="Tipo" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Tipo" For="@(() => InputModel.Tipo)" />
+            <MudSelect T="ETipoEquipamento" Label="Tipo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Tipo">
+                <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Inversor">Inversor</MudSelectItem>
+                <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Painel">Painel</MudSelectItem>
+            </MudSelect>
 
             <MudTextField T="string" Label="Fornecedor" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Fornecedor" For="@(() => InputModel.Fornecedor)" />
@@ -28,7 +30,7 @@ else
                           @bind-Value="InputModel.Marca" For="@(() => InputModel.Marca)" />
 
             <MudTextField T="string" Label="Modelo" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Modelo" For="@(() => InputModel.Tipo)" />
+                          @bind-Value="InputModel.Modelo" For="@(() => InputModel.Modelo)" />
 
             <MudTextField T="string" Label="Potência" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Potencia" For="@(() => InputModel.Potencia)" />
@@ -38,9 +40,6 @@ else
 
             <MudTextField T="string" Label="Peso" 
                           @bind-Value="InputModel.Peso" For="@(() => InputModel.Peso)" />
-
-            <MudTextField T="string" Label="Modelo" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Modelo" For="@(() => InputModel.Tipo)" />
 
             <MudTextField T="string" Label="Tamanho" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />

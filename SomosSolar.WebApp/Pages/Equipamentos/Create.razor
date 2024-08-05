@@ -6,8 +6,10 @@
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
 
-        <MudTextField T="string" Label="Tipo" HelperText="Campo Obrigatório"
-                      @bind-Value="InputModel.Tipo" For="@(() => InputModel.Tipo)" />
+        <MudSelect T="ETipoEquipamento" Label="Tipo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Tipo">
+            <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Inversor">Inversor</MudSelectItem>
+            <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Painel">Painel</MudSelectItem>
+        </MudSelect>
 
         <MudTextField T="string" Label="Fornecedor" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Fornecedor" For="@(() => InputModel.Fornecedor)" />
@@ -19,7 +21,7 @@
                       @bind-Value="InputModel.Modelo" For="@(() => InputModel.Modelo)" />
 
         <MudTextField T="string" Label="Potência em W" HelperText="Campo Obrigatório"
-                      @bind-Value="InputModel.Potencia" For="@(() => InputModel.Tipo)" />
+                      @bind-Value="InputModel.Potencia" For="@(() => InputModel.Potencia)" />
 
         <MudTextField T="string" Label="Potencia Máxima em W"
                       @bind-Value="InputModel.PotenciaMaxima" For="@(() => InputModel.PotenciaMaxima)" />

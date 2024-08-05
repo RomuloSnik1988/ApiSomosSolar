@@ -15,10 +15,12 @@ public class InstalacaoMapping : IEntityTypeConfiguration<Instalacao>
         builder.Property(x => x.DataInstalacao)
             .IsRequired(false);
 
+        builder.Property(x => x.TipoInstalacao)
+            .HasColumnType("SMALLINT");
+
         builder.Property(x => x.Valor)
           .IsRequired(true)
-          .HasColumnType("MONEY")
-          .HasMaxLength(20);
+          .HasColumnType("MONEY");
 
         builder.Property(x => x.Status)
           .IsRequired(true)
@@ -26,11 +28,16 @@ public class InstalacaoMapping : IEntityTypeConfiguration<Instalacao>
           .HasMaxLength(10);
 
         builder.Property(x => x.Despesas)
-          .IsRequired(true)
-          .HasColumnType("MONEY")
-          .HasMaxLength(20);
+          .HasColumnType("MONEY");
 
-        builder.Property(x=> x.EnderecoId)
+        builder.Property(x => x.AmpliacaoInstalacao)
+            .HasColumnType("SMALLINT");
+
+        builder.Property(x => x.EnderecoId)
+            .IsRequired(true)
+            .HasMaxLength(20);
+
+        builder.Property(x => x.ClienteId)
             .IsRequired(true)
             .HasMaxLength(20);
 

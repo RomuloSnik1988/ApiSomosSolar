@@ -7,8 +7,7 @@ namespace SomoSSolar.Core.Requests.Equipamentos;
 public class CreateEquipamentoRequest
 {
     [Required(ErrorMessage = "Tipo Inválido")]
-    [MaxLength(120, ErrorMessage = "O tipo deve ter no máximo 120 catacteres")]
-    public string Tipo { get; set; } = string.Empty;
+    public ETipoEquipamento Tipo { get; set; } = ETipoEquipamento.Inversor;
     [Required(ErrorMessage = "Fornecedor Inválido")]
     [MaxLength(120, ErrorMessage = "O fornecedor deve ter no máximo 120 catacteres")]
     public string Fornecedor { get; set; } = string.Empty;

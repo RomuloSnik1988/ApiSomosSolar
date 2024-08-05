@@ -19,7 +19,6 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
             var cliente = new Cliente
             {
                 Nome = request.Nome,
-                Sobrenome = request.Sobrenome,
                 Documento = request.Documento,
                 Celular = request.Celular,
                 Email = request.Email,
@@ -47,7 +46,6 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
                 return new Response<Cliente?>(null, 404, "Cliente não encontrado");
 
             cliente.Nome = request.Nome;
-            cliente.Sobrenome = request.Sobrenome;
             cliente.Documento = request.Documento;
             cliente.Celular = request.Celular;
             cliente.Email = request.Email;

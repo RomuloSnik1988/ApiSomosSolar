@@ -19,7 +19,7 @@ public class GetInstalacaoByIdEndpoint : IEndpoint
     {
         var request = new GetInstalacaoByIdRequest { Id = id };
 
-        var result = await handler.GetByAsync(request);
+        var result = await handler.GetByIdAsync(request);
         return result.IsSuccess
             ? TypedResults.Ok(result)
             : TypedResults.BadRequest(result);

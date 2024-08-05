@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Clientes;
-using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Clientes;
 
@@ -58,7 +57,6 @@ public class EditClientePage : ComponentBase
                 {
                     Id = response.Data.Id,
                     Nome = response.Data.Nome,
-                    Sobrenome = response.Data.Sobrenome,
                     Documento = response.Data.Documento,
                     Celular = response.Data.Celular,
                     Email = response.Data.Email,

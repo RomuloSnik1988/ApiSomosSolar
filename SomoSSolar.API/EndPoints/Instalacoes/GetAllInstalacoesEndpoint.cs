@@ -16,7 +16,7 @@ public class GetAllInstalacoesEndpoint : IEndpoint
         .WithSummary("Recupera todas as instalações")
         .WithDescription("Recupera todas as instalações")
         .WithOrder(5)
-        .Produces<Response<Instalacao?>>();
+        .Produces<PagedResponse<List<Instalacao>?>>();
 
     private static async Task<IResult>HandlerAsync(IInstacacaoHandler handler,
         [FromQuery] int pageNumber = 1,

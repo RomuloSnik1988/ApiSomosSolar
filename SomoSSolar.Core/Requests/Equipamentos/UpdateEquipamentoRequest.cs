@@ -9,8 +9,7 @@ public class UpdateEquipamentoRequest
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Tipo Inválido")]
-    [MaxLength(120, ErrorMessage = "O tipo deve ter no máximo 120 catacteres")]
-    public string Tipo { get; set; } = string.Empty;
+    public ETipoEquipamento Tipo { get; set; }
     [Required(ErrorMessage = "Fornecedor Inválido")]
     [MaxLength(120, ErrorMessage = "O fornecedor deve ter no máximo 120 catacteres")]
     public string Fornecedor { get; set; } = string.Empty;

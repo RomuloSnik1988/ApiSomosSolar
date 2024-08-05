@@ -13,6 +13,7 @@
             <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator />
                 @* <ValidationSummary /> *@
+               
                 <MudTextField T="string" Label="E-mail" HelperText="Campo obrigatório"
                               InputType="InputType.Email" For="@(()=>InputModel.Email)" @bind-Value="InputModel.Email" />
 

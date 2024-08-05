@@ -10,6 +10,7 @@ using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Handlers.Equipamentos;
 using SomoSSolar.Core.Handlers.Instalacoes;
+using SomoSSolar.Core.Handlers.Vendas;
 using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -39,6 +40,7 @@ builder.Services.AddTransient<IClienteHandler, ClienteHandler>();
 builder.Services.AddTransient<IEnderecoHandler, EnderecoHandler>();
 builder.Services.AddTransient<IEquipamentoHandler, EquipamentoHandler>();
 builder.Services.AddTransient<IInstacacaoHandler, InstacacaoHandler>();
+builder.Services.AddTransient<IVendasHandler, VendaHandler>();
 
 builder.Services.AddLocalization();
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");

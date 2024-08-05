@@ -12,8 +12,8 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240726212015_EntityUserEndRoles")]
-    partial class EntityUserEndRoles
+    [Migration("20240804125925_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace SomoSSolar.API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -155,14 +155,14 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Nome");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("IdentityUserToken", (string)null);
                 });
@@ -264,12 +264,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR");
-
-                    b.Property<string>("Sobrenome")
-                        .IsRequired()
-                        .HasMaxLength(80)
+                        .HasMaxLength(250)
                         .HasColumnType("NVARCHAR");
 
                     b.HasKey("Id");
@@ -295,7 +290,7 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("NVARCHAR");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("ClienteId")
                         .HasMaxLength(15)
                         .HasColumnType("int");
 
@@ -315,7 +310,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Endereco", (string)null);
                 });
@@ -328,10 +323,8 @@ namespace SomoSSolar.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Ativo")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("VARCHAR");
+                    b.Property<short>("Ativo")
+                        .HasColumnType("SMALLINT");
 
                     b.Property<string>("Fornecedor")
                         .IsRequired()
@@ -369,10 +362,8 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("NVARCHAR");
+                    b.Property<short>("Tipo")
+                        .HasColumnType("SMALLINT");
 
                     b.HasKey("Id");
 
@@ -387,15 +378,17 @@ namespace SomoSSolar.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Id")
+                    b.Property<short>("AmpliacaoInstalacao")
+                        .HasColumnType("SMALLINT");
+
+                    b.Property<int>("ClienteId")
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataInstalacao")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Despesas")
-                        .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("MONEY");
 
                     b.Property<int>("EnderecoId")
@@ -407,15 +400,15 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<short>("TipoInstalacao")
+                        .HasColumnType("SMALLINT");
+
                     b.Property<decimal>("Valor")
-                        .HasMaxLength(20)
                         .HasColumnType("MONEY");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Id");
-
-                    b.HasIndex("EnderecoId");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Instalacao", (string)null);
                 });
@@ -455,7 +448,7 @@ namespace SomoSSolar.API.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<long>", b =>
                 {
                     b.HasOne("SomoSSolar.API.Models.User", null)
-                        .WithMany("Role")
+                        .WithMany("Roles")
                         .HasForeignKey("UserId");
                 });
 
@@ -499,7 +492,7 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", null)
                         .WithMany("Enderecos")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -508,17 +501,11 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", "Cliente")
                         .WithMany("Instalacoes")
-                        .HasForeignKey("Id");
-
-                    b.HasOne("SomoSSolar.Core.Models.Endereco", "Endereco")
-                        .WithMany()
-                        .HasForeignKey("EnderecoId")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
-
-                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Venda", b =>
@@ -542,7 +529,7 @@ namespace SomoSSolar.API.Migrations
 
             modelBuilder.Entity("SomoSSolar.API.Models.User", b =>
                 {
-                    b.Navigation("Role");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Cliente", b =>

@@ -1,0 +1,49 @@
+﻿@page "/instalacao/adicionar"
+@inherits CreateInstacalaoPage
+
+<MudText Typo="Typo.h6">Adicionar uma Instalação</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator/>
+
+        <MudSelect T="int" Label="Cliente" @bind-Value="InputModel.ClienteId" AnchorOrigin="Origin.BottomCenter">
+            @foreach (var cliente in Clientes)
+            {
+                <MudSelectItem T="int" Value="@cliente.Id">@cliente.Nome</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudSelect T="int" Label="Endereco" @bind-Value="InputModel.EnderecoId" AnchorOrigin="Origin.BottomCenter">
+            @foreach (var endereco in Enderecos)
+            {
+                <MudSelectItem T="int" Value="@endereco.Id">@endereco.Lagradouro, @endereco.Bairro</MudSelectItem>
+            }
+        </MudSelect>
+
+        <MudSelect T="ETipoInstalacao" Label="Instalação" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.TipoInstalacao">
+            <MudSelectItem T="ETipoInstalacao" Value="ETipoInstalacao.Instalacao">Instalação</MudSelectItem>
+            <MudSelectItem T="ETipoInstalacao" Value="ETipoInstalacao.Ampliacao">Ampliaçao</MudSelectItem>
+        </MudSelect>
+
+        <MudTextField T="DateTime" Label="Data da Instalação" HelperText="Campo Obrigatório"
+                      @bind-Value=InputModel.DataInstalacao For="@(()=> InputModel.DataInstalacao)" />
+
+        <MudTextField T="decimal" AdornmentIcon="@Icons.Material.Filled.AttachMoney" Label="Valor" HelperText="Campo Obrigatório"
+                      @bind-Value=InputModel.Valor For="@(()=> InputModel.Valor)" Format="C" />
+
+        <MudSelect T="EStatus" Label="Status" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Status">
+            <MudSelectItem T="EStatus" Value="EStatus.Pedido">Pedido</MudSelectItem>
+            <MudSelectItem T="EStatus" Value="EStatus.Instalado">Instalado</MudSelectItem>
+            <MudSelectItem T="EStatus" Value="EStatus.Finalizado">Finalizado</MudSelectItem>
+        </MudSelect>
+
+        <MudSelect T="EAmpliacaoInstacacao" Label="Sistema Suporta Ampliação" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.AmpliacaoInstalacao">
+            <MudSelectItem T="EAmpliacaoInstacacao" Value="EAmpliacaoInstacacao.Suporta">Suporta</MudSelectItem>
+            <MudSelectItem T="EAmpliacaoInstacacao" Value="EAmpliacaoInstacacao.NaoSuporta">Não Suporta</MudSelectItem>
+        </MudSelect>
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Proximo</MudButton>
+
+    </EditForm>
+
+</MudPaper>

@@ -40,12 +40,12 @@ namespace SomosSolar.WebApp.Handlers
             await _client.GetFromJsonAsync<PagedResponse<List<Endereco?>>>("v1/enderecos")
             ?? new PagedResponse<List<Endereco?>>(null, 400, "Não foi possivel obter os clientes");
 
-        public async Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request)
-        =>
-            await _client.GetFromJsonAsync<Response<List<Endereco?>>>($"v1/enderecos/{request.Id}")
-            ?? new Response<List<Endereco?>>(null, 400, "Não foi possivel obter os clientes");
+        //public async Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request)
+        //=>
+        //    await _client.GetFromJsonAsync<Response<List<Endereco?>>>($"v1/enderecos/{request.Id}")
+        //    ?? new Response<List<Endereco?>>(null, 400, "Não foi possivel obter os clientes");
 
-        public async Task<Response<List<Endereco?>>> GetEnderecoByClienteId(GetEnderecoByClienteIdRequest request)
+        public async Task<Response<List<Endereco?>>> GetEnderecoByClienteIdAsync(GetEnderecoByClienteIdRequest request)
       =>
             await _client.GetFromJsonAsync<Response<List<Endereco?>>>($"v1/enderecos/{request.Id}")
             ?? new Response<List<Endereco?>>(null, 400, "Não foi possível obter os endereços");

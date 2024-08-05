@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SomoSSolar.API.Data;
+using SomoSSolar.Core.Enums;
 using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Instalacoes;
@@ -15,11 +16,14 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
         {
             var instalacao = new Instalacao
             {
+                ClienteId = request.ClienteId,
                 DataInstalacao = request.DataInstalacao,
+                TipoInstalacao = request.TipoInstalacao,
                 Valor = request.Valor,
                 Status = request.Status,
                 Despesas = request.Despesas,
-                EnderecoId = request.EnderecoId,
+                AmpliacaoInstalacao = request.AmpliacaoInstalacao,
+                EnderecoId = request.EnderecoId
             };
 
             await context.Instalacoes.AddAsync(instalacao);
@@ -40,10 +44,13 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             if (instalacao == null)
                 return new Response<Instalacao?>(null, 404, "Instalacao não encontrada");
-
+            
+            instalacao.ClienteId = request.ClienteId;
             instalacao.DataInstalacao = request.DataInstalacao;
+            instalacao.TipoInstalacao = request.TipoInstalacao;
             instalacao.Valor = request.Valor;
             instalacao.Status = request.Status;
+            instalacao.AmpliacaoInstalacao = request.AmpliacaoInstalacao;
             instalacao.Despesas = request.Despesas;
 
             context.Instalacoes.Update(instalacao);
@@ -76,7 +83,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
             return new Response<Instalacao?>(null, 500, "Não foi possível excluir a instalação");
         }
     }
-    public async Task<Response<Instalacao?>> GetByAsync(GetInstalacaoByIdRequest request)
+    public async Task<Response<Instalacao?>> GetByIdAsync(GetInstalacaoByIdRequest request)
     {
         try
         {

@@ -117,28 +117,28 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
         }
     }
 
-    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request)
-    {
+    //public async Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request)
+    //{
        
 
-        var enderecos = await (from endereco in context.Enderecos
-                               where endereco.ClienteId == request.Id
-                               select new Endereco
-                               {
-                                   Lagradouro = endereco.Lagradouro,
-                                   Bairro = endereco.Bairro,
-                                   Numero = endereco.Numero,
-                                   Complemento = endereco.Complemento,
-                                   Cep = endereco.Cep
+    //    var enderecos = await (from endereco in context.Enderecos
+    //                           where endereco.ClienteId == request.Id
+    //                           select new Endereco
+    //                           {
+    //                               Lagradouro = endereco.Lagradouro,
+    //                               Bairro = endereco.Bairro,
+    //                               Numero = endereco.Numero,
+    //                               Complemento = endereco.Complemento,
+    //                               Cep = endereco.Cep
 
-                               }).ToListAsync();
+    //                           }).ToListAsync();
 
-        return enderecos.Count == 0 
-            ? new Response<List<Endereco?>>(null, 404, "Não encontrado")
-            : new Response<List<Endereco?>>(enderecos);
-    }
+    //    return enderecos.Count == 0 
+    //        ? new Response<List<Endereco?>>(null, 404, "Não encontrado")
+    //        : new Response<List<Endereco?>>(enderecos);
+    //}
 
-    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteId(GetEnderecoByClienteIdRequest request)
+    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteIdAsync(GetEnderecoByClienteIdRequest request)
     {
         try
         {

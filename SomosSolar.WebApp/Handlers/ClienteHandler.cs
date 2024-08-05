@@ -16,7 +16,6 @@ namespace SomosSolar.WebApp.Handlers
             return await result.Content.ReadFromJsonAsync<Response<Cliente?>>()
                 ?? new Response<Cliente?>(null, 400, "Falha ao adicionar o cliente");
         }
-
         public async Task<Response<Cliente?>> DeleteAsync(DeleteClienteRequest request)
         {
             var result = await _client.DeleteAsync($"v1/clientes/{request.Id}");

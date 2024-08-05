@@ -4,7 +4,7 @@
 <MudText Typo="Typo.h6">Instalções</MudText>
 <div class="d-flex justify-end"
 <MudButton Variant="Variant.Filled" Color="Color.Primary"
-StartIcon="@Icons.Material.TwoTone.Add" Href="instalacoes/adicionar">
+StartIcon="@Icons.Material.TwoTone.Add" Href="instalacao/adicionar">
 Nova Instalação
 </MudButton>
 </div>
@@ -18,15 +18,15 @@ Nova Instalação
         </MudTextField>
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Cliente" Title="Cliente"></PropertyColumn>
+        <PropertyColumn Property="x => x.ClienteId" Title="Cliente"></PropertyColumn>
         <PropertyColumn Property="x => x.DataInstalacao" Title="Data de Instalação"></PropertyColumn>
         <PropertyColumn Property="x => x.Valor" Title="Valor de Venda"></PropertyColumn>
-        <PropertyColumn Property="x => x.Despesas" Title="Despesas"></PropertyColumn>
+        <PropertyColumn Property="x => x.AmpliacaoInstalacao" Title="Ampliação"></PropertyColumn>
         <TemplateColumn Class="d-flex justify-end">
             <CellTemplate>
                 <MudStack Row>
                     <MudIconButton Icon="@Icons.Material.Filled.Edit"
-                                   Href="@($"/instalacoes/editar/{context.Item.Id}")" Color="Color.Primary"></MudIconButton>
+                                   Href="@($"/addEquipamentos/{context.Item.Id}")" Color="Color.Primary"></MudIconButton>
                     <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
                                    arial-label="Excluir" OnClick="()=>OnDeleteButtonClickedAsync(context.Item.Id)"></MudIconButton>
                 </MudStack>

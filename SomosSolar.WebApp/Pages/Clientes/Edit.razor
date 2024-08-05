@@ -21,9 +21,6 @@ else
             <MudTextField T="string" Label="Nome" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Nome" For="@(() => InputModel.Nome)" />
 
-            <MudTextField T="string" Label="Sobrenome" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Sobrenome" For="@(() => InputModel.Sobrenome)" />
-
             <MudTextField T="string" Label="CPF/CNPJ" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Documento" For="@(() => InputModel.Documento)" />
 
@@ -35,8 +32,6 @@ else
 
             <MudTextField T="DateTime" Label="Data de Cadastro" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.DataCadastro" For="@(() => InputModel.DataCadastro)" />
-
-
 
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
             <MudButton Href="/clientes" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>

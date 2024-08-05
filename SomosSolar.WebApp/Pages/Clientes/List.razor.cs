@@ -83,9 +83,6 @@ public class ListClientePage : ComponentBase
         if (cliente.Nome.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
             return true;
 
-        if (cliente.Sobrenome.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
         return false;
 
     };

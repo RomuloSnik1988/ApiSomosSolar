@@ -36,7 +36,6 @@ public static class Endpoints
             .MapEndpoint<DeleteEnderecoEndpoint>()
             .MapEndpoint<GetEnderecoByIdEndpoint>()
             .MapEndpoint<GetAllEnderecoEndpoint>()
-            .MapEndpoint<GetEnderecosByClienteEndpoint>()
             .MapEndpoint<GetByClienteIdEndpoint>();
 
 

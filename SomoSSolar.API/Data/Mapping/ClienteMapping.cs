@@ -14,12 +14,7 @@ public class ClienteMapping : IEntityTypeConfiguration<Cliente>
         builder.Property(x => x.Nome)
             .IsRequired(true)
             .HasColumnType("NVARCHAR")
-            .HasMaxLength(50);
-
-        builder.Property(x => x.Sobrenome)
-            .IsRequired(true)
-            .HasColumnType("NVARCHAR")
-            .HasMaxLength(80);
+            .HasMaxLength(250);
 
         builder.Property(x => x.Documento)
             .IsRequired(true)

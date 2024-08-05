@@ -29,7 +29,7 @@ namespace SomosSolar.WebApp.Handlers
             return await result.Content.ReadFromJsonAsync<Response<Instalacao?>>()
                 ?? new Response<Instalacao?>(null, 400, "Falha ao atualizar a instalação");
         }
-        public async Task<Response<Instalacao?>> GetByAsync(GetInstalacaoByIdRequest request)
+        public async Task<Response<Instalacao?>> GetByIdAsync(GetInstalacaoByIdRequest request)
       => await _cliente.GetFromJsonAsync<Response<Instalacao?>>($"v1/instalacoes/{request.Id}")
             ?? new Response<Instalacao?>(null, 400, "Não foi possível obter o cliente");
 

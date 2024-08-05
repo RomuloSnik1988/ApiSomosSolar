@@ -13,8 +13,7 @@ public class EquipamentoMapping : IEntityTypeConfiguration<Equipamento>
 
         builder.Property(x => x.Tipo)
            .IsRequired(true)
-           .HasColumnType("NVARCHAR")
-           .HasMaxLength(120);
+           .HasColumnType("SMALLINT");
 
         builder.Property(x => x.Fornecedor)
            .IsRequired(true)
@@ -58,8 +57,7 @@ public class EquipamentoMapping : IEntityTypeConfiguration<Equipamento>
 
         builder.Property(x => x.Ativo)
           .IsRequired(true)
-          .HasColumnType("VARCHAR")
-          .HasMaxLength(10);
+          .HasColumnType("SMALLINT");
 
     }
 }

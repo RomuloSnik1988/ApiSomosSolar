@@ -38,6 +38,7 @@ namespace SomosSolar.WebApp.Handlers
             await _client.GetFromJsonAsync<PagedResponse<List<Cliente?>>>("v1/clientes")
             ?? new PagedResponse<List<Cliente?>>(null, 400, "Não foi possivel obter os clientes");
 
+
     }
 
        

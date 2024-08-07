@@ -24,6 +24,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
                 Despesas = request.Despesas,
                 AmpliacaoInstalacao = request.AmpliacaoInstalacao,
                 EnderecoId = request.EnderecoId
+                
             };
 
             await context.Instalacoes.AddAsync(instalacao);
@@ -52,6 +53,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
             instalacao.Status = request.Status;
             instalacao.AmpliacaoInstalacao = request.AmpliacaoInstalacao;
             instalacao.Despesas = request.Despesas;
+            instalacao.EnderecoId = request.EnderecoId;
 
             context.Instalacoes.Update(instalacao);
             await context.SaveChangesAsync();
@@ -99,11 +101,32 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
         }
     }
 
-    public async Task<PagedResponse<List<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request)
+    //public async Task<PagedResponse<List<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request)
+    //{
+    //    try
+    //    {
+    //        var query = context.Instalacoes.AsNoTracking().OrderBy(x => x.DataInstalacao);
+
+    //        var instalacoes = await query
+    //            .Skip((request.PageNumber - 1) * request.PageSize)
+    //            .Take(request.PageSize)
+    //            .ToListAsync();
+
+    //        var count = await query.CountAsync();
+
+    //        return new PagedResponse<List<Instalacao?>>(instalacoes, count, request.PageNumber, request.PageSize);
+    //    }
+    //    catch (Exception)
+    //    {
+    //        return new PagedResponse<List<Instalacao?>>(null, 500, "Não foi possível pesquisar as instalações");
+    //    }
+    //}
+
+    public async Task<PagedResponse<IEnumerable<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request)
     {
         try
         {
-            var query = context.Instalacoes.AsNoTracking().OrderBy(x => x.DataInstalacao);
+            var query = context.Instalacoes.Include(c => c.Cliente).AsNoTracking().OrderBy(x => x.DataInstalacao);
 
             var instalacoes = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -112,15 +135,19 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             var count = await query.CountAsync();
 
-            return new PagedResponse<List<Instalacao?>>(instalacoes, count, request.PageNumber, request.PageSize);
+            return new PagedResponse<IEnumerable<Instalacao?>>(instalacoes, count, request.PageNumber, request.PageSize);
         }
         catch (Exception)
         {
-            return new PagedResponse<List<Instalacao?>>(null, 500, "Não foi possível pesquisar as instalações");
+            return new PagedResponse<IEnumerable<Instalacao?>>(null, 500, "Não foi possível pesquisar as instalações");
         }
     }
+  
 
-   
 
-   
+
+
+
+
+
 }

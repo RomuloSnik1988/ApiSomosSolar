@@ -13,7 +13,9 @@ public class Instalacao
     public EAmpliacaoInstacacao AmpliacaoInstalacao { get; set; } 
 
     public int ClienteId { get; set; }
-    public Cliente Cliente { get; set; } = null!;
-    public ICollection<Venda> Venda { get; set; } = null!;
+    public virtual Cliente? Cliente { get; set; } 
+    public ICollection<Venda> Venda { get; set; } = new List<Venda>();
     public int EnderecoId { get; set; }
+
+    public string NomeCliente => Cliente?.Nome ?? "Nome não disponível";
 }

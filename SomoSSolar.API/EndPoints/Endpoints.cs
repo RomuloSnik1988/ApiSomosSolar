@@ -28,6 +28,7 @@ public static class Endpoints
             .MapEndpoint<GetClienteByIDEndpoint>()
             .MapEndpoint<GetAllClienteEndpoint>();
 
+
         endpoints.MapGroup("v1/enderecos")
             .WithTags("Endereços")
             .RequireAuthorization()

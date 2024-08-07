@@ -7,6 +7,7 @@ using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Cliente;
 using SomoSSolar.Core.Requests.Clientes;
 using SomoSSolar.Core.Responses;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SomoSSolar.API.Handlers;
 
@@ -95,29 +96,37 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
             return new Response<Cliente?>(null, 500, "Não foi possível localizar o cliente");
         }
     }
+
     public async Task<PagedResponse<List<Cliente?>>> GetAllAsync(GetAllClientesRequest request)
     {
         try
         {
-            var query = context.Clientes.AsNoTracking().OrderBy(x => x.Nome);
+            var query = context.Clientes
+                .Include(c => c.Instalacoes)
+                .Include(c => c.Enderecos)
+                .AsNoTracking()
+                .OrderBy(c => c.Nome);
 
             var clientes = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
 
-            var count = await query
-                .CountAsync();
+            var count = await query.CountAsync();
 
             return new PagedResponse<List<Cliente?>>(clientes, count, request.PageNumber, request.PageSize);
+
         }
-        catch
+        catch (Exception)
         {
             return new PagedResponse<List<Cliente?>>(null, 500, "Não foi possivel pesquisar os clientes");
         }
     }
 
-    
+
+
+
+
 
     //public async Task<IActionResult> enderecosAsync(int usuarioid)
     //{

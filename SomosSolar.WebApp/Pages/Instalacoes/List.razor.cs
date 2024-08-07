@@ -11,7 +11,7 @@ public partial class ListInstalacoesPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public List<Instalacao> Instalacoes { get; set; } = new List<Instalacao>();
+    public IEnumerable<Instalacao> Instalacoes { get; set; } = new List<Instalacao>();
     public List<Cliente> Clientes { get; set; } = [];
     public string SearchTerm { get; set; } = string.Empty;
     #endregion
@@ -34,6 +34,8 @@ public partial class ListInstalacoesPage : ComponentBase
             var result = await Handler.GetAllAsync(request);
             if (result.IsSuccess)
                 Instalacoes = result.Data ?? [];
+            
+            
         }
         catch (Exception ex)
         {
@@ -66,7 +68,7 @@ public partial class ListInstalacoesPage : ComponentBase
         try
         {
             await Handler.DeleteAsync(new DeleteInstalacaoRequest { Id = id });
-            Instalacoes.RemoveAll(x => x.Id == id);
+            Instalacoes = Instalacoes.Where(x => x.Id != id).ToList();
             Snackbar.Add($"Instalaçõa{id}, excluida", Severity.Success);
         }
         catch (Exception ex)

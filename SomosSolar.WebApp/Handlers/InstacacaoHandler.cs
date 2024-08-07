@@ -33,12 +33,10 @@ namespace SomosSolar.WebApp.Handlers
       => await _cliente.GetFromJsonAsync<Response<Instalacao?>>($"v1/instalacoes/{request.Id}")
             ?? new Response<Instalacao?>(null, 400, "Não foi possível obter o cliente");
 
-        public async Task<PagedResponse<List<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request)
-       => await _cliente.GetFromJsonAsync<PagedResponse<List<Instalacao?>>>("v1/instalacoes")
-            ?? new PagedResponse<List<Instalacao?>>(null, 400, "Não foi possível obter as instalações");
+        public async Task<PagedResponse<IEnumerable<Instalacao?>>> GetAllAsync(GetAllInstacoesRequest request)
+       => await _cliente.GetFromJsonAsync<PagedResponse<IEnumerable<Instalacao?>>>("v1/instalacoes")
+            ?? new PagedResponse<IEnumerable<Instalacao?>>(null, 400, "Não foi possível obter as instalações");
 
-       
-
-       
+     
     }
 }

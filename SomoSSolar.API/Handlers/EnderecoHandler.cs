@@ -16,10 +16,12 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
         {
             var endereco = new Endereco
             {
-                Lagradouro = request.Lagradouro,
+                Logradouro = request.Lagradouro,
                 Bairro = request.Bairro,
                 Numero = request.Numero,
                 Complemento = request.Complemento,
+                Estado = request.Estado,
+                Cidade = request.Cidade,
                 Cep = request.Cep,
                 ClienteId = request.ClienteId,
             };
@@ -43,10 +45,12 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
             if (endereco is null)
                 return new Response<Endereco?>(null, 404, "Endereço não encontrado");
 
-            endereco.Lagradouro = request.Lagradouro;
+            endereco.Logradouro = request.Lagradouro;
             endereco.Bairro = request.Bairro;
             endereco.Numero = request.Numero;
             endereco.Complemento = request.Complemento;
+            endereco.Estado = request.Estado;
+            endereco.Cidade = request.Cidade;
             endereco.Cep = request.Cep;
             endereco.ClienteId = request.ClienteId;
 
@@ -125,7 +129,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
     //                           where endereco.ClienteId == request.Id
     //                           select new Endereco
     //                           {
-    //                               Lagradouro = endereco.Lagradouro,
+    //                               Logradouro = endereco.Logradouro,
     //                               Bairro = endereco.Bairro,
     //                               Numero = endereco.Numero,
     //                               Complemento = endereco.Complemento,

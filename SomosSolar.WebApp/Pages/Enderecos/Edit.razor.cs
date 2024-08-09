@@ -57,10 +57,12 @@ public class EditEnderecoPage : ComponentBase
                 InputModel = new UpdateEnderecoRequest
                 {
                     Id = response.Data.Id,
-                    Lagradouro = response.Data.Lagradouro,
+                    Lagradouro = response.Data.Logradouro,
                     Bairro = response.Data.Bairro,
                     Numero = response.Data.Numero,
                     Complemento = response.Data.Complemento,
+                    Estado = response.Data.Estado,
+                    Cidade = response.Data.Cidade,
                     Cep = response.Data.Cep,
                     ClienteId = response.Data.ClienteId
                 };

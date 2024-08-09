@@ -16,7 +16,7 @@
         <MudSelect T="int" Label="Endereco" @bind-Value="InputModel.EnderecoId" AnchorOrigin="Origin.BottomCenter">
             @foreach (var endereco in Enderecos)
             {
-                <MudSelectItem T="int" Value="@endereco.Id">@endereco.Lagradouro, @endereco.Bairro</MudSelectItem>
+                <MudSelectItem T="int" Value="@endereco.Id">@endereco.Logradouro, @endereco.Bairro</MudSelectItem>
             }
         </MudSelect>
 

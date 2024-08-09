@@ -19,7 +19,7 @@
     </ToolBarContent>
     <Columns>
         <PropertyColumn Property="x => x.Id" Title="ID"></PropertyColumn>
-        <PropertyColumn Property="x => x.Lagradouro" Title="Lagradouro"></PropertyColumn>
+        <PropertyColumn Property="x => x.Logradouro" Title="Lagradouro"></PropertyColumn>
         <PropertyColumn Property="x => x.Bairro" Title="Bairro"></PropertyColumn>
         <PropertyColumn Property="x => x.Numero" Title="Número"></PropertyColumn>
         <PropertyColumn Property="x => x.Cep" Title="CEP"></PropertyColumn>
@@ -29,7 +29,7 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Edit"
                     Href="@($"/enderecos/editar/{context.Item.Id}")" Color="Color.Primary"></MudIconButton>
                     <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
-                    arial-label="Exlcuir" OnClick="()=>onDeldeteButtonClickedAsync(context.Item.Id, context.Item.Lagradouro)"></MudIconButton>
+                    arial-label="Exlcuir" OnClick="()=>onDeldeteButtonClickedAsync(context.Item.Id, context.Item.Logradouro)"></MudIconButton>
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>

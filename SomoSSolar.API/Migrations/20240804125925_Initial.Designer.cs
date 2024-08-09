@@ -298,7 +298,7 @@ namespace SomoSSolar.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("NVARCHAR");
 
-                    b.Property<string>("Lagradouro")
+                    b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("NVARCHAR");

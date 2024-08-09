@@ -16,7 +16,10 @@ public class CreateEnderecoPage : ComponentBase
     public List<Cliente> Clientes { get; set; } = [];
     public UpdateClienteRequest InputMCliente { get; set; } = new();
     #endregion
-
+    #region Parameter
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+    #endregion
     #region Services
     [Inject]
     public IEnderecoHandler Handler { get; set; } = null!;
@@ -31,8 +34,8 @@ public class CreateEnderecoPage : ComponentBase
     #region Override
     protected override async Task OnInitializedAsync()
     {
-        await GetClientesAsync();
-    }
+        await GetClientesByIdAsync();
+     }
     #endregion
 
     #region Methods
@@ -59,8 +62,9 @@ public class CreateEnderecoPage : ComponentBase
         finally { IsBusy = false; }
         #endregion
     }
-    private async Task GetClientesAsync()
+    private async Task GetClientesByIdAsync()
     {
+
         IsBusy = true;
         try
         {
@@ -69,7 +73,7 @@ public class CreateEnderecoPage : ComponentBase
             if (result.IsSuccess)
             {
                 Clientes = result.Data ?? [];
-                InputModel.ClienteId = Clientes.FirstOrDefault()?.Id ??0;
+                InputModel.ClienteId = Clientes.FirstOrDefault()?.Id ?? 0;
             }
         }
         catch (Exception ex)

@@ -135,7 +135,7 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
     //                                orderby enderecos.Id descending
     //                                select new
     //                                {
-    //                                    Lagradouro = enderecos.Lagradouro,
+    //                                    Logradouro = enderecos.Logradouro,
     //                                    Bairro = enderecos.Bairro,
     //                                    Numero = enderecos.Numero,
     //                                    Complemento = enderecos.Complemento,

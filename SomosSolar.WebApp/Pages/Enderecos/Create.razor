@@ -1,4 +1,4 @@
-﻿﻿@page "/enderecos/adicionar"
+﻿@page "/enderecos/adicionar"
 @inherits CreateEnderecoPage
 
 <MudText Typo="Typo.h6">Novo Endereço</MudText>
@@ -7,27 +7,35 @@
         <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator/>
 
-            <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
-            @bind-Value="InputModel.Lagradouro" For="@(()=> InputModel.Lagradouro)"/>
+       <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Lagradouro" For="@(()=>InputModel.Lagradouro)" />
 
-            <MudTextField T="string" Label="Bairro" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Bairro" For="@(()=> InputModel.Bairro)" />
+            <div class="d-flex">
+                <MudTextField T="string" Label="Bairro" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModel.Bairro" For="@(()=>InputModel.Bairro)" />
+               
+                <MudTextField T="string" Label="Número" 
+                              @bind-Value="InputModel.Numero" For="@(()=>InputModel.Numero)" />
+            </div>
+            <div class="d-flex">
+                <MudTextField T="string" Label="Estado" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModel.Estado" For="@(()=>InputModel.Estado)" />
 
-            <MudTextField T="string" Label="Numero"
-                          @bind-Value="InputModel.Numero" For="@(()=> InputModel.Numero)" />
+                <MudTextField T="string" Label="Cidade" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModel.Cidade" For="@(()=>InputModel.Cidade)" />
 
-            <MudTextField T="string" Label="Complemento" 
-                          @bind-Value="InputModel.Complemento" For="@(()=> InputModel.Complemento)" />
+                <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModel.Cep" For="@(()=>InputModel.Cep)" />
 
-            <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Cep" For="@(()=> InputModel.Cep)" />
+            </div>
 
-            <MudSelect T="int" Label="Cliente" @bind-Value="InputModel.ClienteId" AnchorOrigin="Origin.BottomCenter">
+
+             <MudSelect T="int" Label="Cliente" @bind-Value="InputModel.ClienteId" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var cliente in Clientes)
                 {
                     <MudSelectItem T="int" Value="@cliente.Id">@cliente.Nome</MudSelectItem>
                 }
-            </MudSelect>
+            </MudSelect> 
 
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"> Salvar</MudButton>
             <MudButton Href="/enderecos" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>

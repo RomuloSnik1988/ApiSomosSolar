@@ -1,0 +1,45 @@
+﻿@page "/clienteview/{Id}"
+@inherits ViewClientePage
+
+@if (IsBusy)
+{
+    <MudProgressCircular Indeterminate="true" />
+}
+else if (Cliente != null)
+{
+    <div class="d-flex pa-4">
+    <MudText Typo="Typo.h5">Detalhes do Cliente :</MudText>
+    </div>
+    <MudCard>
+        <MudCardHeader>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.subtitle1">Nome:</MudText>
+                    <MudText Typo="Typo.body1">@Cliente.Nome</MudText>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.subtitle1">CPF/CNPJ:</MudText>
+                    <MudText Typo="Typo.body1">@Cliente.Documento</MudText>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.subtitle1">Celular:</MudText>
+                    <MudText Typo="Typo.body1">@Cliente.Celular</MudText>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.subtitle1">Email:</MudText>
+                    <MudText Typo="Typo.body1">@Cliente.Email</MudText>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Color="Color.Primary" Href="/clientes">Voltar</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+}
+else
+{
+    <MudAlert Severity="Severity.Error">Cliente não encontrado.</MudAlert>
+}

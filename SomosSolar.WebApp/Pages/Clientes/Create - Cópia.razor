@@ -1,0 +1,68 @@
+﻿@page "/clientes/adicionar1"
+@inherits CreateClientePage1
+
+<div class="d-flex pa-4">
+<MudText Typo="Typo.h5">Novo Cliente</MudText>
+</div>
+<MudCard>
+<MudCardContent Class="pa-2">
+    <EditForm Model="@InputModel" FormName="AddCliente">
+        <DataAnnotationsValidator />
+
+        <MudTextField T="string" Label="Nome" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Nome" For="@(() =>InputModel.Nome)" />
+        <div class="d-flex">
+        <MudTextField T="string" Label="CPF/CNPJ" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Documento" For="@(() =>InputModel.Documento)" />
+
+        <MudTextField T="string" Label="Celular" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Celular" For="@(() =>InputModel.Celular)" />
+        </div>
+        <MudTextField T="string" Label="E-mail" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.Email" For="@(() =>InputModel.Email)" />
+
+        <MudTextField T="DateTime" Label="Data de Cadastro" HelperText="Campo Obrigatório"
+                      @bind-Value="InputModel.DataCadastro" For="@(() =>InputModel.DataCadastro)" />
+     </EditForm>
+    </MudCardContent>
+</MudCard>
+            
+    
+
+<div class="d-flex pa-4 mt-2">
+    <MudText Typo="Typo.h6">Endereço :</MudText>
+</div>
+<MudCard>
+    <MudCardContent Class="pa-2">
+        <EditForm Model="@InputModelEndereco" FormName="AddEndereco">
+            
+            <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModelEndereco.Lagradouro" For="@(()=>InputModelEndereco.Lagradouro)" />
+
+            <div class="d-flex">
+                <MudTextField T="string" Label="Bairro" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModelEndereco.Bairro" For="@(()=>InputModelEndereco.Bairro)" />
+               
+                <MudTextField T="string" Label="Número" 
+                              @bind-Value="InputModelEndereco.Numero" For="@(()=>InputModelEndereco.Numero)" />
+            </div>
+            <div class="d-flex">
+                <MudTextField T="string" Label="Estado" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModelEndereco.Estado" For="@(()=>InputModelEndereco.Estado)" />
+
+                <MudTextField T="string" Label="Cidade" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModelEndereco.Cidade" For="@(()=>InputModelEndereco.Cidade)" />
+
+                <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModelEndereco.Cep" For="@(()=>InputModelEndereco.Cep)" />
+
+               
+            </div>
+            <MudButton OnClick="@OnValidSubmitAsync" Variant="Variant.Filled" Color="Color.Primary">
+                Salvar
+            </MudButton>
+        </EditForm>
+
+        
+    </MudCardContent>
+</MudCard>

@@ -11,7 +11,7 @@ public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
         builder.ToTable("Endereco");
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Lagradouro)
+        builder.Property(x => x.Logradouro)
            .IsRequired(true)
            .HasColumnType("NVARCHAR")
            .HasMaxLength(120);
@@ -30,6 +30,16 @@ public class EnderecoMapping : IEntityTypeConfiguration<Endereco>
          .IsRequired(false)
         .HasColumnType("NVARCHAR")
         .HasMaxLength(50);
+
+        builder.Property(x => x.Estado)
+           .IsRequired(true)
+           .HasColumnType("NVARCHAR")
+           .HasMaxLength(80);
+
+        builder.Property(x => x.Cidade)
+            .IsRequired(true)
+            .HasColumnType("NVARCHAR")
+            .HasMaxLength(80);
 
         builder.Property(x => x.Cep)
           .IsRequired(true)

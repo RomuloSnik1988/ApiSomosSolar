@@ -73,7 +73,7 @@ public partial class ListEnderecoPage : ComponentBase
         if (endereco.Id.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
             return true;
 
-        if (endereco.Lagradouro.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+        if (endereco.Logradouro.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
             return true;
 
         if (endereco.Bairro.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))

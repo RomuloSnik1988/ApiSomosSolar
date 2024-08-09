@@ -1,21 +1,24 @@
 ﻿@page "/clientes/adicionar"
 @inherits CreateClientePage
 
+<div class="d-flex pa-4">
 <MudText Typo="Typo.h5">Novo Cliente</MudText>
+</div>
 <MudCard>
-<MudCardContent Class="pa-8 mt-4">
-    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+<MudCardContent Class="pa-2">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync" FormName="AddCliente">
         <DataAnnotationsValidator />
-        
 
         <MudTextField T="string" Label="Nome" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Nome" For="@(() =>InputModel.Nome)" />
+        <div class="d-flex">
 
         <MudTextField T="string" Label="CPF/CNPJ" HelperText="Campo Obrigatório"
-                      @bind-Value="InputModel.Documento" For="@(() =>InputModel.Documento)" />
+                          @bind-Value="InputModel.Documento" For="@(() =>InputModel.Documento)" />
 
         <MudTextField T="string" Label="Celular" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Celular" For="@(() =>InputModel.Celular)" />
+        </div>
 
         <MudTextField T="string" Label="E-mail" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Email" For="@(() =>InputModel.Email)" />
@@ -23,9 +26,11 @@
         <MudTextField T="DateTime" Label="Data de Cadastro" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.DataCadastro" For="@(() =>InputModel.DataCadastro)" />
 
-        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
-            Salvar
-        </MudButton>
-    </EditForm>
-</MudCardContent>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">
+                Proximo
+            </MudButton>
+     </EditForm>
+    </MudCardContent>
 </MudCard>
+            
+    

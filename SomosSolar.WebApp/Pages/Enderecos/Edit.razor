@@ -1,7 +1,7 @@
 ﻿@page "/enderecos/editar/{id}"
 @inherits EditEnderecoPage
 
-<MudText Typo="Typo.h3">Editar Endereço 0</MudText>
+<MudText Typo="Typo.h3">Editar Endereço</MudText>
 @if (IsBusy)
 {
     <MudPaper Class="pa-8 mt-4">
@@ -29,6 +29,12 @@ else
 
             <MudTextField T="string" Label="Complemento" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Complemento" For="@(() => InputModel.Complemento)" />
+            
+           <MudTextField T="string" Label="Estado" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Estado" For="@(()=> InputModel.Estado)" />
+
+            <MudTextField T="string" Label="Cidade" HelperText="Campo Obrigatório"
+                          @bind-Value="InputModel.Cidade" For="@(()=> InputModel.Cidade)" />
 
             <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Cep" For="@(() => InputModel.Cep)" />

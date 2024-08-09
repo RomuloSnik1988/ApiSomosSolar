@@ -6,7 +6,7 @@ using SomoSSolar.Core.Requests.Endereco;
 
 namespace SomosSolar.WebApp.Pages.Clientes;
 
-public partial class CreateClientePage : ComponentBase
+public partial class CreateClientePage1 : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
@@ -34,8 +34,7 @@ public partial class CreateClientePage : ComponentBase
             if (result.IsSuccess )
             {
                 Snackbar.Add(result.Message, Severity.Success);
-                var requestId = result.Data.Id;
-                NavigationManager.NavigateTo($"/enderecos/adicionar/{requestId}");
+                NavigationManager.NavigateTo("/clientes");
             }
             else
             {

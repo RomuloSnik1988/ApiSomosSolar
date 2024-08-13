@@ -79,6 +79,7 @@ public class SaleInstalacaoPage : ComponentBase
             if (response.IsSuccess && response.Data is not null)
             {
                 var instalacao = response.Data;
+                InputModelInstalacao.Id = instalacao.Id;
 
                 //Cliente = instalacao.Cliente;
                 var enderecoRequest = new GetEnderecoByIdRequest
@@ -153,11 +154,15 @@ public class SaleInstalacaoPage : ComponentBase
     
     #endregion
     public void OpenModal()
-
     {
+
+        // Verifique se o InstalacaoId está correto antes de abrir o modal
+        Console.WriteLine($"InstalacaoId: {InputModelInstalacao.Id}");
+
         var parameters = new DialogParameters
         {
             {"InstalacaoId", InputModelInstalacao.Id },
+
         };
         DialogService.Show<AddEquipamentosModal>("Adicionar Equipamentos", parameters, new DialogOptions
         {

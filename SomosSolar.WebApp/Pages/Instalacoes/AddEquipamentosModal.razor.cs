@@ -50,6 +50,7 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
                 var result = await EquipamentoHandler.GetAllAsync(request);
                 if (result.IsSuccess)
                     Equipamentos = result.Data ?? new List<Equipamento>();
+
                 InputModel.InstalacaoId = InstalacaoId;
             }
             catch (Exception ex)

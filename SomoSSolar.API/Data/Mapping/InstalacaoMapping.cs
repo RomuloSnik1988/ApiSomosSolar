@@ -37,10 +37,6 @@ public class InstalacaoMapping : IEntityTypeConfiguration<Instalacao>
             .IsRequired(true)
             .HasMaxLength(20);
 
-        builder.Property(x => x.ClienteId)
-            .IsRequired(true)
-            .HasMaxLength(20);
-
 
     }
 

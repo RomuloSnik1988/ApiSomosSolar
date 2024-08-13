@@ -56,7 +56,8 @@ public static class Endpoints
             .MapEndpoint<UpdateInstalacaoEndpoint>()
             .MapEndpoint<DeleteInstalacaoEndpoint>()
             .MapEndpoint<GetInstalacaoByIdEndpoint>()
-            .MapEndpoint<GetAllInstalacoesEndpoint>();
+            .MapEndpoint<GetAllInstalacoesEndpoint>()
+            .MapEndpoint<GetInstalacaoByEnderecoEndpoint>();
 
         endpoints.MapGroup("v1/vendas")
             .WithTags("Vendas")
@@ -65,7 +66,9 @@ public static class Endpoints
             .MapEndpoint<UpdateVendaEndpoint>()
             .MapEndpoint<DeleteVendaEndpoint>()
             .MapEndpoint<GetVendaByIdEndpoint>()
-            .MapEndpoint<GetAllVendaEndpoint>();
+            .MapEndpoint<GetAllVendaEndpoint>()
+            .MapEndpoint<GetVendasByInstalacaoEndPoint>();
+
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")

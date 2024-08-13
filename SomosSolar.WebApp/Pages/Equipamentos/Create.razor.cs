@@ -9,7 +9,7 @@ public partial class CreateEquipamentoPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public CreateEquipamentoRequest InputModel { get; set; } = new();
+    public CreateEquipamentosRequest InputModel { get; set; } = new();
     #endregion
 
     #region Services

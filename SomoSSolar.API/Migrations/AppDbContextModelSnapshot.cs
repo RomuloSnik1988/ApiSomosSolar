@@ -243,7 +243,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.Property<string>("Celular")
                         .IsRequired()
-                        .HasMaxLength(12)
+                        .HasMaxLength(14)
                         .HasColumnType("NVARCHAR");
 
                     b.Property<DateTime>("DataCadastro")
@@ -388,8 +388,7 @@ namespace SomoSSolar.API.Migrations
                     b.Property<short>("AmpliacaoInstalacao")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<int>("ClienteId")
-                        .HasMaxLength(20)
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataInstalacao")
@@ -417,6 +416,8 @@ namespace SomoSSolar.API.Migrations
 
                     b.HasIndex("ClienteId");
 
+                    b.HasIndex("EnderecoId");
+
                     b.ToTable("Instalacao", (string)null);
                 });
 
@@ -427,9 +428,6 @@ namespace SomoSSolar.API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Datadavenda")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("EquipamentoId")
                         .HasColumnType("int");
@@ -508,11 +506,17 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", "Cliente")
                         .WithMany("Instalacoes")
-                        .HasForeignKey("ClienteId")
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("SomoSSolar.Core.Models.Endereco", "Endereco")
+                        .WithMany("Instalacoes")
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Venda", b =>
@@ -543,6 +547,11 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.Navigation("Enderecos");
 
+                    b.Navigation("Instalacoes");
+                });
+
+            modelBuilder.Entity("SomoSSolar.Core.Models.Endereco", b =>
+                {
                     b.Navigation("Instalacoes");
                 });
 

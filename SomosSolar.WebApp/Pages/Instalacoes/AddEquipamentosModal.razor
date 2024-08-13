@@ -1,0 +1,35 @@
+﻿@page "/addequipamentomodel"
+@inherits AddEquipamentosModalPage
+
+<MudDialog>
+    <DialogActions>
+        <MudGrid>
+         <MudItem xs="12">
+        <MudSelect Label="Categoria:"  T="ETipoEquipamento" @bind-Value="TipoEquipamentoSelecionado"
+                           @bind-Value:after="FiltrarEquipamentos" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Inversor">Inversor</MudSelectItem>
+            <MudSelectItem T="ETipoEquipamento" Value="ETipoEquipamento.Painel">Painel</MudSelectItem>
+        </MudSelect>
+        </MudItem>
+
+           <MudItem xs="12">
+             <MudSelect T="int" Label="Item:" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.EquipamentoId">
+            @foreach (var equipamento in EquipamentosFiltrados)
+            {
+                <MudSelectItem T="int" Value="@equipamento.Id">@equipamento.Modelo</MudSelectItem>
+            }
+        </MudSelect>
+        </MudItem>
+
+        <MudItem xs="2">
+        <MudNumericField Label="Quantidade:"   Typo="Typo.h6" T="int" @bind-Value="InputModel.Quantidade"
+        Min="1" Max="1000" Step="1" />
+        </MudItem>
+
+        <MudItem xs="12" class="d-flex justify-end">
+        <MudButton @onclick="() => ModalInstace.Close()">Cancelar</MudButton>
+        <MudButton @onclick="SalvarAsync">Salvar</MudButton>
+        </MudItem>
+        </MudGrid>
+    </DialogActions>
+</MudDialog>

@@ -1,6 +1,7 @@
 ﻿using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Instalacoes;
+using SomoSSolar.Core.Requests.Vendas;
 using SomoSSolar.Core.Responses;
 using System.Net.Http.Json;
 
@@ -37,6 +38,10 @@ namespace SomosSolar.WebApp.Handlers
        => await _cliente.GetFromJsonAsync<PagedResponse<IEnumerable<Instalacao?>>>("v1/instalacoes")
             ?? new PagedResponse<IEnumerable<Instalacao?>>(null, 400, "Não foi possível obter as instalações");
 
-     
+        public async Task<Response<List<Instalacao?>>> GetByEnderecoAsync(GetInstacalaoByEnderecoRequest request)
+        =>
+            await _cliente.GetFromJsonAsync<Response<List<Instalacao?>>>($"v1/instalacoes/2/{request.Id}")
+            ?? new Response<List<Instalacao?>>(null, 400, "Não foi possível obter os endereços");
+
     }
 }

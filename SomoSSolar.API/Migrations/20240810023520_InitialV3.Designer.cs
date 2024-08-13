@@ -12,8 +12,8 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240808111307_CorrecaoModel")]
-    partial class CorrecaoModel
+    [Migration("20240810023520_InitialV3")]
+    partial class InitialV3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,7 +246,7 @@ namespace SomoSSolar.API.Migrations
 
                     b.Property<string>("Celular")
                         .IsRequired()
-                        .HasMaxLength(12)
+                        .HasMaxLength(14)
                         .HasColumnType("NVARCHAR");
 
                     b.Property<DateTime>("DataCadastro")
@@ -391,8 +391,7 @@ namespace SomoSSolar.API.Migrations
                     b.Property<short>("AmpliacaoInstalacao")
                         .HasColumnType("SMALLINT");
 
-                    b.Property<int>("ClienteId")
-                        .HasMaxLength(20)
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataInstalacao")
@@ -419,6 +418,8 @@ namespace SomoSSolar.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Instalacao", (string)null);
                 });
@@ -511,11 +512,17 @@ namespace SomoSSolar.API.Migrations
                 {
                     b.HasOne("SomoSSolar.Core.Models.Cliente", "Cliente")
                         .WithMany("Instalacoes")
-                        .HasForeignKey("ClienteId")
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("SomoSSolar.Core.Models.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("SomoSSolar.Core.Models.Venda", b =>

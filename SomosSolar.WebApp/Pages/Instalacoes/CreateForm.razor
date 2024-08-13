@@ -1,17 +1,26 @@
-﻿@page "/instalacao/adicionar"
-@inherits CreateInstacalaoPage
+﻿@page "/instalacao/adicionarForm/{id}"
+@inherits CreateFormInstacalaoPage
+
+<MudText Typo="Typo.h6">Endereço da Instalação</MudText>
+<MudCard>
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudText Typo="Typo.subtitle1">Logradouro</MudText>
+                <MudText Typo="Typo.subtitle1">@Enderecos.Logradouro</MudText>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudText Typo="Typo.subtitle1">Bairro</MudText>
+                <MudText Typo="Typo.subtitle1">@Enderecos.Bairro</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
 
 <MudText Typo="Typo.h6">Adicionar uma Instalação</MudText>
 <MudPaper Class="pa-8 mt-4">
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator/>
-
-        <MudSelect T="int" Label="Endereco" @bind-Value="InputModel.EnderecoId" AnchorOrigin="Origin.BottomCenter">
-            @foreach (var endereco in Enderecos)
-            {
-                <MudSelectItem T="int" Value="@endereco.Id">@endereco.Logradouro, @endereco.Bairro</MudSelectItem>
-            }
-        </MudSelect>
 
         <MudSelect T="ETipoInstalacao" Label="Instalação" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.TipoInstalacao">
             <MudSelectItem T="ETipoInstalacao" Value="ETipoInstalacao.Instalacao">Instalação</MudSelectItem>

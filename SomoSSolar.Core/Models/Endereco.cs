@@ -12,5 +12,5 @@ public class Endereco
     public string Cep { get; set; } = string.Empty;
     
     public int ClienteId { get; set; }
-
+    public List<Instalacao> Instalacoes { get; set; } = new List<Instalacao>();
 }

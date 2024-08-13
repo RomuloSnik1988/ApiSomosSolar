@@ -7,7 +7,7 @@
         <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator/>
 
-       <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
+            <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Lagradouro" For="@(()=>InputModel.Lagradouro)" />
 
             <div class="d-flex">
@@ -24,7 +24,7 @@
                 <MudTextField T="string" Label="Cidade" HelperText="Campo Obrigatório"
                               @bind-Value="InputModel.Cidade" For="@(()=>InputModel.Cidade)" />
 
-                <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
+                <MudTextField T="string" Label="Cep" Mask="@(new PatternMask("00000-000"))" HelperText="Campo Obrigatório"
                               @bind-Value="InputModel.Cep" For="@(()=>InputModel.Cep)" />
 
             </div>

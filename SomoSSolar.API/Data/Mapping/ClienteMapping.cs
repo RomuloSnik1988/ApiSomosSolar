@@ -24,7 +24,7 @@ public class ClienteMapping : IEntityTypeConfiguration<Cliente>
         builder.Property(x => x.Celular)
              .IsRequired(true)
              .HasColumnType("NVARCHAR")
-              .HasMaxLength(12);
+              .HasMaxLength(14);
 
         builder.Property(x => x.Email)
             .IsRequired(true)

@@ -17,7 +17,6 @@ public class VendaHandler(AppDbContext context) : IVendasHandler
             {
                 EquipamentoId = request.EquipamentoId,
                 Quantidade = request.Quantidade,
-                Datadavenda = request.DatadaVenda,
                 InstalacaoId = request.InstalacaoId,
             };
 
@@ -42,7 +41,6 @@ public class VendaHandler(AppDbContext context) : IVendasHandler
 
             venda.EquipamentoId = request.EquipamentoId;
             venda.Quantidade = request.Quantidade;
-            venda.Datadavenda = request.DatadaVenda;
             venda.InstalacaoId = request.InstalacaoId;
 
             context.Vendas.Update(venda);
@@ -95,7 +93,7 @@ public class VendaHandler(AppDbContext context) : IVendasHandler
     {
         try
         {
-            var query = context.Vendas.AsNoTracking().OrderBy(x => x.Datadavenda);
+            var query = context.Vendas.AsNoTracking().OrderBy(x => x.InstalacaoId);
 
             var vendas = await query
                 .Skip((request.PageNumber - 1) * request.PageSize)
@@ -112,7 +110,21 @@ public class VendaHandler(AppDbContext context) : IVendasHandler
         }
     }
 
-    
+    public async Task<Response<List<Venda?>>> GetVendasAsync(GetVendasByInstalacaoRequest request)
+    {
+        try
+        {
+            var vendas = await context.Vendas.Where(i => i.InstalacaoId == request.Id)
+                .Include(i => i.Equipamento)
+                .AsNoTracking()
+                .ToListAsync();
 
-   
+            return new Response<List<Venda?>>(vendas);
+
+        }
+        catch (Exception)
+        {
+            return new Response<List<Venda?>>(null, 500, "Não foi possível pesquisar as vendas");
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class CreateFormEnderecoPage : ComponentBase
     #region Properties
     public bool IsBusy { get; set; } = false;
     public CreateEnderecoRequest InputModel { get; set; } = new();
-    public GetClienteByIdRequest? InputModelC { get; set; } 
+    public GetClienteByIdRequest? ClienteInputModel { get; set; } 
     public Cliente? Clientes { get; set; }
     #endregion
     #region Parameters
@@ -48,7 +48,7 @@ public class CreateFormEnderecoPage : ComponentBase
 
             if (response.IsSuccess && response.Data is not null)
             {
-                InputModelC = new GetClienteByIdRequest
+                ClienteInputModel = new GetClienteByIdRequest
                 {
                     Id = response.Data.Id,
                 };
@@ -82,7 +82,8 @@ public class CreateFormEnderecoPage : ComponentBase
             if (result.IsSuccess)
             {
                 Snackbar.Add(result.Message, Severity.Success);
-                NavigationManager.NavigateTo("/instalacao/adicionar");
+                var requestId = result.Data.Id;
+                NavigationManager.NavigateTo($"/instalacao/adicionarForm/{requestId}");
             }
             else
             {

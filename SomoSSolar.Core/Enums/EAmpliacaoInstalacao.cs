@@ -1,6 +1,6 @@
 ﻿namespace SomoSSolar.Core.Enums;
 
-public enum EAmpliacaoInstacacao
+public enum EAmpliacaoInstalacao
 {
     Suporta = 1,
     NaoSuporta = 2

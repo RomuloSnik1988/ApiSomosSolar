@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SomoSSolar.API.Data;
-using SomoSSolar.Core.Enums;
 using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Instalacoes;
+using SomoSSolar.Core.Requests.Vendas;
 using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.Handlers;
@@ -16,7 +16,6 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
         {
             var instalacao = new Instalacao
             {
-                ClienteId = request.ClienteId,
                 DataInstalacao = request.DataInstalacao,
                 TipoInstalacao = request.TipoInstalacao,
                 Valor = request.Valor,
@@ -24,7 +23,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
                 Despesas = request.Despesas,
                 AmpliacaoInstalacao = request.AmpliacaoInstalacao,
                 EnderecoId = request.EnderecoId
-                
+
             };
 
             await context.Instalacoes.AddAsync(instalacao);
@@ -32,7 +31,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             return new Response<Instalacao?>(instalacao, 201, "Instalação incluída com sucesso");
         }
-        catch 
+        catch
         {
             return new Response<Instalacao?>(null, 500, "Não foi possível incluir a instalação");
         }
@@ -45,8 +44,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             if (instalacao == null)
                 return new Response<Instalacao?>(null, 404, "Instalacao não encontrada");
-            
-            instalacao.ClienteId = request.ClienteId;
+
             instalacao.DataInstalacao = request.DataInstalacao;
             instalacao.TipoInstalacao = request.TipoInstalacao;
             instalacao.Valor = request.Valor;
@@ -60,7 +58,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             return new Response<Instalacao?>(instalacao, message: "Instalação alterada com sucesso");
         }
-        catch 
+        catch
         {
             return new Response<Instalacao?>(null, 500, "Não foi possível alterar a instalação");
         }
@@ -70,7 +68,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
     {
         try
         {
-            var instalacao = await context.Instalacoes.FirstOrDefaultAsync(x =>x.Id == request.Id);
+            var instalacao = await context.Instalacoes.FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (instalacao == null)
                 return new Response<Instalacao?>(null, 404, "Instalação não encontrada");
@@ -80,7 +78,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
 
             return new Response<Instalacao?>(instalacao, message: "Instalação removida com sucesso");
         }
-        catch 
+        catch
         {
             return new Response<Instalacao?>(null, 500, "Não foi possível excluir a instalação");
         }
@@ -95,7 +93,7 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
                 ? new Response<Instalacao?>(null, 404, "Instalação não encontrada")
                 : new Response<Instalacao?>(instalacao);
         }
-        catch 
+        catch
         {
             return new Response<Instalacao?>(null, 500, "Não foi possível encontrar a instalação");
         }
@@ -142,12 +140,20 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
             return new PagedResponse<IEnumerable<Instalacao?>>(null, 500, "Não foi possível pesquisar as instalações");
         }
     }
+
+    public async Task<Response<List<Instalacao?>>> GetByEnderecoAsync(GetInstacalaoByEnderecoRequest request)
+    {
+        try
+        {
+            var query = context.Instalacoes.AsNoTracking().Where(x => x.EnderecoId == request.Id);
+            var instalacoes = await query.ToListAsync();
+            return new Response<List<Instalacao?>>(instalacoes);
+        }
+        catch (Exception)
+        {
+            return new Response<List<Instalacao?>>(null, 500, "Nâo foi possível pesquisar as instalações");
+        }
+    }
+
   
-
-
-
-
-
-
-
 }

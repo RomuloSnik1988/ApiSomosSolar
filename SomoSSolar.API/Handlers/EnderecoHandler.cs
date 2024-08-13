@@ -142,7 +142,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
     //        : new Response<List<Endereco?>>(enderecos);
     //}
 
-    public async Task<Response<List<Endereco?>>> GetEnderecoByClienteIdAsync(GetEnderecoByClienteIdRequest request)
+    public async Task<Response<List<Endereco?>>> GetByClienteIdAsync(GetEnderecoByClienteIdRequest request)
     {
         try
         {
@@ -152,7 +152,7 @@ public class EnderecoHandler(AppDbContext context) : IEnderecoHandler
 
             return new Response<List<Endereco?>>(enderecos);
         }
-        catch (Exception)
+        catch 
         {
             return new Response<List<Endereco?>>(null, 500, "Não foi possível pesquisar os endereços");
         }

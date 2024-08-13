@@ -73,7 +73,7 @@ public partial class CreateInstacalaoPage : ComponentBase
             if (result.IsSuccess)
             {
                 Clientes = result.Data ?? [];
-                InputModel.ClienteId = Clientes.FirstOrDefault()?.Id ?? 0;
+                //InputModel.ClienteId = Clientes.FirstOrDefault()?.Id ?? 0;
             }
         }
         catch (Exception ex)

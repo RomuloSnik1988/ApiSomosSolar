@@ -9,7 +9,6 @@ public class CreateVendaRequest
     [Required(ErrorMessage = "Quantidade de equipamento inválido")]
     public int Quantidade { get; set; }
     [Required(ErrorMessage ="Informe a data da venda")]
-    public DateTime DatadaVenda { get; set; }
-    [Required(ErrorMessage ="Informe a instalação")]
+    
     public int InstalacaoId { get; set; }
 }

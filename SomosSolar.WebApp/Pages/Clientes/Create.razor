@@ -6,17 +6,18 @@
 </div>
 <MudCard>
 <MudCardContent Class="pa-2">
-        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync" FormName="AddCliente">
+        <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
 
         <MudTextField T="string" Label="Nome" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Nome" For="@(() =>InputModel.Nome)" />
         <div class="d-flex">
 
-        <MudTextField T="string" Label="CPF/CNPJ" HelperText="Campo Obrigatório"
-                          @bind-Value="InputModel.Documento" For="@(() =>InputModel.Documento)" />
+                <MudTextField T="string" Label="CPF/CNPJ" Mask="@DocumentoMask" HelperText="Campo Obrigatório"
+                              @bind-Value="InputModel.Documento" For="@(() => InputModel.Documento)" Immediate="true"
+                              OnBlur="@(e => UpdateMask(InputModel.Documento))" />
 
-        <MudTextField T="string" Label="Celular" HelperText="Campo Obrigatório"
+        <MudTextField T="string" Label="Celular" Mask="@(new PatternMask("00 0 0000-0000"))" HelperText="Campo Obrigatório"
                       @bind-Value="InputModel.Celular" For="@(() =>InputModel.Celular)" />
         </div>
 
@@ -33,4 +34,15 @@
     </MudCardContent>
 </MudCard>
             
-    
+@code {
+    private PatternMask CPFMask = new("000.000.000-00");
+    private PatternMask CNPJMask = new("00.000.000/0000-00");
+
+    private IMask DocumentoMask => InputModel.Documento?.Length > 13 ? CNPJMask : CPFMask;
+
+    private void UpdateMask(string value)
+    {
+        // Atualiza a máscara
+        StateHasChanged();
+    }
+}

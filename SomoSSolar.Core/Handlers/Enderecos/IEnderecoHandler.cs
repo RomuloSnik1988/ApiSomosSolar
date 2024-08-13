@@ -13,9 +13,8 @@ public interface IEnderecoHandler
     Task<Response<Endereco?>> GetByIdAsync(GetEnderecoByIdRequest request);
     Task<PagedResponse<List<Endereco?>>> GetAllAsync(GetAllEnderecosRequest request);
     
-    Task<Response<List<Endereco?>>> GetEnderecoByClienteIdAsync(GetEnderecoByClienteIdRequest request);
+    Task<Response<List<Endereco?>>> GetByClienteIdAsync(GetEnderecoByClienteIdRequest request);
     
-    //Task<Response<List<Endereco?>>> GetEnderecoByClienteAsync(GetEnderecosClienteRequest request);
 
 
 

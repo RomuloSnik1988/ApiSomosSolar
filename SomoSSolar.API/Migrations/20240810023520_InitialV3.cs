@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SomoSSolar.API.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialV3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace SomoSSolar.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "NVARCHAR(250)", maxLength: 250, nullable: false),
                     Documento = table.Column<string>(type: "NVARCHAR(18)", maxLength: 18, nullable: false),
-                    Celular = table.Column<string>(type: "NVARCHAR(12)", maxLength: 12, nullable: false),
+                    Celular = table.Column<string>(type: "NVARCHAR(14)", maxLength: 14, nullable: false),
                     Email = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -97,10 +97,12 @@ namespace SomoSSolar.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Lagradouro = table.Column<string>(type: "NVARCHAR(120)", maxLength: 120, nullable: false),
+                    Logradouro = table.Column<string>(type: "NVARCHAR(120)", maxLength: 120, nullable: false),
                     Bairro = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     Numero = table.Column<string>(type: "NVARCHAR(10)", maxLength: 10, nullable: false),
                     Complemento = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: true),
+                    Estado = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: false),
+                    Cidade = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: false),
                     Cep = table.Column<string>(type: "NVARCHAR(10)", maxLength: 10, nullable: false),
                     ClienteId = table.Column<int>(type: "int", maxLength: 15, nullable: false)
                 },
@@ -109,32 +111,6 @@ namespace SomoSSolar.API.Migrations
                     table.PrimaryKey("PK_Endereco", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Endereco_Cliente_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Cliente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Instalacao",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoInstalacao = table.Column<short>(type: "SMALLINT", nullable: false),
-                    DataInstalacao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Valor = table.Column<decimal>(type: "MONEY", nullable: false),
-                    Status = table.Column<string>(type: "VARCHAR(10)", maxLength: 10, nullable: false),
-                    Despesas = table.Column<decimal>(type: "MONEY", nullable: true),
-                    AmpliacaoInstalacao = table.Column<short>(type: "SMALLINT", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", maxLength: 20, nullable: false),
-                    EnderecoId = table.Column<int>(type: "int", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Instalacao", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Instalacao_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "Id",
@@ -242,6 +218,37 @@ namespace SomoSSolar.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Instalacao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoInstalacao = table.Column<short>(type: "SMALLINT", nullable: false),
+                    DataInstalacao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Valor = table.Column<decimal>(type: "MONEY", nullable: false),
+                    Status = table.Column<string>(type: "VARCHAR(10)", maxLength: 10, nullable: false),
+                    Despesas = table.Column<decimal>(type: "MONEY", nullable: true),
+                    AmpliacaoInstalacao = table.Column<short>(type: "SMALLINT", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: true),
+                    EnderecoId = table.Column<int>(type: "int", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Instalacao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Instalacao_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Instalacao_Endereco_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Endereco",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Venda",
                 columns: table => new
                 {
@@ -316,6 +323,11 @@ namespace SomoSSolar.API.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Instalacao_EnderecoId",
+                table: "Instalacao",
+                column: "EnderecoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Venda_EquipamentoId",
                 table: "Venda",
                 column: "EquipamentoId");
@@ -329,9 +341,6 @@ namespace SomoSSolar.API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Endereco");
-
             migrationBuilder.DropTable(
                 name: "IdentityClaim");
 
@@ -361,6 +370,9 @@ namespace SomoSSolar.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Instalacao");
+
+            migrationBuilder.DropTable(
+                name: "Endereco");
 
             migrationBuilder.DropTable(
                 name: "Cliente");

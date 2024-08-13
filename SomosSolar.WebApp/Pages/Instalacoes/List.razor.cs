@@ -85,9 +85,6 @@ public partial class ListInstalacoesPage : ComponentBase
         if (instalacao.Id.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
             return true;
 
-        if (instalacao.ClienteId.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return true;
-
         if (instalacao.DataInstalacao.ToString().Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
             return true;
 

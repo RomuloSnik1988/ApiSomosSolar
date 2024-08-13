@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SomoSSolar.Core.Requests.Equipamentos;
 
-public class CreateEquipamentoRequest
+public class CreateEquipamentosRequest
 {
     [Required(ErrorMessage = "Tipo Inválido")]
     public ETipoEquipamento Tipo { get; set; } = ETipoEquipamento.Inversor;

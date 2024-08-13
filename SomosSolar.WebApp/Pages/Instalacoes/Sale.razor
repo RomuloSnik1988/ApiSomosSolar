@@ -1,7 +1,8 @@
 ﻿@page "/addEquipamentos/{id}"
 @inherits SaleInstalacaoPage
 
-<MudText Typo="Typo.h6">Adicione os equipamentos da instalação</MudText>
+<MudText Typo="Typo.h6">Instalação:</MudText>
+
 @if (IsBusy)
 {
     <MudPaper Class="pa-8 mt-4">
@@ -18,36 +19,40 @@ else
         <EditForm Model="@InputModelInstalacao">
             <DataAnnotationsValidator />
 
-            <MudTextField T="int" Label="Cliente"
-                          @bind-Value="InputModelInstalacao.ClienteId"/>
+            <MudText Typo="Typo.h6">Cliente: @Cliente?.Nome</MudText>
 
-            <MudTextField T="DateTime" Label="Data da Instalação"
-                          @bind-Value="InputModelInstalacao.DataInstalacao" />
+            @if (Endereco != null)
+            {
+                <MudText Typo="Typo.body1"> @Endereco.Logradouro, @Endereco.Numero, @Endereco.Bairro, @Endereco.Cidade</MudText>
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">Endereço não encontrado.</MudText>
+            }
 
-           
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
-            <MudButton Href="/instalacoes" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
-
+           @*  <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+            <MudButton Href="/instalacoes" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton> *@
         </EditForm>
     </MudPaper>
+    <div class="d-flex pa-4">
+    <MudText Typo="Typo.h6">Adicione os equipamentos da instalação:</MudText>
+    </div>
+
+    <MudButton  StartIcon="@Icons.Material.TwoTone.Add" Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenModal">Adicionar</MudButton>
+
+    <MudPaper>
+    <MudDataGrid Items="@Vendas" 
+                Class="mt-4">
+       
+        <Columns>
+            <PropertyColumn Property="x => x.Quantidade" Title="Quantidade"></PropertyColumn>
+            <PropertyColumn Property="x => x.Equipamento.Tipo" Title="Tipo"></PropertyColumn>
+            <PropertyColumn Property="x => x.Equipamento.Modelo" Title="Item"></PropertyColumn>
+        </Columns>
+
+    </MudDataGrid>
+
+    </MudPaper>
+
 
 }
-
-@* <MudText Typo="Typo.h6">Adicione os equipamentos desta instalação</MudText>
-
-<MudDataGrid Items="@Instalacoes" Class="mt-4">
-    <ToolBarContent>
-        <MudText Typo="Typo.h6">Instalação:</MudText>
-        <MudSpacer />
-       
-    </ToolBarContent>
-    <Columns>
-        <PropertyColumn Property="x => x.Cliente" Title="Cliente"></PropertyColumn>
-        <PropertyColumn Property="x => x.DataInstalacao" Title="Data de Instalação"></PropertyColumn>
-        <TemplateColumn Class="d-flex justify-end">
-            <CellTemplate>
-            </CellTemplate>
-        </TemplateColumn>
-    </Columns>
-
-</MudDataGrid> *@

@@ -9,7 +9,7 @@ namespace SomosSolar.WebApp.Handlers;
 public class EquipamentoHandler(IHttpClientFactory httpClientFactory) : IEquipamentoHandler
 {
     private readonly HttpClient _client = httpClientFactory.CreateClient(Configuration.HttpClientName);
-    public async Task<Response<Equipamento?>> CreateAsync(CreateEquipamentoRequest request)
+    public async Task<Response<Equipamento?>> CreateAsync(CreateEquipamentosRequest request)
     {
         var result = await _client.PostAsJsonAsync("v1/equipamentos", request);
         return await result.Content.ReadFromJsonAsync<Response<Equipamento?>>()

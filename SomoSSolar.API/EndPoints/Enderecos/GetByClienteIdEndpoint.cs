@@ -19,7 +19,7 @@ public class GetByClienteIdEndpoint : IEndpoint
     {
         var request = new GetEnderecoByClienteIdRequest { Id = id };
 
-        var result = await handler.GetEnderecoByClienteIdAsync(request);
+        var result = await handler.GetByClienteIdAsync(request);
         return result.IsSuccess
             ? TypedResults.Ok(result)
             : TypedResults.BadRequest(result);

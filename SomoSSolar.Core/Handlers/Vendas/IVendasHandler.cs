@@ -11,4 +11,6 @@ public interface IVendasHandler
     Task<Response<Venda?>> DeleteAsync(DeleteVendaRequest request);
     Task<Response<Venda?>> GetByIdAsync(GetVendaByIdRequest request);
     Task<PagedResponse<List<Venda?>>> GetAllAsync(GetAllVendasRequest request);
+    Task<Response<List<Venda?>>> GetVendasAsync(GetVendasByInstalacaoRequest request);
+
 }

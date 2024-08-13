@@ -13,7 +13,7 @@ public class CreateClienteRequest
     [MaxLength(18, ErrorMessage = "O CPF ou CNPJ deve conter até 18 caracteres")]
     public string Documento { get; set; } = string.Empty;
     [Required(ErrorMessage = "Celular inválido")]
-    [MaxLength(12, ErrorMessage = "O celular deve conter até 50 caracteres")]
+    [MaxLength(14, ErrorMessage = "O celular deve conter até 14 caracteres")]
     public string Celular { get; set; } = string.Empty;
     [Required(ErrorMessage = "Email inválido")]
     [MaxLength(80, ErrorMessage = "O email deve conter até 50 caracteres")]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
@@ -22,13 +23,19 @@ public class SaleInstalacaoPage : ComponentBase
     public List<Instalacao> Instalacoes { get; set; } = [];
     public UpdateInstalacaoRequest InputModelInstalacao { get; set; } = new();
     public List<Equipamento> Equipamentos { get; set; } = [];
-    public List<Cliente> Clientes { get; set; } = [];
-    public List<Endereco> Enderecos { get; set; } = [];
+    public List<Venda> Vendas { get; set; } = new List<Venda?>();
+    public string NomeCliente => Cliente?.Nome ?? "Cliente não encontrado";
+    public Venda? Venda { get; set; }
+    public Endereco Endereco { get; set; } = null!;
+    public GetVendasByInstalacaoRequest VendaInstalcao { get; set; } = new();
     #endregion
+
     #region Parameter
     [Parameter]
     public string Id { get; set; } = string.Empty;
     #endregion
+
+    #region Services
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
     [Inject]
@@ -43,6 +50,9 @@ public class SaleInstalacaoPage : ComponentBase
     public IClienteHandler ClienteHandler { get; set; } = null!;
     [Inject]
     public IEnderecoHandler EnderecoHandler { get; set; } = null!;
+    [Inject]
+    public IDialogService DialogService { get; set; } = null!;
+    #endregion
 
     #region Override 
     protected override async Task OnInitializedAsync()
@@ -65,12 +75,27 @@ public class SaleInstalacaoPage : ComponentBase
         IsBusy = true;
         try
         {
-            //await GetClientesAsync();
-            //await GetEnderecosAsync();
-
             var response = await InstalacaoHanler.GetByIdAsync(request);
-            if (response.IsSuccess && response.Data is not null);
-              
+            if (response.IsSuccess && response.Data is not null)
+            {
+                var instalacao = response.Data;
+
+                //Cliente = instalacao.Cliente;
+                var enderecoRequest = new GetEnderecoByIdRequest
+                {
+                    Id = instalacao.EnderecoId
+                };
+                await GetClienteById(instalacao.EnderecoId);
+                await GetVendasAsync(instalacao.Id);
+
+                var enderecoResponse = await EnderecoHandler.GetByIdAsync(enderecoRequest);
+                if (enderecoResponse.IsSuccess && enderecoResponse.Data is not null)
+                {
+                    Endereco = enderecoResponse.Data;
+                }
+                
+
+            }
         }
         catch (Exception ex)
         {
@@ -78,21 +103,26 @@ public class SaleInstalacaoPage : ComponentBase
             Snackbar.Add(ex.Message, Severity.Error);
         }
         finally { IsBusy = false; }
+  
     }
+
     #endregion
 
     #region Methods
-    private async Task GetClientesAsync()
+    public async Task GetVendasAsync(int instalacaoId)
     {
-        IsBusy = true;
         try
         {
-            var request = new GetAllClientesRequest();
-            var result = await ClienteHandler.GetAllAsync(request);
-            if (result.IsSuccess)
+            var request = new GetVendasByInstalacaoRequest { Id = instalacaoId };
+            var response = await VendasHandler.GetVendasAsync(request);
+
+            if(response.IsSuccess && response.Data is not null)
             {
-                Clientes = result.Data ?? [];
-                InputModelInstalacao.ClienteId = Clientes.FirstOrDefault()?.Id ?? 0;
+                Vendas = response.Data.Where(venda => venda != null).ToList()!;
+            }
+            else
+            {
+                Snackbar.Add("Vendas não localizas", Severity.Error);
             }
         }
         catch (Exception ex)
@@ -100,23 +130,38 @@ public class SaleInstalacaoPage : ComponentBase
             Snackbar.Add(ex.Message, Severity.Error);
         }
     }
-    public async Task GetEnderecosAsync()
+    public async Task GetClienteById(int enderecoid)
     {
-        IsBusy = true;
         try
         {
-            var request = new GetAllEnderecosRequest();
-            var result = await EnderecoHandler.GetAllAsync(request);
-            if (result.IsSuccess)
+            var request = new GetClienteByIdRequest { Id = enderecoid };
+            var response = await ClienteHandler.GetByIdAsync(request);
+            if(response.IsSuccess && response?.Data is not null)
             {
-                Enderecos = result.Data ?? [];
-                InputModelInstalacao.EnderecoId = Enderecos.FirstOrDefault()?.Id ?? 0;
+                Cliente = response.Data;
+            }
+            else
+            {
+                Snackbar.Add("Cliente não encontrado", Severity.Error);
             }
         }
-        catch (Exception ex)
+        catch 
         {
-            Snackbar.Add(ex.Message, Severity.Error);
+            Snackbar.Add("Erro ao buscar o cliente", Severity.Error);
         }
     }
+    
     #endregion
+    public void OpenModal()
+
+    {
+        var parameters = new DialogParameters
+        {
+            {"InstalacaoId", InputModelInstalacao.Id },
+        };
+        DialogService.Show<AddEquipamentosModal>("Adicionar Equipamentos", parameters, new DialogOptions
+        {
+            CloseOnEscapeKey = true
+        });
+    }
 }

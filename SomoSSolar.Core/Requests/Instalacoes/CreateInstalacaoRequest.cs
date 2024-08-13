@@ -21,11 +21,8 @@ public class CreateInstalacaoRequest
     public decimal Despesas { get; set; }
 
     [Required(ErrorMessage ="Informe se a instalação suporta ampliação")]
-    public EAmpliacaoInstacacao AmpliacaoInstalacao { get; set; }
-
-    [Required(ErrorMessage = "O Cliente deve ser informado")]
-    public int ClienteId { get; set; }
-
+    public EAmpliacaoInstalacao AmpliacaoInstalacao { get; set; }
+  
     [Required(ErrorMessage = "O Endereço deve ser informado")]
     public int EnderecoId { get; set; } 
 

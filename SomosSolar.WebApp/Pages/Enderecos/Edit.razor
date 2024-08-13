@@ -36,7 +36,7 @@ else
             <MudTextField T="string" Label="Cidade" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Cidade" For="@(()=> InputModel.Cidade)" />
 
-            <MudTextField T="string" Label="Cep" HelperText="Campo Obrigatório"
+            <MudTextField T="string" Label="Cep" Mask="@(new PatternMask("00000-000"))" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Cep" For="@(() => InputModel.Cep)" />
 
         <MudSelect T="int" Label="Cliente" @bind-Value="InputModel.ClienteId" AnchorOrigin="Origin.BottomCenter">

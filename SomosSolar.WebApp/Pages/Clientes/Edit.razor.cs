@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Clientes;
-using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Clientes;
 
 namespace SomosSolar.WebApp.Pages.Clientes;
@@ -11,7 +10,6 @@ public class EditClientePage : ComponentBase
     #region Properties
     public bool IsBusy { get; set; } = false;
     public UpdateClienteRequest InputModel { get; set; } = new();
-    public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
     #endregion
 
     #region Parameters
@@ -26,8 +24,7 @@ public class EditClientePage : ComponentBase
     public NavigationManager NavigationManager { get; set; } = null!;
     [Inject]
     public IClienteHandler Handler { get; set; } = null!;
-    //[Inject]
-    //public IEnderecoHandler HEndereco { get; set; } = null!;
+    
     #endregion
 
     #region Overrides
@@ -62,12 +59,6 @@ public class EditClientePage : ComponentBase
                     Email = response.Data.Email,
                     DataCadastro = response.Data.DataCadastro
                 };
-
-            //var enderecosReponse = await HEndereco.GetEnderecoByClienteAsync(new GetEnderecosClienteRequest { Id = request.Id });
-            //if (enderecosReponse.IsSuccess && enderecosReponse.Data is not null)
-            //{
-            //    Enderecos = enderecosReponse.Data;
-            //}
         }
         catch (Exception ex)
         {

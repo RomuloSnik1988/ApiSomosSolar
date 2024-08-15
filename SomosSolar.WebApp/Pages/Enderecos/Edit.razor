@@ -18,7 +18,7 @@ else
         <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator />
 
-            <MudTextField T="string" Label="Lagradouro" HelperText="Campo Obrigatório"
+            <MudTextField T="string" Label="Logradouro" HelperText="Campo Obrigatório"
                           @bind-Value="InputModel.Lagradouro" For="@(() => InputModel.Lagradouro)" />
 
             <MudTextField T="string" Label="Bairro" HelperText="Campo Obrigatório"

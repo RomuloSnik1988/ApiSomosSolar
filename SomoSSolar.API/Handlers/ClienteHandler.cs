@@ -123,11 +123,6 @@ public class ClienteHandler(AppDbContext context) : IClienteHandler
         }
     }
 
-
-
-
-
-
     //public async Task<IActionResult> enderecosAsync(int usuarioid)
     //{
     //    var buscaEnderecos = await (from enderecos in context.Enderecos

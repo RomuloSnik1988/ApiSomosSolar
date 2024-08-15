@@ -9,21 +9,19 @@ using SomoSSolar.Core.Requests.Vendas;
 
 namespace SomosSolar.WebApp.Pages.Instalacoes
 {
-    public class AddEquipamentosModalPage : ComponentBase
+    public class EditEquipamentosModalPage : ComponentBase
     {
         #region Properties
         public bool IsBusy { get; set; } = false;
-        public CreateVendaRequest InputModel { get; set; } = new();
-        public UpdateEquipamentoRequest? EquipamentosInputModel { get; set; }
+        public UpdateVendaRequest InputModel { get; set; } = new();
         public List<Equipamento> Equipamentos { get; set; } = new List<Equipamento>();
-        public List<Venda> Vendas { get; set; } = new List<Venda>();
         public List<Equipamento> EquipamentosFiltrados { get; set; } = new List<Equipamento>();
         public ETipoEquipamento TipoEquipamentoSelecionado { get; set; }
 
         #endregion
         #region Parameters
         [Parameter]
-        public int InstalacaoId { get; set; }
+        public int VendaId { get; set; }
         [CascadingParameter]
         public MudDialogInstance ModalInstace { get; set; }
         #endregion
@@ -33,32 +31,42 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
         [Inject]
         public IDialogService DialogService { get; set; } = null!;
         [Inject]
-        public IEquipamentoHandler EquipamentoHandler { get; set; } = null!;
-        [Inject]
         public IVendasHandler Handler { get; set; } = null!;
         #endregion
 
         #region Overrides
         protected override async Task OnInitializedAsync()
         {
+            GetVendaByIdRequest? request = null;
+            try
+            {
+                request = new GetVendaByIdRequest { Id = VendaId };
+            }
+            catch 
+            {
+                Snackbar.Add("Parametro Inválido", Severity.Error);
+            }
+            if (request is null)
+                return;
+
             IsBusy = true;
             try
             {
-                // VERIFICAR SE ID FOI RECEBIDO CERTO
-                //Console.WriteLine($"EnderecoId recebido: {InstalacaoId}");
-
-                var request = new GetAllEquipamentosRequest();
-                var result = await EquipamentoHandler.GetAllAsync(request);
-                if (result.IsSuccess)
-                    Equipamentos = result.Data ?? new List<Equipamento>();
-
-                InputModel.InstalacaoId = InstalacaoId;
+                var response = await Handler.GetByIdAsync(request);
+                if (response.IsSuccess && response.Data is not not null)
+                    Snackbar.Add("Response Sucesso");
+                    InputModel = new UpdateVendaRequest
+                    {
+                        Id = response.Data.Id,
+                        EquipamentoId = response.Data.EquipamentoId,
+                        Quantidade = response.Data.Quantidade,
+                        InstalacaoId = response.Data.InstalacaoId
+                    };
             }
             catch (Exception ex)
             {
                 Snackbar.Add(ex.Message, Severity.Error);
-            }
-            finally { IsBusy = false; }
+            }IsBusy = false;
         }
         #endregion
         #region Methods
@@ -67,14 +75,13 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
             EquipamentosFiltrados = Equipamentos
                 .Where(e => e.Tipo == TipoEquipamentoSelecionado)
                 .ToList();
-            //Console.WriteLine(TipoEquipamentoSelecionado);
         }
-        public async Task SalvarAsync()
+        public async Task UpdateAsync()
         {
             IsBusy = true;
             try
             {
-                var result = await Handler.CreateAsync(InputModel);
+                var result = await Handler.UpdateAsync(InputModel);
                 if (result.IsSuccess)
                 {
                     Snackbar.Add(result.Message, Severity.Success);
@@ -84,7 +91,7 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
             catch (Exception ex)
             {
                 Snackbar.Add(ex.Message, Severity.Error);
-            }
+            }finally { IsBusy = false; }
         }
        
         #endregion

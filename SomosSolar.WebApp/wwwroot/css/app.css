@@ -60,3 +60,19 @@
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+.blur {
+    backdrop-filter: blur(10px);
+}
+
+.dialog-background {
+    background-color: transparent;
+}
+
+.dialog-background-title {
+    background: rgb(from var(--mud-palette-info-lighten) r g b / 50%);
+    color: var(--mud-palette-white);
+}
+
+.dialog-background-surface {
+    background: rgb(from var(--mu) r g b / 25%);
+}

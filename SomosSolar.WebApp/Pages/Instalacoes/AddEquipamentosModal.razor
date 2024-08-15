@@ -1,8 +1,8 @@
-﻿@page "/addequipamentomodel"
-@inherits AddEquipamentosModalPage
+﻿@inherits AddEquipamentosModalPage
 
-<MudDialog>
-    <DialogActions>
+<MudDialog Class="blur dialog-background" TitleClass="blur dialog-background-title" ContentClass="dialog-background-surface"
+           ActionsClass="dialog-background-surface">
+    <DialogContent>
         <MudGrid>
          <MudItem xs="12">
         <MudSelect Label="Categoria:"  T="ETipoEquipamento" @bind-Value="TipoEquipamentoSelecionado"
@@ -25,11 +25,15 @@
         <MudNumericField Label="Quantidade:"   Typo="Typo.h6" T="int" @bind-Value="InputModel.Quantidade"
         Min="1" Max="1000" Step="1" />
         </MudItem>
-
-        <MudItem xs="12" class="d-flex justify-end">
-        <MudButton @onclick="() => ModalInstace.Close()">Cancelar</MudButton>
-        <MudButton @onclick="SalvarAsync">Salvar</MudButton>
-        </MudItem>
         </MudGrid>
+
+    </DialogContent>
+    <DialogActions>
+        <MudItem xs="12" class="d-flex justify-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => ModalInstace.Close()">Cancelar</MudButton>
+        <MudSpacer/>
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Primary" @onclick="SalvarAsync">Salvar</MudButton>
+        </MudItem>
     </DialogActions>
 </MudDialog>
+

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.JSInterop;
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
@@ -18,21 +18,20 @@ public class SaleInstalacaoPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public CreateVendaRequest InputModel { get; set; } = new();
     public Cliente Cliente { get; set; } = null!;
-    public List<Instalacao> Instalacoes { get; set; } = [];
     public UpdateInstalacaoRequest InputModelInstalacao { get; set; } = new();
-    public List<Equipamento> Equipamentos { get; set; } = [];
-    public List<Venda> Vendas { get; set; } = new List<Venda?>();
-    public string NomeCliente => Cliente?.Nome ?? "Cliente não encontrado";
-    public Venda? Venda { get; set; }
+    public List<Venda> Vendas { get; set; } = new List<Venda>();
     public Endereco Endereco { get; set; } = null!;
-    public GetVendasByInstalacaoRequest VendaInstalcao { get; set; } = new();
     #endregion
 
     #region Parameter
     [Parameter]
     public string Id { get; set; } = string.Empty;
+    [Parameter]
+    public int InstalacaoId { get; set; }
+    [Parameter]
+    public int VendaId { get; set; }
+
     #endregion
 
     #region Services
@@ -84,15 +83,23 @@ public class SaleInstalacaoPage : ComponentBase
                 //Cliente = instalacao.Cliente;
                 var enderecoRequest = new GetEnderecoByIdRequest
                 {
-                    Id = instalacao.EnderecoId
+                    Id = instalacao.EnderecoId,
                 };
-                await GetClienteById(instalacao.EnderecoId);
                 await GetVendasAsync(instalacao.Id);
 
                 var enderecoResponse = await EnderecoHandler.GetByIdAsync(enderecoRequest);
                 if (enderecoResponse.IsSuccess && enderecoResponse.Data is not null)
                 {
                     Endereco = enderecoResponse.Data;
+
+                    if (Endereco.ClienteId > 0)
+                    {
+                        await GetClienteById(Endereco.ClienteId);
+                    }
+                    else
+                    {
+                        Snackbar.Add("Cliente Id não encontrado no endereço", Severity.Warning);
+                    }
                 }
                 
 
@@ -131,11 +138,11 @@ public class SaleInstalacaoPage : ComponentBase
             Snackbar.Add(ex.Message, Severity.Error);
         }
     }
-    public async Task GetClienteById(int enderecoid)
+    public async Task GetClienteById(int clienteid)
     {
         try
         {
-            var request = new GetClienteByIdRequest { Id = enderecoid };
+            var request = new GetClienteByIdRequest { Id = clienteid };
             var response = await ClienteHandler.GetByIdAsync(request);
             if(response.IsSuccess && response?.Data is not null)
             {
@@ -144,6 +151,7 @@ public class SaleInstalacaoPage : ComponentBase
             else
             {
                 Snackbar.Add("Cliente não encontrado", Severity.Error);
+                Console.WriteLine($"ClienteID:{ Cliente.Id}");
             }
         }
         catch 
@@ -153,20 +161,83 @@ public class SaleInstalacaoPage : ComponentBase
     }
     
     #endregion
-    public void OpenModal()
+    public async void OpenModal()
     {
 
-        // Verifique se o InstalacaoId está correto antes de abrir o modal
-        Console.WriteLine($"InstalacaoId: {InputModelInstalacao.Id}");
+        //// Verifique se o InstalacaoId está correto antes de abrir o modal
+        //Console.WriteLine($"VendaId: {InputModelInstalacao.Id}");
 
         var parameters = new DialogParameters
         {
             {"InstalacaoId", InputModelInstalacao.Id },
 
         };
-        DialogService.Show<AddEquipamentosModal>("Adicionar Equipamentos", parameters, new DialogOptions
+
+        var dialog = DialogService.Show<AddEquipamentosModal>("Adicionar Equipamentos", parameters, new DialogOptions
         {
-            CloseOnEscapeKey = true
+            CloseOnEscapeKey = true,
         });
+
+        var result = await dialog.Result;
+
+        if(!result.Canceled)
+        {
+            Snackbar.Add("Chegou de volta", Severity.Error);
+            NavigationManager.Refresh(forceReload: true);
+        }
     }
+
+    public async Task OpenModalEdit(int id)
+    {
+
+        //// Verifique se o VendaId está correto antes de abrir o modal
+        //Console.WriteLine($"VendaId: {InputModelInstalacao.Id}");
+
+        var parameters = new DialogParameters
+        {
+            {"VendaId",id},
+
+        };
+
+        var dialog = DialogService.Show<EditEquipamentosModal>("Editar Quantidade de Equipamentos", parameters, new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+        });
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Chegou de volta", Severity.Error);
+            NavigationManager.Refresh(forceReload: true);
+        }
+
+    }
+    public async Task OnDeleteButtonClikedAsync(int id, int quantidade, string modelo)
+    {
+        var result = await DialogService.ShowMessageBox("Atenção", $"Ao prosseguir {quantidade}" +
+            $" {modelo} será excuido. Essa é uma ação irreversível! Deseja Continuar?",
+            yesText: "EXCLUIR",
+            cancelText: "CANCELAR");
+
+        if (result is true)
+            await OnDeleteAsync(id, quantidade,modelo);
+
+        StateHasChanged();
+    }
+
+    public async Task OnDeleteAsync(int id, int quantidade,string modelo)
+    {
+        try
+        {
+            await VendasHandler.DeleteAsync(new DeleteVendaRequest { Id = id });
+            Vendas.RemoveAll(x => x.Id == id);
+            Snackbar.Add($"{quantidade} {modelo}, excluído", Severity.Success);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+
 }

@@ -48,6 +48,17 @@ else
             <PropertyColumn Property="x => x.Quantidade" Title="Quantidade"></PropertyColumn>
             <PropertyColumn Property="x => x.Equipamento.Tipo" Title="Tipo"></PropertyColumn>
             <PropertyColumn Property="x => x.Equipamento.Modelo" Title="Item"></PropertyColumn>
+            <TemplateColumn>
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary"
+                                           OnClick="()=>OpenModalEdit(context.Item.Id)"></MudIconButton>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                           OnClick="()=>OnDeleteButtonClikedAsync(context.Item.Id, context.Item.Quantidade,
+                                            context.Item.Equipamento.Modelo)"></MudIconButton>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
         </Columns>
 
     </MudDataGrid>

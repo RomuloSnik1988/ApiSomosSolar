@@ -1,0 +1,18 @@
+﻿@inherits EditEquipamentosModalPage
+
+<MudDialog Class="blur dialog-background" TitleClass="blur dialog-background-title" ContentClass="dialog-background-surface"
+           ActionsClass="dialog-background-surface">
+    <DialogContent>
+        <EditForm Model="@InputModel">
+            <MudNumericField Label="Quantidade:" Typo="Typo.h6" T="int" @bind-Value="InputModel.Quantidade" For="@(()=>InputModel.Quantidade)"
+                             Min="1" Max="1000" Step="1" />
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudItem xs="12" class="d-flex justify-end">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="() => ModalInstace.Close()">Cancelar</MudButton>
+        <MudSpacer/>
+            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Primary" OnClick="UpdateAsync">Salvar</MudButton>
+        </MudItem>
+    </DialogActions>
+</MudDialog>

@@ -19,21 +19,25 @@ namespace SomosSolar.WebApp
             },
             PaletteLight = new PaletteLight
             {
-                Primary = new MudColor("#1EFA2D"),
+                Primary = new MudColor("#80CBC4"),
                 PrimaryContrastText = new MudColor("#000000"),
-                Secondary = Colors.LightGreen.Darken3,
+                Secondary = Colors.Shades.Black,
                 Background = Colors.Gray.Lighten4,
-                AppbarBackground = new MudColor("1EFA2D"),
+                AppbarBackground = new MudColor("#80CBC4"),
                 AppbarText = Colors.Shades.Black,
+                //Texto Principal
                 TextPrimary = Colors.Shades.Black,
                 DrawerText = Colors.Shades.White,
-                DrawerBackground = Colors.Green.Darken4
+                DrawerBackground = Colors.Teal.Darken2
+                
+                
+                
             },
             PaletteDark = new PaletteDark
             {
-                Primary = Colors.LightGreen.Accent3,
-                Secondary = Colors.LightGreen.Darken3,
-                AppbarBackground = Colors.LightGreen.Accent3,
+                Primary = Colors.Teal.Accent2,
+                Secondary = Colors.Teal.Darken3,
+                AppbarBackground = Colors.Teal.Accent3,
                 AppbarText = Colors.Shades.Black,
                 PrimaryContrastText = new MudColor("#000000")
             }

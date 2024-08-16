@@ -117,7 +117,6 @@ public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
             return new PagedResponse<List<Equipamento?>>(null, 500, "Não foi possível pesquisar os equipamentos");
         }
     }
-    
 
-    
+   
 }

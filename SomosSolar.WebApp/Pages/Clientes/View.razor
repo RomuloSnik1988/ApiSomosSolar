@@ -43,6 +43,8 @@ else
 {
     <MudAlert Severity="Severity.Error">Cliente não encontrado.</MudAlert>
 }
+
+
 <div class="d-flex pa-4">
 <MudText Typo="Typo.h6">Endereço(s):</MudText>
 </div>
@@ -79,9 +81,28 @@ else
 
     <MudDataGrid Items="@endereco.Instalacoes">
         <Columns>
-            <PropertyColumn Property="x => x.DataInstalacao">Data</PropertyColumn>
-            <PropertyColumn Property="x => x.TipoInstalacao">Tipo</PropertyColumn>
+            <PropertyColumn Property="x => x.DataInstalacao" Format="dd/MM/yyyy" Title="Data da Instalação"></PropertyColumn>
+            <PropertyColumn Property="x => x.TipoInstalacao" Title="Tipo"></PropertyColumn>
+            <PropertyColumn Property="x => x.Valor" Format="C">Valor</PropertyColumn>
             <PropertyColumn Property="x => x.Status">Status</PropertyColumn>
         </Columns>
     </MudDataGrid>
+
+    @foreach (var instalacao in endereco.Instalacoes)
+    {
+        <div class="d-flex pa-4">
+            <MudText Typo="Typo.h6">@instalacao.TipoInstalacao - @instalacao.DataInstalacao</MudText>
+        </div>
+
+        <MudDataGrid Items="@instalacao.Vendas">
+            <Columns>
+                <PropertyColumn Property="x => x.Quantidade" Title="Quantidade"></PropertyColumn>
+                <PropertyColumn Property="x => x.Equipamento.Tipo" Title="Tipo"></PropertyColumn>
+                <PropertyColumn Property="x => x.Equipamento.Modelo" Title="Item"></PropertyColumn>
+            </Columns>
+        </MudDataGrid>
+    }
 }
+<div>
+    <br />
+</div>

@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using SomosSolar.WebApp.Handlers;
 using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
+using SomoSSolar.Core.Handlers.Equipamentos;
 using SomoSSolar.Core.Handlers.Instalacoes;
+using SomoSSolar.Core.Handlers.Vendas;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Clientes;
 using SomoSSolar.Core.Requests.Enderecos;
+using SomoSSolar.Core.Requests.Equipamentos;
 using SomoSSolar.Core.Requests.Instalacoes;
+using SomoSSolar.Core.Requests.Vendas;
 
 namespace SomosSolar.WebApp.Pages.Clientes;
 
@@ -17,6 +22,7 @@ public class ViewClientePage : ComponentBase
     public Cliente? Cliente { get; set; }
     public List<Endereco?> Enderecos { get; set; } = new List<Endereco?>();
     public List<Instalacao?> Instacoes { get; set; } = new List<Instalacao?>();
+    public List<Venda?> Vendas { get; set; } = new List<Venda?>();
     public GetClienteByIdRequest? InputModel { get; set; }
     public UpdateClienteRequest? EnderecoInputModel { get; set; }
     #endregion
@@ -33,6 +39,8 @@ public class ViewClientePage : ComponentBase
     IEnderecoHandler EnderecoHandler { get; set; } = null!;
     [Inject]
     IInstacacaoHandler InstalacaoHandler { get; set; } = null!;
+    [Inject]
+    IVendasHandler VendasHandler { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
     #endregion
@@ -84,7 +92,21 @@ public class ViewClientePage : ComponentBase
                 foreach (var endereco in Enderecos)
                 {
                     endereco.Instalacoes = await CarregarInstalacoesPorEnderecoId(endereco.Id);
+
+                    foreach (var instalcao in endereco.Instalacoes)
+                    {
+                        if(instalcao != null)
+                        {
+                            var instalacaoId = instalcao.Id;
+
+                            instalcao.Vendas = await CarregarVendasPorInstalacaoId(instalacaoId);
+
+                            //Verificar o ID da instalação
+                            //Snackbar.Add($"Instalacao ID: {instalacaoId}" , Severity.Info);
+                        }
+                    }
                 }
+                
             }
             else
             {
@@ -95,7 +117,6 @@ public class ViewClientePage : ComponentBase
         {
             Snackbar.Add("Erro ao buscar endereço", Severity.Error);
         }
-        
     }
     public async Task<List<Instalacao>> CarregarInstalacoesPorEnderecoId(int enderecoId)
     {
@@ -103,6 +124,14 @@ public class ViewClientePage : ComponentBase
         var response = await InstalacaoHandler.GetByEnderecoAsync(request);
 
         return response.IsSuccess ? response.Data : new List<Instalacao>();
+
+    }
+    public async Task<List<Venda>> CarregarVendasPorInstalacaoId(int instalacaoId)
+    {
+        var request = new GetVendasByInstalacaoRequest { Id = instalacaoId };
+        var response = await VendasHandler.GetVendasAsync(request);
+
+        return response.IsSuccess ? response.Data : new List<Venda>();
     }
     #endregion
     public async Task AdicionarEndereco(int clienteid)

@@ -1,4 +1,6 @@
 ﻿using SomoSSolar.Core.Enums;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SomoSSolar.Core.Models;
 

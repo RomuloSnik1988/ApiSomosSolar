@@ -2,7 +2,6 @@
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Models;
-using SomoSSolar.Core.Requests.Clientes;
 using SomoSSolar.Core.Requests.Instalacoes;
 
 namespace SomosSolar.WebApp.Pages.Instalacoes;
@@ -34,8 +33,6 @@ public partial class ListInstalacoesPage : ComponentBase
             var result = await Handler.GetAllAsync(request);
             if (result.IsSuccess)
                 Instalacoes = result.Data ?? [];
-            
-            
         }
         catch (Exception ex)
         {
@@ -43,7 +40,6 @@ public partial class ListInstalacoesPage : ComponentBase
         }
         finally
         {
-
             IsBusy = false;
         }
 

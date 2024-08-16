@@ -22,7 +22,8 @@ public class InstalacaoHandler(AppDbContext context) : IInstacacaoHandler
                 Status = request.Status,
                 Despesas = request.Despesas,
                 AmpliacaoInstalacao = request.AmpliacaoInstalacao,
-                EnderecoId = request.EnderecoId
+                EnderecoId = request.EnderecoId,
+                ClienteId = request.ClienteId
 
             };
 

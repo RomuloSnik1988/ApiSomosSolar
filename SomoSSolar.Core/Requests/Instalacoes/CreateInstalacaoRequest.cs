@@ -26,4 +26,6 @@ public class CreateInstalacaoRequest
     [Required(ErrorMessage = "O Endereço deve ser informado")]
     public int EnderecoId { get; set; } 
 
+    public int ClienteId { get; set; }
+
 }

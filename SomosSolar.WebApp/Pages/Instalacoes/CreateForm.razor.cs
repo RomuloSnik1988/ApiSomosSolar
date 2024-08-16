@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Models;
-using SomoSSolar.Core.Requests.Clientes;
 using SomoSSolar.Core.Requests.Enderecos;
 using SomoSSolar.Core.Requests.Instalacoes;
 
@@ -16,7 +14,7 @@ public partial class CreateFormInstacalaoPage : ComponentBase
     public bool IsBusy { get; set; } = false;
     public CreateInstalacaoRequest InputModel { get; set; } = new();
     public GetEnderecoByIdRequest? EnderecoInputModel { get; set; }
-    public Endereco? Enderecos { get; set; }
+    public Endereco? Enderecos { get; set; } 
     #endregion
     #region Parameters
     [Parameter]
@@ -25,8 +23,8 @@ public partial class CreateFormInstacalaoPage : ComponentBase
     #region Services
     [Inject]
     public IInstacacaoHandler Handler { get; set; } = null!;
-    [Inject]
-    public IClienteHandler ClienteHandler { get; set; } = null!;
+    //[Inject]
+    //public IClienteHandler ClienteHandler { get; set; } = null!;
     [Inject]
     public IEnderecoHandler EnderecoHandler { get; set; } = null!;
     [Inject]
@@ -57,18 +55,19 @@ public partial class CreateFormInstacalaoPage : ComponentBase
                 Enderecos = response.Data;
                 // Preencher automaticamente o EnderecoId no InputModel
                 InputModel.EnderecoId = response.Data.Id;
-
-
+                InputModel.ClienteId = response.Data.ClienteId;
+                Console.WriteLine("ClienteID", InputModel.EnderecoId);
             }
             else
             {
-                Snackbar.Add("Cliente não encontrado", Severity.Error);
+                Snackbar.Add("Endereço não encontrado", Severity.Error);
             }
         }
         catch (Exception ex)
         {
             Snackbar.Add(ex.Message, Severity.Error);
-        }finally { IsBusy = false; }
+        }
+        finally { IsBusy = false; }
     }
     #endregion
     #region Methods

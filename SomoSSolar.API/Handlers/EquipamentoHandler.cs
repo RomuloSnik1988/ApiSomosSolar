@@ -15,6 +15,7 @@ public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
         {
             var equipamento = new Equipamento
             {
+                Tipo = request.Tipo,
                 Fornecedor = request.Fornecedor,
                 Marca = request.Marca,
                 Modelo = request.Modelo,
@@ -43,7 +44,8 @@ public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
 
             if (equipamento == null)
                 return new Response<Equipamento?>(null, 404, "Equipamento não encontrado");
-
+            
+            equipamento.Tipo = request.Tipo;
             equipamento.Fornecedor = request.Fornecedor;
             equipamento.Marca = request.Marca;
             equipamento.Modelo = request.Modelo;

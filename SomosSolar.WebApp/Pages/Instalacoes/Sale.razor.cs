@@ -180,11 +180,13 @@ public class SaleInstalacaoPage : ComponentBase
 
         var result = await dialog.Result;
 
-        if(!result.Canceled)
+        if (result.Data is bool sucesso && sucesso)
         {
-            Snackbar.Add("Chegou de volta", Severity.Error);
-            NavigationManager.Refresh(forceReload: true);
+            //Snackbar.Add("Dados dados Atualizados com Sucesso", Severity.Success);
+            await UpdateGridAsync();
         }
+        else
+            Snackbar.Add("Atualização cancelada", Severity.Info);
     }
 
     public async Task OpenModalEdit(int id)
@@ -206,13 +208,39 @@ public class SaleInstalacaoPage : ComponentBase
 
         var result = await dialog.Result;
 
-        if (!result.Canceled)
+        if (result.Data is bool sucesso && sucesso)
         {
-            Snackbar.Add("Chegou de volta", Severity.Error);
-            NavigationManager.Refresh(forceReload: true);
+            //Snackbar.Add("Dados dados Atualizados com Sucesso", Severity.Success);
+            await UpdateGridAsync();
         }
+        else
+            Snackbar.Add("Atualização cancelada", Severity.Info);
 
     }
+
+    public async Task UpdateGridAsync()
+    {
+        try
+        {
+            await GetVendasAsync(InputModelInstalacao.Id);
+            Console.WriteLine($"InstalacaoId: {InputModelInstalacao.Id}");
+
+            if (Vendas != null && Vendas.Any())
+            {
+                Snackbar.Add("Dados Atualizados com sucesso!", Severity.Success);
+            }
+            else
+            {
+                Snackbar.Add("Nenhum Dado encontrado", Severity.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Erro ao atualizar os dados:{ex.Message}");
+        }
+        finally { StateHasChanged(); }
+    }
+
     public async Task OnDeleteButtonClikedAsync(int id, int quantidade, string modelo)
     {
         var result = await DialogService.ShowMessageBox("Atenção", $"Ao prosseguir {quantidade}" +

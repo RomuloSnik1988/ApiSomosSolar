@@ -5,7 +5,7 @@ using SomoSSolar.Core.Requests.Reports;
 
 namespace SomosSolar.WebApp.Components.Reports
 {
-    public class TotalVendasAnualComponent : ComponentBase
+    public class TotalVendasMensalComponent : ComponentBase
     {
         #region Properties
         public ChartOptions Options { get; set; } = new();

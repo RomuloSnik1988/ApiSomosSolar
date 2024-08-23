@@ -10,4 +10,5 @@ public interface IReportHandler
     Task<Response<TotalClientes>?> GetTotalClientesAsync(GetTotalClientesRequest request);
     Task<Response<TotalInvesores>?> GetTotalInversoresAsync(GetTotalInvesoresRequest request);
     Task<Response<TotalInstalacoes>?> GetTotalInstalacaoAsync(GetTotalInstalacoesRequest request);
+    Task<Response<List<TotalVendasMensal>?>> GetTotalVendasMensalAsync(GetTotalVendaMensalRequest request);
 }

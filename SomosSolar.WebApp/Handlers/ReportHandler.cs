@@ -34,4 +34,10 @@ public class ReportHandler(IHttpClientFactory httpClientFactory) : IReportHandle
             ?? new Response<TotalPainesVenda>(null, 400, "Não foi possível obter os dados");
 
     }
+
+    public async Task<Response<List<TotalVendasMensal>?>> GetTotalVendasMensalAsync(GetTotalVendaMensalRequest request)
+    {
+        return await _client.GetFromJsonAsync<Response<List<TotalVendasMensal>?>>("v1/reports/totalvendas-anual")
+            ?? new Response<List<TotalVendasMensal>?>(null, 400, "Não foi possível obter os dados");
+    }
 }

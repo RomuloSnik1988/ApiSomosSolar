@@ -64,4 +64,18 @@ public class ReportHandler(AppDbContext context) : IReportHandler
 			return new Response<TotalPainesVenda> (null, 500,"Não foi possível retornar o total de painéis");
 		}
     }
+
+    public async Task<Response<List<TotalVendasMensal>?>> GetTotalVendasMensalAsync(GetTotalVendaMensalRequest request)
+    {
+		try
+		{
+			var data = await context.TotalDeVendasAnual.AsNoTracking().OrderByDescending(x => x.Year).ThenBy(x => x.Month).ToListAsync(); 
+
+			return new Response<List<TotalVendasMensal>?>(data);
+		}
+		catch 
+		{
+			return new Response<List<TotalVendasMensal>?>(null, 500, "Não foi possível obter total de vendas anual");
+		}
+    }
 }

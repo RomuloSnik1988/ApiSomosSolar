@@ -7,6 +7,7 @@ using SomoSSolar.API.EndPoints.Instalacoes;
 using SomoSSolar.API.EndPoints.Reports;
 using SomoSSolar.API.EndPoints.Vendas;
 using SomoSSolar.API.Models;
+using SomoSSolar.Core.Requests.Reports;
 
 namespace SomoSSolar.API.EndPoints;
 
@@ -29,7 +30,6 @@ public static class Endpoints
             .MapEndpoint<GetClienteByIDEndpoint>()
             .MapEndpoint<GetAllClienteEndpoint>();
 
-
         endpoints.MapGroup("v1/enderecos")
             .WithTags("Endereços")
             .RequireAuthorization()
@@ -39,7 +39,6 @@ public static class Endpoints
             .MapEndpoint<GetEnderecoByIdEndpoint>()
             .MapEndpoint<GetAllEnderecoEndpoint>()
             .MapEndpoint<GetByClienteIdEndpoint>();
-
 
         endpoints.MapGroup("v1/equipamentos")
             .WithTags("Equipamentos")
@@ -70,7 +69,6 @@ public static class Endpoints
             .MapEndpoint<GetAllVendaEndpoint>()
             .MapEndpoint<GetVendasByInstalacaoEndPoint>();
 
-
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")
             .MapIdentityApi<User>();
@@ -86,7 +84,8 @@ public static class Endpoints
             .MapEndpoint<TotalPaineisVendaEndpoint>()
             .MapEndpoint<TotalClientesEndpoint>()
             .MapEndpoint<TotalInversoresEndpoint>()
-            .MapEndpoint<TotalInstalacoesEndpoint>();
+            .MapEndpoint<TotalInstalacoesEndpoint>()
+            .MapEndpoint<TotalVendasMensalEndpoint>();
     }
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
         where TEndpoint : IEndpoint

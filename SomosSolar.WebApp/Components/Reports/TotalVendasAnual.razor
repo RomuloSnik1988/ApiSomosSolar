@@ -1,0 +1,14 @@
+﻿@inherits TotalVendasAnualComponent
+
+
+@if (Series is not null)
+{
+    <MudChart ChartOptions="Options" ChartType="ChartType.Line" ChartSeries="Series" XAxisLabels="Labels.ToArray()"
+    Width="100%" Height="350px"/>
+}
+else
+{
+    <div class="d-flex aling-center justify-center" style="height: 350px">
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary"></MudProgressCircular>
+    </div>
+}

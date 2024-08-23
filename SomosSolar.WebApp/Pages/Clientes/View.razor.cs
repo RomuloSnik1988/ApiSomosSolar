@@ -19,10 +19,10 @@ public class ViewClientePage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public Cliente? Cliente { get; set; }
-    public List<Endereco?> Enderecos { get; set; } = new List<Endereco?>();
-    public List<Instalacao?> Instacoes { get; set; } = new List<Instalacao?>();
-    public List<Venda?> Vendas { get; set; } = new List<Venda?>();
+    public Cliente Cliente { get; set; } = null!;
+    public List<Endereco> Enderecos { get; set; } = new List<Endereco>();
+    public List<Instalacao> Instacoes { get; set; } = new List<Instalacao>();
+    public List<Venda> Vendas { get; set; } = new List<Venda>();
     public GetClienteByIdRequest? InputModel { get; set; }
     public UpdateClienteRequest? EnderecoInputModel { get; set; }
     #endregion
@@ -131,7 +131,7 @@ public class ViewClientePage : ComponentBase
         var request = new GetVendasByInstalacaoRequest { Id = instalacaoId };
         var response = await VendasHandler.GetVendasAsync(request);
 
-        return response.IsSuccess ? response.Data : new List<Venda>();
+        return response.IsSuccess ? response.Data : new List<Venda?>();
     }
     #endregion
     public async Task AdicionarEndereco(int clienteid)

@@ -10,7 +10,7 @@ public class ListClientePage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public List<Cliente> Clientes { get; set; } = new List<Cliente>();
+    public List<Cliente?> Clientes { get; set; } = new List<Cliente?>();
     public string SearchTerm { get; set; } = string.Empty;
     #endregion
     #region Services

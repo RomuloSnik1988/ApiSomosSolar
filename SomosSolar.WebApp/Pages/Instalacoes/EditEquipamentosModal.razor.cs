@@ -23,7 +23,7 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
         [Parameter]
         public int VendaId { get; set; }
         [CascadingParameter]
-        public MudDialogInstance ModalInstace { get; set; }
+        public MudDialogInstance? ModalInstace { get; set; }
         #endregion
         #region Services
         [Inject]

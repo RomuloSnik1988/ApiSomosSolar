@@ -15,9 +15,9 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
         public bool IsBusy { get; set; } = false;
         public CreateVendaRequest InputModel { get; set; } = new();
         public UpdateEquipamentoRequest? EquipamentosInputModel { get; set; }
-        public List<Equipamento> Equipamentos { get; set; } = new List<Equipamento>();
-        public List<Venda> Vendas { get; set; } = new List<Venda>();
-        public List<Equipamento> EquipamentosFiltrados { get; set; } = new List<Equipamento>();
+        public List<Equipamento?> Equipamentos { get; set; } = new List<Equipamento?>();
+        public List<Venda?> Vendas { get; set; } = new List<Venda?>();
+        public List<Equipamento?> EquipamentosFiltrados { get; set; } = new List<Equipamento?>();
         public ETipoEquipamento TipoEquipamentoSelecionado { get; set; }
 
         #endregion
@@ -25,7 +25,7 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
         [Parameter]
         public int InstalacaoId { get; set; }
         [CascadingParameter]
-        public MudDialogInstance ModalInstace { get; set; }
+        public MudDialogInstance ModalInstace { get; set; } = null!;
         #endregion
         #region Services
         [Inject]
@@ -50,7 +50,7 @@ namespace SomosSolar.WebApp.Pages.Instalacoes
                 var request = new GetAllEquipamentosRequest();
                 var result = await EquipamentoHandler.GetAllAsync(request);
                 if (result.IsSuccess)
-                    Equipamentos = result.Data ?? new List<Equipamento>();
+                    Equipamentos = result.Data ?? new List<Equipamento?>();
 
                 InputModel.InstalacaoId = InstalacaoId;
             }

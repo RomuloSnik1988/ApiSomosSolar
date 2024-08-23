@@ -1,7 +1,109 @@
 ﻿@page "/"
 
 <PageTitle>Sistema de Gestão de Clientes Somos Solar</PageTitle>
-
 <h1>Bem vindo</h1>
 
-Welcome to your new app.
+Sistema de gerenciamento de clientes e instalação.
+
+<MudGrid Class="pa-4">
+    <MudItem  xs="12" sm="6" md="3">
+        <MudPaper Elevation="6" Class="d-flex flex-column" Height="160px" Width="240px">
+            @* <MudIconButton Icon="@Icons.Material.TwoTone.SolarPower" Size="Size.Large" Color="Color.Success" Class="mb-3" /> *@
+            <div class="icon-circle d-flex justify-content-center align-self-center" style="width: 60px; height: 60px; border-radius">
+                <img src="\img\icons\Icon_PainelSolar.ico" alt="clientes" />
+            </div>
+            <div class="d-flex align-self-center pa-1">
+                <MudText Typo="Typo.subtitle1">Total de Painéis</MudText>
+            </div>
+            <div class="d-flex align-self-center">
+                <TotalPaineisVenda />
+            </div>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="6" Class="d-flex flex-column p-3" Height="160px" Width="240px">
+            @* <MudIcon Icon="@Icons.Material.TwoTone.Person" Size="Size.Large" Color="Color.Success" Class="mb-3" /> *@
+            <div class="icon-circle d-flex justify-content-center align-self-center pa-2" style="width: 60px; height: 60px; border-radius">
+                <img src="\img\icons\cliente.ico" alt="clientes" />
+            </div>
+            <div class="d-flex align-self-center pa-1">
+                <MudText Typo="Typo.subtitle1">Total de Clientes</MudText>
+            </div>
+            <div class="d-flex align-self-center">
+                <TotalClientes />
+            </div>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="6" Class="d-flex flex-column p-3" Height="160px" Width="240px">
+            <div class="icon-circle d-flex justify-content-center align-self-center pa-2" style="width: 60px; height: 60px; border-radius">
+                <img src="\img\icons\inversorPhb.ico" alt="inverossr" />
+            </div>
+            <div class="d-flex align-self-center pa-1">
+                <MudText Typo="Typo.subtitle1">Total de Inversores</MudText>
+            </div>
+            <div class="d-flex align-self-center">
+                <TotalInversores />
+            </div>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Elevation="6" Class="d-flex flex-column p-3" Height="160px" Width="240px">
+            <div class="icon-circle d-flex justify-content-center align-self-center pa-2" style="width: 60px; height: 60px; border-radius">
+                <img src="\img\icons\Kit.ico" alt="inverossr" />
+            </div>
+            <div class="d-flex align-self-center pa-1">
+                <MudText Typo="Typo.subtitle1">Total de Instalações</MudText>
+            </div>
+            <div class="d-flex align-self-center">
+                <TotalInstalacoes />
+            </div>
+        </MudPaper>
+    </MudItem>
+    </MudGrid>
+
+
+@* <MudGrid Class="pa-8 mb-6" Justify="Justify.Center">
+    <MudItem>
+        <MudPaper Height="140px" Width="240px" Class="d-flex flex-column align-items-center justify-center">
+            <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Large" />
+            <MudText Typo="Typo.h6">Gerenciar Clientes</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="140px" Width="240px" >
+            <MudIcon Style="font-size: 4rem;" Color="Color.Tertiary" Icon="@Icons.Material.Filled.Person" Size="Size.Large" />
+            <MudText Class="align-text-center" Typo="Typo.h6">Gerenciar Clientes</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="140px" Width="240px" Class="d-flex flex-column align-items-center justify-center">
+            <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Large" />
+            <MudText Typo="Typo.h6">Gerenciar Clientes</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid> *@
+
+
+@* <div class="row">
+    <MudItem Class="pa-4" lg="2" md="6" sm="6" xs="6" >
+     <div class="pa-4" lg="2" md="6" sm="6" xs="6"> 
+    <MudCard Class="pa-8">
+        <MudCardContent>
+            <TotalPaineisVenda/>
+        </MudCardContent>
+    </MudCard>
+    </MudItem>
+
+     </div> 
+        <MudItem Class="pa-4" lg="2" md="6" sm="6" xs="6">
+            <MudCard Class="pa-8">
+            <MudCardContent>
+                <TotalPaineisVenda />
+            </MudCardContent>
+        </MudCard>
+</MudItem>
+</div> *@

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SomoSSolar.API.Data;
 
@@ -11,9 +12,11 @@ using SomoSSolar.API.Data;
 namespace SomoSSolar.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240821231555_Reports")]
+    partial class Reports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -421,36 +424,9 @@ namespace SomoSSolar.API.Migrations
                     b.ToTable("Instalacao", (string)null);
                 });
 
-            modelBuilder.Entity("SomoSSolar.Core.Models.Reports.TotalClientes", b =>
-                {
-                    b.Property<int>("TotalDeClientes")
-                        .HasColumnType("int");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("VwGetTotalClientes", (string)null);
-                });
-
-            modelBuilder.Entity("SomoSSolar.Core.Models.Reports.TotalInstalacoes", b =>
-                {
-                    b.ToTable((string)null);
-
-                    b.ToView("VwGetTotalInstalacoes", (string)null);
-                });
-
-            modelBuilder.Entity("SomoSSolar.Core.Models.Reports.TotalInvesores", b =>
-                {
-                    b.Property<int>("TotalDeInversores")
-                        .HasColumnType("int");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("VwGetTotalInversoresVendas", (string)null);
-                });
-
             modelBuilder.Entity("SomoSSolar.Core.Models.Reports.TotalPainesVenda", b =>
                 {
-                    b.Property<int>("TotalDePaineis")
+                    b.Property<int>("TotalPainel")
                         .HasColumnType("int");
 
                     b.ToTable((string)null);

@@ -10,7 +10,7 @@ public partial class ListInstalacoesPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public IEnumerable<Instalacao> Instalacoes { get; set; } = new List<Instalacao>();
+    public IEnumerable<Instalacao?> Instalacoes { get; set; } = new List<Instalacao>();
     public List<Cliente> Clientes { get; set; } = [];
     public string SearchTerm { get; set; } = string.Empty;
     #endregion

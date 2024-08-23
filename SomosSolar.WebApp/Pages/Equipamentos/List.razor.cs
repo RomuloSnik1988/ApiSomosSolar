@@ -10,7 +10,7 @@ public partial class ListEquipamentosPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public List<Equipamento> Equipamentos { get; set; } = [];
+    public List<Equipamento?> Equipamentos { get; set; } = [];
     public string SearchTerm { get; set; } = string.Empty;
     #endregion
     #region Services

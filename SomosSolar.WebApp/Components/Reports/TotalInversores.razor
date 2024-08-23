@@ -1,0 +1,13 @@
+﻿@inherits TotalInversoresComponent
+
+@if(TInversores > 0)
+{
+    <MudText Typo="Typo.h5">@TInversores</MudText>
+}
+else
+{
+    <div class="d-flex align-center justify-center" style="height: 50px">
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    </div>
+}
+

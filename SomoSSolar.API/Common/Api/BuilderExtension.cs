@@ -8,6 +8,7 @@ using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Handlers.Equipamentos;
 using SomoSSolar.Core.Handlers.Instalacoes;
+using SomoSSolar.Core.Handlers.Reports;
 using SomoSSolar.Core.Handlers.Vendas;
 
 namespace SomoSSolar.API.Common.Api;
@@ -50,6 +51,7 @@ public static class BuilderExtension
         builder.Services.AddTransient<IEquipamentoHandler, EquipamentoHandler>();
         builder.Services.AddTransient<IInstacacaoHandler, InstalacaoHandler>();
         builder.Services.AddTransient<IVendasHandler, VendaHandler>();
+        builder.Services.AddTransient<IReportHandler, ReportHandler>();
     }
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {

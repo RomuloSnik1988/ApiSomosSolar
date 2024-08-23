@@ -13,7 +13,7 @@ public class CreateEnderecoPage : ComponentBase
     #region Properties
     public bool IsBusy { get; set; } = false;
     public CreateEnderecoRequest InputModel { get; set; } = new();
-    public List<Cliente> Clientes { get; set; } = [];
+    public List<Cliente?> Clientes { get; set; } = [];
     public UpdateClienteRequest InputMCliente { get; set; } = new();
     #endregion
     #region Parameter

@@ -1,0 +1,13 @@
+﻿@inherits TotalPaineisVendaComponent
+
+@if (TPaineis > 0)
+{
+    <MudText Typo="Typo.h5">@TPaineis</MudText>
+}
+else
+{
+    <div class="d-flex align-center justify-center" style="height: 50px">
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    </div>
+}
+

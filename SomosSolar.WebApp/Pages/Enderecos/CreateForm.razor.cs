@@ -119,7 +119,7 @@ public class CreateFormEnderecoPage : ComponentBase
     //        var result = await ClienteHandler.GetAllAsync(request);
     //        if (result.IsSuccess)
     //        {
-    //            Cliente = result.Data ?? [];
+    //            Cliente = result.TPaineis ?? [];
     //            InputModel.ClienteId = Cliente.FirstOrDefault()?.Id ?? 0;
     //        }
     //    }

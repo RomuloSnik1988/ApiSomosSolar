@@ -15,8 +15,8 @@ public partial class CreateInstacalaoPage : ComponentBase
     #region Properties
     public bool IsBusy { get; set; } = false;
     public CreateInstalacaoRequest InputModel { get; set; } = new();
-    public List<Cliente> Clientes { get; set; } = [];
-    public List<Endereco> Enderecos { get; set; } = [];
+    public List<Cliente?> Clientes { get; set; } = [];
+    public List<Endereco?> Enderecos { get; set; } = [];
     #endregion
     #region Services
     [Inject]

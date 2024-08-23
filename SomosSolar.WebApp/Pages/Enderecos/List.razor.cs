@@ -10,7 +10,7 @@ public partial class ListEnderecoPage : ComponentBase
 {
     #region Properties
     public bool IsBusy { get; set; } = false;
-    public List<Endereco> Enderecos { get; set; } = [];
+    public List<Endereco?> Enderecos { get; set; } = [];
     public string SearchTerm { get; set; } = string.Empty;
     #endregion
     #region Services

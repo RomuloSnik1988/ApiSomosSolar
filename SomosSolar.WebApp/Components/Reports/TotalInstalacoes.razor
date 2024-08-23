@@ -1,0 +1,12 @@
+﻿@inherits TotalInstalacoesComponent
+
+@if(TInstalacoes > 0)
+{
+    <MudText Typo="Typo.h5">@TInstalacoes</MudText>
+}
+else
+{
+    <div class="d-flex align-center justify-center" style="height: 50px">
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+    </div>
+}

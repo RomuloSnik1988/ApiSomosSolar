@@ -4,6 +4,7 @@ using SomoSSolar.API.EndPoints.Enderecos;
 using SomoSSolar.API.EndPoints.Equipamentos;
 using SomoSSolar.API.EndPoints.Identity;
 using SomoSSolar.API.EndPoints.Instalacoes;
+using SomoSSolar.API.EndPoints.Reports;
 using SomoSSolar.API.EndPoints.Vendas;
 using SomoSSolar.API.Models;
 
@@ -78,6 +79,14 @@ public static class Endpoints
             .WithTags("Identity")
             .MapEndpoint<LogoutEndpoint>()
             .MapEndpoint<GetRolesEndpoint>();
+
+        endpoints.MapGroup("v1/reports")
+            .WithTags("repors")
+            .RequireAuthorization()
+            .MapEndpoint<TotalPaineisVendaEndpoint>()
+            .MapEndpoint<TotalClientesEndpoint>()
+            .MapEndpoint<TotalInversoresEndpoint>()
+            .MapEndpoint<TotalInstalacoesEndpoint>();
     }
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
         where TEndpoint : IEndpoint

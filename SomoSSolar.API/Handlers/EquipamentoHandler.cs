@@ -1,18 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SomoSSolar.API.Data;
 using SomoSSolar.Core.Handlers.Equipamentos;
+using SomoSSolar.Core.Handlers.FileService;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Equipamentos;
 using SomoSSolar.Core.Responses;
 
 namespace SomoSSolar.API.Handlers;
 
-public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
+public class EquipamentoHandler(AppDbContext context, IFileHendler fileService) : IEquipamentoHandler
 {
     public async Task<Response<Equipamento?>> CreateAsync(CreateEquipamentosRequest request)
     {
         try
         {
+            if(request.ImagemFile?.Length > 1 *1024 *1024)
+            {
+                return new Response<Equipamento?>(null, 400, "Tamanho do arquivo não pode exceder 1 MB");
+            }
+            string[] allowedFileExtensions = [".jpg", ".jpeg", ".png"];
+            string createdImageName = await fileService.SaveFileAsync(request.ImagemFile, allowedFileExtensions);
+
             var equipamento = new Equipamento
             {
                 Tipo = request.Tipo,
@@ -23,7 +31,7 @@ public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
                 PotenciaMaxima = request.PotenciaMaxima,
                 Peso = request.Peso,
                 Tamanho = request.Tamanho,
-                ImagemUrl = request.ImagemUrl,
+                ImagemUrl = createdImageName
             };
 
             await context.Equipamentos.AddAsync(equipamento);
@@ -120,5 +128,4 @@ public class EquipamentoHandler(AppDbContext context) : IEquipamentoHandler
         }
     }
 
-   
 }

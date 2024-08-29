@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.FileProviders;
 using SomoSSolar.API;
 using SomoSSolar.API.Common;
 using SomoSSolar.API.Common.Api;
@@ -8,6 +9,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 builder.AddConfiguration();
 builder.AddSecurity();
+
 builder.AddDataContext();
 builder.AddCrossOrigin();
 builder.AddDocumentation();
@@ -17,9 +19,14 @@ var app = builder.Build();
 
 if(app.Environment.IsDevelopment())
     app.ConfigureDevEnviroment();
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"img", "equipamentos")),
+    RequestPath = "/Resources"
+});
 app.UseCors(ApiConfiguration.CorsPolicyName);
 app.UseSecurity();
+
 app.MapEndpoints();
 
 app.Run();

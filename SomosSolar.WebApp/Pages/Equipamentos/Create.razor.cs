@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http;
 using MudBlazor;
 using SomoSSolar.Core.Handlers.Equipamentos;
 using SomoSSolar.Core.Requests.Equipamentos;
@@ -10,6 +11,8 @@ public partial class CreateEquipamentoPage : ComponentBase
     #region Properties
     public bool IsBusy { get; set; } = false;
     public CreateEquipamentosRequest InputModel { get; set; } = new();
+
+    public IFormFile MyProperty { get; set; }
     #endregion
 
     #region Services

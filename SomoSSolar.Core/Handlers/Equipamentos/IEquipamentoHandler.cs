@@ -1,5 +1,5 @@
-﻿using SomoSSolar.Core.Models;
-using SomoSSolar.Core.Requests.Endereco;
+﻿using SomoSSolar.Core.Handlers.FileService;
+using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Equipamentos;
 using SomoSSolar.Core.Responses;
 

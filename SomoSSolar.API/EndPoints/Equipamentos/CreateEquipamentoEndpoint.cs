@@ -1,4 +1,5 @@
-﻿using SomoSSolar.API.Common.Api;
+﻿using Microsoft.AspNetCore.Mvc;
+using SomoSSolar.API.Common.Api;
 using SomoSSolar.Core.Handlers.Equipamentos;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Equipamentos;
@@ -16,8 +17,9 @@ public class CreateEquipamentoEndpoint : IEndpoint
         .WithOrder(1)
         .Produces<Response<Equipamento?>>();
 
-    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler, CreateEquipamentosRequest request)
+    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler, [FromForm] CreateEquipamentosRequest request, IFormFile ImageFile)
     {
+
         var result = await handler.CreateAsync(request);
         return result.IsSuccess
             ? TypedResults.Created($"/{result.Data?.Id}", result)

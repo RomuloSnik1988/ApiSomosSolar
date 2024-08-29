@@ -7,6 +7,7 @@ using SomoSSolar.Core;
 using SomoSSolar.Core.Handlers.Clientes;
 using SomoSSolar.Core.Handlers.Enderecos;
 using SomoSSolar.Core.Handlers.Equipamentos;
+using SomoSSolar.Core.Handlers.FileService;
 using SomoSSolar.Core.Handlers.Instalacoes;
 using SomoSSolar.Core.Handlers.Reports;
 using SomoSSolar.Core.Handlers.Vendas;
@@ -52,6 +53,7 @@ public static class BuilderExtension
         builder.Services.AddTransient<IInstacacaoHandler, InstalacaoHandler>();
         builder.Services.AddTransient<IVendasHandler, VendaHandler>();
         builder.Services.AddTransient<IReportHandler, ReportHandler>();
+        builder.Services.AddTransient<IFileHendler, FileHenlder>();
     }
     public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
@@ -59,7 +61,7 @@ public static class BuilderExtension
             options => options.AddPolicy(ApiConfiguration.CorsPolicyName,
                 policy => policy.WithOrigins([
                     Configuration.BackendUrl,
-                    Configuration.FrontendUrl
+                    Configuration.FrontendUrl,
                     ])
                 .AllowAnyMethod()
                 .AllowAnyHeader()

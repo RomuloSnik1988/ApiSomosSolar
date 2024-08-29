@@ -32,9 +32,6 @@
         <MudTextField T="string" Label="Tamanho" 
                       @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />
 
-        <MudTextField T="string" Label="Imagem URL" 
-                      @bind-Value="InputModel.ImagemUrl" For="@(() => InputModel.ImagemUrl)" />
-
         <MudSelect T="EIsAtivo" Label="Equipamento Ativo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Ativo">
             <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Ativo">Ativo</MudSelectItem>
             <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Inativo">Inativo</MudSelectItem>

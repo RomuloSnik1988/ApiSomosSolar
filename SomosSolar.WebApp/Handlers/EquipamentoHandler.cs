@@ -1,4 +1,5 @@
 ﻿using SomoSSolar.Core.Handlers.Equipamentos;
+using SomoSSolar.Core.Handlers.FileService;
 using SomoSSolar.Core.Models;
 using SomoSSolar.Core.Requests.Equipamentos;
 using SomoSSolar.Core.Responses;
@@ -35,8 +36,6 @@ public class EquipamentoHandler(IHttpClientFactory httpClientFactory) : IEquipam
     public async Task<PagedResponse<List<Equipamento?>>> GetAllAsync(GetAllEquipamentosRequest request)
     => await _client.GetFromJsonAsync<PagedResponse<List<Equipamento>?>>("v1/equipamentos")
         ?? new PagedResponse<List<Equipamento?>>(null, 400, "não foi possível obter os equipamentos");
-
-    
 
   
 }

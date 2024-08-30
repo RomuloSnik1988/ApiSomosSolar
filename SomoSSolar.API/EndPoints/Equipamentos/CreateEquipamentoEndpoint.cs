@@ -15,12 +15,13 @@ public class CreateEquipamentoEndpoint : IEndpoint
         .WithSummary("Incluir um novo equipamento")
         .WithDescription("Incluir um novo equipamento")
         .WithOrder(1)
+        .DisableAntiforgery()
         .Produces<Response<Equipamento?>>();
 
-    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler, [FromForm] CreateEquipamentosRequest request, IFormFile ImageFile)
+    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler,[FromForm] CreateEquipamentosRequest request, IFormFile file)
     {
 
-        var result = await handler.CreateAsync(request);
+        var result = await handler.CreateAsync(file, request);
         return result.IsSuccess
             ? TypedResults.Created($"/{result.Data?.Id}", result)
             : TypedResults.BadRequest(result);

@@ -23,8 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="img\equipamentos\" />
+    <Folder Include="wwwroot\img\equipamentos\" />
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

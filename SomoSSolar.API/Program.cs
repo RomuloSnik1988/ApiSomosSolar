@@ -19,11 +19,7 @@ var app = builder.Build();
 
 if(app.Environment.IsDevelopment())
     app.ConfigureDevEnviroment();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath,"img", "equipamentos")),
-    RequestPath = "/Resources"
-});
+app.UseStaticFiles();
 app.UseCors(ApiConfiguration.CorsPolicyName);
 app.UseSecurity();
 

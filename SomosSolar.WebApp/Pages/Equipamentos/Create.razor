@@ -31,6 +31,24 @@
 
         <MudTextField T="string" Label="Tamanho" 
                       @bind-Value="InputModel.Tamanho" For="@(() => InputModel.Tamanho)" />
+        <div>
+         <input type="file" @ref="inputReference" @onchange="async () => await OpenFileAsync()"/>
+            <ul>
+                <li>File Name: @FileName</li>
+                <li>Size: @Size</li>
+                <li>Type: @Type</li>
+            </ul>
+        </div>
+@* 
+        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="OpenFileAsync" MaximumFileCount="100">
+            <ActivatorContent>
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.CloudUpload">
+                    Imagem Equipamento
+                </MudButton>
+            </ActivatorContent>
+        </MudFileUpload> *@
 
         <MudSelect T="EIsAtivo" Label="Equipamento Ativo" AnchorOrigin="Origin.BottomCenter" @bind-Value="InputModel.Ativo">
             <MudSelectItem T="EIsAtivo" Value="EIsAtivo.Ativo">Ativo</MudSelectItem>
@@ -38,6 +56,10 @@
         </MudSelect>
 
         <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Salvar</MudButton>
+       @*  <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="() => Console.WriteLine(InputModel)">Salvar</MudButton> *@
+
         <MudButton Href="/equipamentos" Variant="Variant.Filled" Color="Color.Primary">Voltar</MudButton>
     </EditForm>
 </MudPaper>
+
+     

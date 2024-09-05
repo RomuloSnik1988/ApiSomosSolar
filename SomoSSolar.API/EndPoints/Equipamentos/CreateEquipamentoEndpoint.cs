@@ -18,10 +18,12 @@ public class CreateEquipamentoEndpoint : IEndpoint
         .DisableAntiforgery()
         .Produces<Response<Equipamento?>>();
 
-    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler,[FromForm] CreateEquipamentosRequest request, IFormFile file)
-    {
+    // Validação do ModelState
 
-        var result = await handler.CreateAsync(file, request);
+    private static async Task<IResult>HandleAsync(IEquipamentoHandler handler,[FromForm]CreateEquipamentosRequest request, IFormFile imageFile)
+    {
+        
+        var result = await handler.CreateAsync(imageFile, request);
         return result.IsSuccess
             ? TypedResults.Created($"/{result.Data?.Id}", result)
             : TypedResults.BadRequest(result);

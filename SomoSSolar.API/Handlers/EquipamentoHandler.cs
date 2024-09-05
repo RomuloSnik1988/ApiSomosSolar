@@ -17,7 +17,7 @@ public class EquipamentoHandler : IEquipamentoHandler
         _environment = environment;
         _context = context;
     }
-    public async Task<Response<Equipamento?>> CreateAsync( IFormFile imageFile, CreateEquipamentosRequest request)
+    public async Task<Response<Equipamento?>> CreateAsync(IFormFile imageFile, CreateEquipamentosRequest request)
     {
         try
         {

@@ -42,8 +42,8 @@ public partial class ListEquipamentosPage : ComponentBase
     #region Methods
     public async Task OnDeleteButtonClickedAsync(int id, string modelo)
     {
-        var result = await DialogService.ShowMessageBox("ATENÇÃO", $"Ao prosseguir o equipamento" +
-            $"{modelo}, será exluiído. Essa é uma ação irreversível! Deseja continuar?",
+        var result = await DialogService.ShowMessageBox("ATENÇÃO", $"Ao prosseguir o equipamento " +
+            $"{modelo}, será exluído. Essa é uma ação irreversível! Deseja continuar?",
             yesText: "EXCLUIR",
             cancelText: "CANCELAR");
 

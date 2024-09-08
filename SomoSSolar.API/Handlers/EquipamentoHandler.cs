@@ -38,10 +38,17 @@ public class EquipamentoHandler : IEquipamentoHandler
 
             string contentPath = _environment.ContentRootPath;
             string path = Path.Combine(contentPath, "wwwroot", "img", "equipamentos");
+
+            // Verifica se o diretório existe, caso contrário cria
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             FileStream stream = new FileStream(Path.Combine(path, filename), FileMode.Create);
             imageFile.CopyTo(stream);
 
-            string imageCreatedName = path + filename;
+            //string imageCreatedName = path + filename;
+            string imageCreatedName = "img/equipamentos/" + filename;
 
             var equipamento = new Equipamento
             {

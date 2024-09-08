@@ -22,6 +22,12 @@ Novo Equipamento
         </MudTextField>
     </ToolBarContent>
     <Columns>
+        <TemplateColumn Title="Imagem">
+            <CellTemplate>
+                <img src="@($"{ApiBaseUrl}{context.Item.ImagemUrl}")" alt="Imagem do equipamento" 
+                     style="width: 50px; height: auto;" />
+            </CellTemplate>
+        </TemplateColumn>
         <PropertyColumn Property="x => x.Id" Title="ID"></PropertyColumn>
         <PropertyColumn Property="x => x.Tipo" Title="Tipo"></PropertyColumn>
         <PropertyColumn Property="x => x.Modelo" Title="Modelo"></PropertyColumn>
@@ -39,3 +45,7 @@ Novo Equipamento
     </Columns>
 
 </MudDataGrid>
+
+@code {
+    private string ApiBaseUrl = "https://localhost:7167/"; // URL base da API para imagens
+}

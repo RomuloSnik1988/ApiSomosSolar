@@ -32,7 +32,7 @@ namespace SomosSolar.WebApp.Components.Reports
 
             foreach (var item in result.Data)
             {
-                vendaanual.Add(item.TotalDeVendasAnual);
+                vendaanual.Add(item.TotalDeVendasMensal);
                 Labels.Add(GetMonthName(item.Month));
             }
             Options.YAxisTicks = 4;

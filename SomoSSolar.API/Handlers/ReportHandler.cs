@@ -69,7 +69,7 @@ public class ReportHandler(AppDbContext context) : IReportHandler
     {
 		try
 		{
-			var data = await context.TotalDeVendasAnual.AsNoTracking().OrderByDescending(x => x.Year).ThenBy(x => x.Month).ToListAsync(); 
+			var data = await context.TotalDeVendasMensal.AsNoTracking().OrderByDescending(x => x.Year).ThenBy(x => x.Month).ToListAsync(); 
 
 			return new Response<List<TotalVendasMensal>?>(data);
 		}

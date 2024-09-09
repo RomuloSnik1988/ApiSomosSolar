@@ -469,7 +469,7 @@ namespace SomoSSolar.API.Migrations
                     b.Property<int>("Month")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalDeVendasAnual")
+                    b.Property<int>("TotalDeVendasMensal")
                         .HasColumnType("int");
 
                     b.Property<int>("Year")

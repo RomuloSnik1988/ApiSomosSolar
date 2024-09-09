@@ -8,7 +8,7 @@ namespace SomoSSolar.API.EndPoints.Reports;
 public class TotalVendasMensalEndpoint : IEndpoint
 {
     public static void Map(IEndpointRouteBuilder app)
-    => app.MapGet("/totalvendas-anual", HandlerAsync)
+    => app.MapGet("/totalvendas-mensal", HandlerAsync)
         .Produces<Response<List<GetTotalVendaMensalRequest>?>>();
     public static async Task<IResult>HandlerAsync(IReportHandler handler)
     {

@@ -24,7 +24,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<TotalClientes> TotalDeClientes { get; set; } = null!;
     public DbSet<TotalInvesores> TotalDeInvesores { get; set; } = null!;
     public DbSet<TotalInstalacoes> TotalDeInstalacoes { get; set; } = null!;
-    public DbSet<TotalVendasMensal> TotalDeVendasAnual { get; set; } = null!;
+    public DbSet<TotalVendasMensal> TotalDeVendasMensal { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,6 +35,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
         modelBuilder.Entity<TotalClientes>().HasNoKey().ToView("VwGetTotalClientes");
         modelBuilder.Entity<TotalInvesores>().HasNoKey().ToView("VwGetTotalInversoresVendas");
         modelBuilder.Entity<TotalInstalacoes>().HasNoKey().ToView("VwGetTotalInstalacoes");
-        modelBuilder.Entity<TotalVendasMensal>().HasNoKey().ToView("VwGetTotalVendasAnual");
+        modelBuilder.Entity<TotalVendasMensal>().HasNoKey().ToView("VwGetTotalVendasMensal");
     }
 }

@@ -12,6 +12,8 @@ public partial class ListEquipamentosPage : ComponentBase
     public bool IsBusy { get; set; } = false;
     public List<Equipamento?> Equipamentos { get; set; } = [];
     public string SearchTerm { get; set; } = string.Empty;
+
+    public string ApiBaseUrl = Configuration.BackendUrl + ("/"); // URL base da API para imagens
     #endregion
     #region Services
     [Inject]

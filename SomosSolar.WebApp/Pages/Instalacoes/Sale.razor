@@ -45,6 +45,12 @@ else
                 Class="mt-4">
        
         <Columns>
+                    <TemplateColumn Title="Imagem">
+                        <CellTemplate Context="venda">
+                            <img src="@($"{ApiBaseUrl}{venda.Item.Equipamento.ImagemUrl}")" alt="Imagem do equipamento"
+                                 style="width: 50px; height: auto;" />
+                        </CellTemplate>
+                    </TemplateColumn>
             <PropertyColumn Property="x => x.Quantidade" Title="Quantidade"></PropertyColumn>
             <PropertyColumn Property="x => x.Equipamento.Tipo" Title="Tipo"></PropertyColumn>
             <PropertyColumn Property="x => x.Equipamento.Modelo" Title="Item"></PropertyColumn>

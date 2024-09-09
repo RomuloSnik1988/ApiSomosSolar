@@ -25,6 +25,8 @@ public class ViewClientePage : ComponentBase
     public List<Venda> Vendas { get; set; } = new List<Venda>();
     public GetClienteByIdRequest? InputModel { get; set; }
     public UpdateClienteRequest? EnderecoInputModel { get; set; }
+
+    public string ApiBaseUrl = Configuration.BackendUrl + ("/"); // URL base da API para imagens
     #endregion
     #region Parameter
     [Parameter]
@@ -44,7 +46,7 @@ public class ViewClientePage : ComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
     #endregion
-
+   
     #region Override
     protected override async Task OnInitializedAsync()
     {
@@ -101,8 +103,7 @@ public class ViewClientePage : ComponentBase
 
                             instalcao.Vendas = await CarregarVendasPorInstalacaoId(instalacaoId);
 
-                            //Verificar o ID da instalação
-                            //Snackbar.Add($"Instalacao ID: {instalacaoId}" , Severity.Info);
+                             
                         }
                     }
                 }

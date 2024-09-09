@@ -22,6 +22,9 @@ public class SaleInstalacaoPage : ComponentBase
     public UpdateInstalacaoRequest InputModelInstalacao { get; set; } = new();
     public List<Venda> Vendas { get; set; } = new List<Venda>();
     public Endereco Endereco { get; set; } = null!;
+
+    public string ApiBaseUrl = Configuration.BackendUrl + ("/"); // URL base da API para imagens
+
     #endregion
 
     #region Parameter
